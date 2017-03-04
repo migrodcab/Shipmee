@@ -5,6 +5,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -26,6 +27,7 @@ public class SizePrice extends DomainEntity {
 		this.size = size;
 	}
 	
+	@Min(value=0)
 	public double getPrice() {
 		return price;
 	}
@@ -36,6 +38,7 @@ public class SizePrice extends DomainEntity {
 	
 	// Relationships ----------------------------------------------------------
 	private Route route;
+	private User user;
 	
 	@Valid
 	@NotNull
@@ -46,4 +49,15 @@ public class SizePrice extends DomainEntity {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }

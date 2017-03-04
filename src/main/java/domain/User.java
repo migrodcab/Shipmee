@@ -1,8 +1,13 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -11,7 +16,37 @@ public class User extends Actor {
 	// Constructors -----------------------------------------------------------
 
 	// Attributes -------------------------------------------------------------
-
+	
+	private boolean isVerified;
+	private boolean isActive;
+	
+	public boolean getIsVerified() {
+		return isVerified;
+	}
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+	
+	public boolean getIsActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	// Relationships ----------------------------------------------------------
+	private Collection<Route> routes;
 
+	@Valid
+	@NotNull
+	@ManyToMany
+	public Collection<Route> getRoutes() {
+		return routes;
+	}
+	public void setRoutes(Collection<Route> routes) {
+		this.routes = routes;
+	}
+	
+	
+	
 }
