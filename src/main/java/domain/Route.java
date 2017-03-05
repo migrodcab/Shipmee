@@ -86,6 +86,7 @@ public class Route extends DomainEntity {
 	
 	// Relationships ----------------------------------------------------------
 	private User creator;
+	private Vehicle vehicle;
 	
 	@Valid
 	@NotNull
@@ -95,5 +96,14 @@ public class Route extends DomainEntity {
 	}
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+	
+	@Valid
+	@ManyToOne(optional = true)
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 }
