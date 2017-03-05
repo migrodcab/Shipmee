@@ -7,14 +7,25 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Complaint extends DomainEntity {
 
-	// Constructors -----------------------------------------------------------
-
 	// Attributes -------------------------------------------------------------
-
+	private String explanation;
+	
+	@NotNull
+	@NotBlank
+	public String getExplanation() {
+		return explanation;
+	}
+	
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+	
 	// Relationships ----------------------------------------------------------
 	private Moderator moderator;
 	private User creator;

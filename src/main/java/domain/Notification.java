@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -8,42 +10,44 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Vehicle extends DomainEntity {
+public class Notification extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
-	private String brand;
-	private String model;
-	private String picture;
+	private Date date;
+	private String origin;
+	private String destination;
+	
+	@DateTimeFormat
+	public Date getDate() {
+		return date;
+	}
+	
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 	@NotNull
 	@NotBlank
-	public String getBrand() {
-		return brand;
+	public String getOrigin() {
+		return origin;
 	}
 	
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
 	
 	@NotNull
 	@NotBlank
-	public String getModel() {
-		return model;
+	public String getDestination() {
+		return destination;
 	}
 	
-	public void setModel(String model) {
-		this.model = model;
-	}
-	
-	public String getPicture() {
-		return picture;
-	}
-	
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 	
 	// Relationships ----------------------------------------------------------
@@ -51,10 +55,11 @@ public class Vehicle extends DomainEntity {
 	
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}

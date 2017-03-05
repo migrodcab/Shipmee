@@ -94,6 +94,7 @@ public class Route extends DomainEntity {
 	public User getUser() {
 		return user;
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}

@@ -5,6 +5,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +29,7 @@ public class SizePrice extends DomainEntity {
 	}
 	
 	@Min(value=0)
+	@Digits(integer=9,fraction=2)
 	public double getPrice() {
 		return price;
 	}
@@ -38,7 +40,6 @@ public class SizePrice extends DomainEntity {
 	
 	// Relationships ----------------------------------------------------------
 	private Route route;
-	private User user;
 	
 	@Valid
 	@NotNull
@@ -48,16 +49,6 @@ public class SizePrice extends DomainEntity {
 	}
 	public void setRoute(Route route) {
 		this.route = route;
-	}
-	
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
 	}
 	
 }

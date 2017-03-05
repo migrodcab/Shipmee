@@ -13,14 +13,14 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class RouteOffer extends DomainEntity {
+public class ShipmentOffer extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private double amount;
 	private String description;
 	
 	@Min(0)
-	@Digits(integer=9,fraction=2)
+	@Digits(integer=9, fraction=2)
 	public double getAmount() {
 		return amount;
 	}
@@ -40,29 +40,28 @@ public class RouteOffer extends DomainEntity {
 	}
 	
 	// Relationships ----------------------------------------------------------
-	private Route route;
 	private User user;
+	private Shipment shipment;
 	
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
-	public Route getRoute() {
-		return route;
-	}
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-	
-	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
 	
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Shipment getShipment() {
+		return shipment;
+	}
 	
-
+	public void setShipment(Shipment shipment) {
+		this.shipment = shipment;
+	}
 }
