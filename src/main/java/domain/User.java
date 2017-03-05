@@ -22,14 +22,14 @@ public class User extends Actor {
 	public boolean getIsVerified() {
 		return isVerified;
 	}
-	public void setVerified(boolean isVerified) {
+	public void setIsVerified(boolean isVerified) {
 		this.isVerified = isVerified;
 	}
 	
 	public boolean getIsActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 	
