@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -33,6 +34,7 @@ public class ShipmentOffer extends DomainEntity {
 	@NotNull
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@Column(length = 5000)
 	public String getDescription() {
 		return description;
 	}
