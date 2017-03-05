@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -38,6 +39,8 @@ public class Vehicle extends DomainEntity {
 		this.model = model;
 	}
 	
+	@NotBlank
+	@URL
 	public String getPicture() {
 		return picture;
 	}

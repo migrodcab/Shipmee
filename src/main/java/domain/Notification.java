@@ -6,6 +6,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -21,11 +23,11 @@ public class Notification extends DomainEntity {
 	private String origin;
 	private String destination;
 	
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getDate() {
 		return date;
 	}
-	
 	public void setDate(Date date) {
 		this.date = date;
 	}
@@ -35,7 +37,6 @@ public class Notification extends DomainEntity {
 	public String getOrigin() {
 		return origin;
 	}
-	
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
@@ -45,7 +46,6 @@ public class Notification extends DomainEntity {
 	public String getDestination() {
 		return destination;
 	}
-	
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}

@@ -6,6 +6,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -28,29 +30,32 @@ public class Shipment extends DomainEntity {
 	private String itemSize;
 	private String itemEnvelope;
 	
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@NotNull
 	public Date getDate() {
 		return date;
 	}
-	
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@NotNull
 	public Date getDepartureTime() {
 		return departureTime;
 	}
-	
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 	
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@NotNull
 	public Date getMaximunArriveTime() {
 		return maximunArriveTime;
 	}
-	
 	public void setMaximunArriveTime(Date maximunArriveTime) {
 		this.maximunArriveTime = maximunArriveTime;
 	}
@@ -60,7 +65,6 @@ public class Shipment extends DomainEntity {
 	public String getOrigin() {
 		return origin;
 	}
-	
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
@@ -70,7 +74,6 @@ public class Shipment extends DomainEntity {
 	public String getDestination() {
 		return destination;
 	}
-	
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
@@ -80,7 +83,6 @@ public class Shipment extends DomainEntity {
 	public double getPrice() {
 		return price;
 	}
-	
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -90,7 +92,6 @@ public class Shipment extends DomainEntity {
 	public String getItemSize() {
 		return itemSize;
 	}
-	
 	public void setItemSize(String itemSize) {
 		this.itemSize = itemSize;
 	}
@@ -100,7 +101,6 @@ public class Shipment extends DomainEntity {
 	public String getItemEnvelope() {
 		return itemEnvelope;
 	}
-	
 	public void setItemEnvelope(String itemEnvelope) {
 		this.itemEnvelope = itemEnvelope;
 	}

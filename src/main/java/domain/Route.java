@@ -6,6 +6,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -25,31 +27,31 @@ public class Route extends DomainEntity {
 	private String itemEnvelope;
 	
 	@NotNull
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getDate() {
 		return date;
 	}
-	
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
 	@NotNull
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getDepartureTime() {
 		return departureTime;
 	}
-	
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 	
 	@NotNull
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getArriveTime() {
 		return arriveTime;
 	}
-	
 	public void setArriveTime(Date arriveTime) {
 		this.arriveTime = arriveTime;
 	}
@@ -59,7 +61,6 @@ public class Route extends DomainEntity {
 	public String getOrigin() {
 		return origin;
 	}
-	
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
@@ -69,7 +70,6 @@ public class Route extends DomainEntity {
 	public String getDestination() {
 		return destination;
 	}
-	
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
@@ -79,23 +79,21 @@ public class Route extends DomainEntity {
 	public String getItemEnvelope() {
 		return itemEnvelope;
 	}
-	
 	public void setItemEnvelope(String itemEnvelope) {
 		this.itemEnvelope = itemEnvelope;
 	}
 	
 	
 	// Relationships ----------------------------------------------------------
-	private User user;
+	private User creator;
 	
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
-	public User getUser() {
-		return user;
+	public User getCreator() {
+		return creator;
 	}
-	
-	public void setUser(User user) {
-		this.user = user;
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 }

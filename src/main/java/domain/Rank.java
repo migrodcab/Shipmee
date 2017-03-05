@@ -17,7 +17,7 @@ public class Rank extends DomainEntity {
 	private String title;
 	private String description;
 	private String icon;
-	private Integer since;
+	private int since;
 	
 	@NotNull
 	@NotBlank
@@ -50,10 +50,10 @@ public class Rank extends DomainEntity {
 	}
 	
 	@Min(0)
-	public Integer getSince() {
+	public int getSince() {
 		return since;
 	}
-	public void setSince(Integer since) {
+	public void setSince(int since) {
 		this.since = since;
 	}
 	

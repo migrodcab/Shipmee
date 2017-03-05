@@ -1,10 +1,14 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
@@ -21,7 +25,7 @@ public class Actor extends DomainEntity {
 	private String name;
 	private String surname;
 	private String email;
-	private String birthDate;
+	private Date birthDate;
 	private String phone;
 	private String dni;
 
@@ -31,7 +35,6 @@ public class Actor extends DomainEntity {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -41,7 +44,6 @@ public class Actor extends DomainEntity {
 	public String getSurname() {
 		return surname;
 	}
-
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
@@ -51,25 +53,23 @@ public class Actor extends DomainEntity {
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	@DateTimeFormat
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@NotNull
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
-
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -77,7 +77,6 @@ public class Actor extends DomainEntity {
 	public String getDni() {
 		return dni;
 	}
-
 	public void setDni(String dni) {
 		this.dni = dni;
 	}

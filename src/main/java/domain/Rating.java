@@ -9,22 +9,23 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Rating extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
-	private Integer value;
+	private int value;
 	private String valoration;
 	private String comment;
 	
 	@Range(min=0,max=5)
-	public Integer getValue() {
+	public int getValue() {
 		return value;
 	}
-	
-	public void setValue(Integer value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 	
@@ -33,13 +34,13 @@ public class Rating extends DomainEntity {
 	public String getValoration() {
 		return valoration;
 	}
-	
 	public void setValoration(String valoration) {
 		this.valoration = valoration;
 	}
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getComment() {
 		return comment;
 	}

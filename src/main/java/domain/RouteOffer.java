@@ -10,6 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -24,17 +26,16 @@ public class RouteOffer extends DomainEntity {
 	public double getAmount() {
 		return amount;
 	}
-	
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return description;
 	}
-	
 	public void setDescription(String description) {
 		this.description = description;
 	}
