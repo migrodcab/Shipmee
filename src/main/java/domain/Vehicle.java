@@ -39,7 +39,6 @@ public class Vehicle extends DomainEntity {
 		this.model = model;
 	}
 	
-	@NotBlank
 	@URL
 	public String getPicture() {
 		return picture;
