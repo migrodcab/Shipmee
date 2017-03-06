@@ -19,27 +19,12 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="USER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
 				<bean class="security.Authority">
 					<property name="authority" value="USER" />
 				</bean>
@@ -47,6 +32,133 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="moderator1" />
+		<property name="password" value="38caf4a470117125b995f7ce53e6e6b9" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MODERATOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Administrator -->	
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Miguel"/>
+		<property name="surname" value="Rodriguez"/>
+		<property name="email" value="miguel@gmail.com"/>
+		<property name="birthDate" value="1995/10/24 00:00"/>
+		<property name="phone" value="666777888"/>
+		<property name="dni" value="12345678A"/>
+		<property name="userAccount" ref="userAccount1"/>
+	</bean>
+	
+	<!-- Rank -->
+	
+	<bean id="rank1" class="domain.Rank">
+		<property name="title" value="title1"/>
+		<property name="description" value="description1"/>
+		<property name="icon" value="http://www.icon1.com"/>
+		<property name="since" value="1"/>
+	</bean>
+	
+	<bean id="rank2" class="domain.Rank">
+		<property name="title" value="title2"/>
+		<property name="description" value="description2"/>
+		<property name="icon" value="http://www.icon2.com"/>
+		<property name="since" value="2"/>
+	</bean>
+	
+	<!-- User -->
+	
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="Ruiz"/>
+		<property name="email" value="manolo@gmail.com"/>
+		<property name="birthDate" value="1992/10/05 00:00"/>
+		<property name="phone" value="666777666"/>
+		<property name="dni" value="23456789B"/>
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="isVerified" value="true"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank1"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user2" class="domain.User">
+		<property name="name" value="Guillermo"/>
+		<property name="surname" value="Gamero"/>
+		<property name="email" value="Guillermo@gmail.com"/>
+		<property name="birthDate" value="1990/02/09 00:00"/>
+		<property name="phone" value="676554345"/>
+		<property name="dni" value="34567890C"/>
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank2"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Moderator -->
+	
+	<bean id="moderator1" class="domain.Moderator">
+		<property name="name" value="Antonio"/>
+		<property name="surname" value="López"/>
+		<property name="email" value="Antonio@gmail.com"/>
+		<property name="birthDate" value="1994/11/28 00:00"/>
+		<property name="phone" value="689836654"/>
+		<property name="dni" value="49983586H"/>
+		<property name="userAccount" ref="userAccount4"/>
+	</bean>
+	
+	<!-- Vehicle -->
+	
+	<bean id="vehicle1" class="domain.Vehicle">
+		<property name="brand" value="Audi"/>
+		<property name="model" value="a7"/>
+		<property name="picture" value=""/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<!-- Rating -->
+	
+	<bean id="rating1" class="domain.Rating">
+		<property name="value" value="4"/>
+		<property name="valoration" value="Very good"/>
+		<property name="comment" value="He is a great driver"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<!-- Complaint -->
+	
+	<bean id="complaint1" class="domain.Complaint">
+		<property name="explanation" value="His car is not an Audi"/>
+		<property name="creator" ref="user2"/>
+		<property name="involved" ref="user1"/>
+		<property name="moderator" ref="moderator1"/>
+	</bean>
+	
+	<!-- Route -->
 	
 </beans>
