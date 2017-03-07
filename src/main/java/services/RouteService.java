@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Route;
+import domain.RouteOffer;
+import domain.SizePrice;
 import domain.User;
 import repositories.RouteRepository;
 
@@ -28,6 +30,11 @@ public class RouteService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private SizePriceService sizePriceService;
+	
+	@Autowired
+	private RouteOfferService routeOfferService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -83,34 +90,34 @@ public class RouteService {
 		return route;
 	}
 	
-	/*public void delete(Club club, int managerId) {
-		Assert.notNull(club);
-		Assert.isTrue(club.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can delete clubes");
-		Manager preSave, postSave;
+	public void delete(Route route) {
+		Assert.notNull(route);
+		Assert.isTrue(route.getId() != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete routes");
+
+		User user;
+		Collection<User> users;
+		Collection<SizePrice> sizePrices;
+		Collection<RouteOffer> routeOffers;
 		
-		if(actorService.checkAuthority("MANAGER")) {
-			Manager manager;
-			
-			manager = userService.findByPrincipal();
-			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
+		user = userService.findByPrincipal();
+		users = userService.findAllByRoutePurchased(route.getId());
+
+		Assert.isTrue(user.getId() == route.getCreator().getId(), "Only the user who created the route can delete it");
+		Assert.isTrue(users.isEmpty(), "User can not delete a route if he has purchasers");
+
+		sizePrices = sizePriceService.findAllByRouteId(route.getId());
+		for(SizePrice s : sizePrices) {
+			sizePriceService.delete(s);
 		}
 		
-		preSave = userService.findByPrincipal();
-		postSave = userService.findOne(managerId);
-		
-		Assert.isTrue(postSave.getClub() == null, "El nuevo Manager no debe ser dueño de un club");
-		
-		preSave.setClub(null);
-		userService.saveFromOthers(preSave);
-		
-		club.setManager(postSave);
-		club = routeRepository.save(club);
-		
-		postSave.setClub(club);
-		userService.saveFromOthers(postSave);
-		
-	}*/
+		routeOffers = routeOfferService.findAllByRouteId(route.getId());
+		for(RouteOffer ro : routeOffers) {
+			routeOfferService.delete(ro);
+		}
+						
+		routeRepository.delete(route);
+	}
 	
 	public Route findOne(int routeId) {
 		Route result;

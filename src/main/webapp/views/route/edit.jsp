@@ -15,6 +15,8 @@
 	<!-- Hidden Attributes -->
 	<form:hidden path="creator" />
 	<form:hidden path="date" />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 	
 	<!-- Editable Attributes -->
 	

@@ -1,6 +1,8 @@
 package services;
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,14 @@ public class UserService {
 		result = userRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(result);
 		
+		return result;
+	}
+
+	public Collection<User> findAllByRoutePurchased(int routeId) {
+		Collection<User> result;
+		
+		result = userRepository.findAllByRoutePurchased(routeId);
+
 		return result;
 	}
 

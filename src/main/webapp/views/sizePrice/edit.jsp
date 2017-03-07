@@ -14,6 +14,8 @@
 <form:form action="sizePrice/user/edit.do" modelAttribute="sizePrice">
 	<!-- Hidden Attributes -->
 	<form:hidden path="route" />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 	
 	<!-- Editable Attributes -->
 	

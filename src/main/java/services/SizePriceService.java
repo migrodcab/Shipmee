@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,9 +67,8 @@ public class SizePriceService {
 		Assert.notNull(sizePrice);
 		Assert.isTrue(sizePrice.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete sizePrices");
-		
+
 		sizePriceRepository.delete(sizePrice);
-		
 	}
 	
 	public SizePrice findOne(int sizePriceId) {
@@ -82,6 +83,14 @@ public class SizePriceService {
 	
 	public void flush() {
 		sizePriceRepository.flush();
+	}
+
+	public Collection<SizePrice> findAllByRouteId(int routeId) {
+		Collection<SizePrice> result;
+		
+		result = sizePriceRepository.findAllByRouteId(routeId);
+
+		return result;
 	}
 	
 }

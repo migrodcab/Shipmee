@@ -98,11 +98,11 @@ public class RouteUserController extends AbstractController {
 		return result;
 	}
 			
-	/*@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(Route route, BindingResult binding) {
 		ModelAndView result;
 
-		try {			
+		try {
 			routeService.delete(route);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
@@ -110,7 +110,7 @@ public class RouteUserController extends AbstractController {
 		}
 
 		return result;
-	}*/
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 	
