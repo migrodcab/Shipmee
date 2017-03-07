@@ -11,18 +11,24 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="sizePrice/user/edit.do" modelAttribute="sizePrice">
+<form:form action="sizePrice/user/edit.do" modelAttribute="sizePriceForm">
 	<!-- Hidden Attributes -->
-	<form:hidden path="route" />
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+	<form:hidden path="routeId" />
 	
 	<!-- Editable Attributes -->
 	
-	<acme:textbox code="sizePrice.size" path="size"/>
+	<acme:textbox code="sizePrice.priceS" path="priceS"/>
+	<form:checkbox path="S"/>
 	
-	<acme:textbox code="sizePrice.price" path="price"/>
-				
+	<acme:textbox code="sizePrice.priceM" path="priceM"/>
+	<form:checkbox path="M"/>
+	
+	<acme:textbox code="sizePrice.priceL" path="priceL"/>
+	<form:checkbox path="L"/>
+	
+	<acme:textbox code="sizePrice.priceXL" path="priceXL"/>
+	<form:checkbox path="XL"/>
+			
 	<br/>
 
 	<!-- Action buttons -->

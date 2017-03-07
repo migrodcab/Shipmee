@@ -21,23 +21,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.RouteService;
-import services.SizePriceService;
+import services.form.SizePriceFormService;
 import controllers.AbstractController;
-import domain.Route;
-import domain.SizePrice;
+import domain.form.SizePriceForm;
 
 @Controller
 @RequestMapping("/sizePrice/user")
 public class SizePriceUserController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
-
-	@Autowired
-	private SizePriceService sizePriceService;
 	
 	@Autowired
-	private RouteService routeService;
+	private SizePriceFormService sizePriceFormService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -52,14 +47,11 @@ public class SizePriceUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int routeId) {
 		ModelAndView result;
-		SizePrice sizePrice;
-		Route route;
+		SizePriceForm sizePriceForm;
 
-		sizePrice = sizePriceService.create();
-		route = routeService.findOne(routeId);
-		sizePrice.setRoute(route);
+		sizePriceForm = sizePriceFormService.create(routeId);
 		
-		result = createEditModelAndView(sizePrice);
+		result = createEditModelAndView(sizePriceForm);
 
 		return result;
 	}
@@ -67,31 +59,31 @@ public class SizePriceUserController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int sizePriceId) {
+	public ModelAndView edit(@RequestParam int routeId) {
 		ModelAndView result;
-		SizePrice sizePrice;
+		SizePriceForm sizePriceForm;
 
-		sizePrice = sizePriceService.findOne(sizePriceId);		
-		Assert.notNull(sizePrice);
-		result = createEditModelAndView(sizePrice);
+		sizePriceForm = sizePriceFormService.findOne(routeId);		
+		Assert.notNull(sizePriceForm);
+		result = createEditModelAndView(sizePriceForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid SizePrice sizePrice, BindingResult binding) {
+	public ModelAndView save(@Valid SizePriceForm sizePriceForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
 
-			result = createEditModelAndView(sizePrice);
+			result = createEditModelAndView(sizePriceForm);
 		} else {
 			try {
-				sizePriceService.save(sizePrice);				
+				sizePriceFormService.reconstruct(sizePriceForm);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 
-				result = createEditModelAndView(sizePrice, "sizePrice.commit.error");				
+				result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");				
 			}
 		}
 
@@ -99,14 +91,14 @@ public class SizePriceUserController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(SizePrice sizePrice, BindingResult binding) {
+	public ModelAndView delete(SizePriceForm sizePriceForm, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			sizePriceService.delete(sizePrice);
+			sizePriceFormService.delete(sizePriceForm);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(sizePrice, "sizePrice.commit.error");
+			result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");
 		}
 
 		return result;
@@ -114,19 +106,19 @@ public class SizePriceUserController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(SizePrice sizePrice) {
+	protected ModelAndView createEditModelAndView(SizePriceForm sizePriceForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(sizePrice, null);
+		result = createEditModelAndView(sizePriceForm, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(SizePrice sizePrice, String message) {
+	protected ModelAndView createEditModelAndView(SizePriceForm sizePriceForm, String message) {
 		ModelAndView result;		
 				
 		result = new ModelAndView("sizePrice/edit");
-		result.addObject("sizePrice", sizePrice);
+		result.addObject("sizePriceForm", sizePriceForm);
 		result.addObject("message", message);
 
 		return result;
