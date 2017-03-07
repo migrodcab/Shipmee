@@ -81,14 +81,20 @@ public class RouteUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Route route, BindingResult binding) {
 		ModelAndView result;
+		int id;
 
 		if (binding.hasErrors()) {
-
 			result = createEditModelAndView(route);
 		} else {
 			try {
+				id = route.getId();
 				route = routeService.save(route);	
-				result = new ModelAndView("redirect:../../sizePrice/user/create.do?routeId="+route.getId());
+				
+				if(id == 0) {
+					result = new ModelAndView("redirect:../../sizePrice/user/create.do?routeId="+route.getId());
+				} else {
+					result = new ModelAndView("redirect:list.do");
+				}
 			} catch (Throwable oops) {
 
 				result = createEditModelAndView(route, "route.commit.error");				
