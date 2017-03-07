@@ -11,24 +11,35 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="route/user/edit.do" modelAttribute="route">
+<form:form action="route/user/edit.do" modelAttribute="routeForm">
 	<!-- Hidden Attributes -->
-	<form:hidden path="creator" />
-	<form:hidden path="date" />
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+	<form:hidden path="routeId" />
 	
 	<!-- Editable Attributes -->
 	
 	<acme:textbox code="route.origin" path="origin"/>
 	
 	<acme:textbox code="route.destination" path="destination"/>
+	
+	<acme:datetime code="route.departureTime" path="departureTime"/>
+	
+	<acme:datetime code="route.arriveTime" path="arriveTime"/>
 		
-	<acme:textbox code="route.departureTime" path="departureTime"/>
+	<form:label path="itemEnvelope">
+		<spring:message code="route.itemEnvelope" />
+	</form:label>
 	
-	<acme:textbox code="route.arriveTime" path="arriveTime"/>
+	<spring:message code="route.open" var="open"/>
+	<spring:message code="route.closed" var="closed"/>
+	<spring:message code="route.both" var="both"/>
 	
-	<acme:textbox code="route.itemEnvelope" path="itemEnvelope"/>
+	<form:select id="route" path="ItemEnvelope">
+		<form:option value="" label="----" />
+		<form:option value="${open }" label="${open }" />
+		<form:option value="${closed }" label="${closed }" />
+		<form:option value="${both }" label="${both }" />
+	</form:select>
+	<form:errors path="itemEnvelope" cssClass="error" />
 	
 	<acme:select items="${vehicles}" itemLabel="brand" code="route.vehicle" path="vehicle"/>
 		
@@ -37,7 +48,7 @@
 	<!-- Action buttons -->
 	<acme:submit name="save" code="route.save"/>
 	
-	<jstl:if test="${route.id != 0}">
+	<jstl:if test="${routeForm.routeId != 0}">
 		<acme:submit_confirm name="delete" code="route.delete" codeConfirm="route.confirm.delete"/>
 	</jstl:if>
 	

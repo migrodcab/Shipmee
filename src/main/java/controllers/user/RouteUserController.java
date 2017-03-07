@@ -27,8 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Route;
 import domain.Vehicle;
+import domain.form.RouteForm;
 import services.RouteService;
 import services.VehicleService;
+import services.form.RouteFormService;
 
 @Controller
 @RequestMapping("/route/user")
@@ -38,6 +40,9 @@ public class RouteUserController extends AbstractController {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private RouteFormService routeFormService;
 	
 	@Autowired
 	private VehicleService vehicleService;
@@ -56,10 +61,10 @@ public class RouteUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Route route;
+		RouteForm routeForm;
 
-		route = routeService.create();
-		result = createEditModelAndView(route);
+		routeForm = routeFormService.create();
+		result = createEditModelAndView(routeForm);
 
 		return result;
 	}
@@ -69,26 +74,30 @@ public class RouteUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int routeId) {
 		ModelAndView result;
-		Route route;
+		RouteForm routeForm;
 
-		route = routeService.findOne(routeId);		
-		Assert.notNull(route);
-		result = createEditModelAndView(route);
+		routeForm = routeFormService.findOne(routeId);		
+		Assert.notNull(routeForm);
+		routeForm.setRouteId(routeId);
+		result = createEditModelAndView(routeForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Route route, BindingResult binding) {
+	public ModelAndView save(@Valid RouteForm routeForm, BindingResult binding) {
 		ModelAndView result;
 		int id;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(route);
+			result = createEditModelAndView(routeForm);
 		} else {
 			try {
-				id = route.getId();
-				route = routeService.save(route);	
+				Route route;
+				id = routeForm.getRouteId();
+				
+				route = routeFormService.reconstruct(routeForm);
+				route = routeService.save(route);
 				
 				if(id == 0) {
 					result = new ModelAndView("redirect:../../sizePrice/user/create.do?routeId="+route.getId());
@@ -97,7 +106,7 @@ public class RouteUserController extends AbstractController {
 				}
 			} catch (Throwable oops) {
 
-				result = createEditModelAndView(route, "route.commit.error");				
+				result = createEditModelAndView(routeForm, "route.commit.error");				
 			}
 		}
 
@@ -105,14 +114,14 @@ public class RouteUserController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Route route, BindingResult binding) {
+	public ModelAndView delete(RouteForm routeForm, BindingResult binding) {
 		ModelAndView result;
 
 		try {
-			routeService.delete(route);
+			routeFormService.delete(routeForm);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(route, "route.commit.error");
+			result = createEditModelAndView(routeForm, "route.commit.error");
 		}
 
 		return result;
@@ -120,22 +129,22 @@ public class RouteUserController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Route route) {
+	protected ModelAndView createEditModelAndView(RouteForm routeForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(route, null);
+		result = createEditModelAndView(routeForm, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Route route, String message) {
+	protected ModelAndView createEditModelAndView(RouteForm routeForm, String message) {
 		ModelAndView result;
 		Collection<Vehicle> vehicles;
 		
 		vehicles = vehicleService.findAllByUser();
 				
 		result = new ModelAndView("route/edit");
-		result.addObject("route", route);
+		result.addObject("routeForm", routeForm);
 		result.addObject("message", message);
 		result.addObject("vehicles", vehicles);
 
