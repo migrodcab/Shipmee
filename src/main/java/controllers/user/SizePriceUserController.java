@@ -10,9 +10,6 @@
 
 package controllers.user;
 
-
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,42 +21,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.RouteService;
+import services.SizePriceService;
 import controllers.AbstractController;
 import domain.Route;
-import domain.Vehicle;
-import services.RouteService;
-import services.VehicleService;
+import domain.SizePrice;
 
 @Controller
-@RequestMapping("/route/user")
-public class RouteUserController extends AbstractController {
+@RequestMapping("/sizePrice/user")
+public class SizePriceUserController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private RouteService routeService;
+	private SizePriceService sizePriceService;
 	
 	@Autowired
-	private VehicleService vehicleService;
+	private RouteService routeService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public RouteUserController() {
+	public SizePriceUserController() {
 		super();
 	}
 
 	// Listing ----------------------------------------------------------------
-	
 
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int routeId) {
 		ModelAndView result;
+		SizePrice sizePrice;
 		Route route;
 
-		route = routeService.create();
-		result = createEditModelAndView(route);
+		sizePrice = sizePriceService.create();
+		route = routeService.findOne(routeId);
+		sizePrice.setRoute(route);
+		
+		result = createEditModelAndView(sizePrice);
 
 		return result;
 	}
@@ -67,71 +67,67 @@ public class RouteUserController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int routeId) {
+	public ModelAndView edit(@RequestParam int sizePriceId) {
 		ModelAndView result;
-		Route route;
+		SizePrice sizePrice;
 
-		route = routeService.findOne(routeId);		
-		Assert.notNull(route);
-		result = createEditModelAndView(route);
+		sizePrice = sizePriceService.findOne(sizePriceId);		
+		Assert.notNull(sizePrice);
+		result = createEditModelAndView(sizePrice);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Route route, BindingResult binding) {
+	public ModelAndView save(@Valid SizePrice sizePrice, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
 
-			result = createEditModelAndView(route);
+			result = createEditModelAndView(sizePrice);
 		} else {
 			try {
-				route = routeService.save(route);	
-				result = new ModelAndView("redirect:../../sizePrice/user/create.do?routeId="+route.getId());
+				sizePriceService.save(sizePrice);				
+				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 
-				result = createEditModelAndView(route, "route.commit.error");				
+				result = createEditModelAndView(sizePrice, "sizePrice.commit.error");				
 			}
 		}
 
 		return result;
 	}
 			
-	/*@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Route route, BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(SizePrice sizePrice, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			routeService.delete(route);
+			sizePriceService.delete(sizePrice);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(route, "route.commit.error");
+			result = createEditModelAndView(sizePrice, "sizePrice.commit.error");
 		}
 
 		return result;
-	}*/
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Route route) {
+	protected ModelAndView createEditModelAndView(SizePrice sizePrice) {
 		ModelAndView result;
 
-		result = createEditModelAndView(route, null);
+		result = createEditModelAndView(sizePrice, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Route route, String message) {
-		ModelAndView result;
-		Collection<Vehicle> vehicles;
-		
-		vehicles = vehicleService.findAllByUser();
+	protected ModelAndView createEditModelAndView(SizePrice sizePrice, String message) {
+		ModelAndView result;		
 				
-		result = new ModelAndView("route/edit");
-		result.addObject("route", route);
+		result = new ModelAndView("sizePrice/edit");
+		result.addObject("sizePrice", sizePrice);
 		result.addObject("message", message);
-		result.addObject("vehicles", vehicles);
 
 		return result;
 	}

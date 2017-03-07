@@ -50,7 +50,6 @@ public class RouteService {
 		date = new Date();
 		
 		result.setCreator(user);
-		result.setVehicle(null);
 		result.setDate(date);
 		
 		return result;
@@ -58,6 +57,10 @@ public class RouteService {
 	
 	public Route save(Route route) {
 		Assert.notNull(route);
+		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "ItemEnvelope must be open, closed or both.");
+		if(route.getVehicle() != null) {
+			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "Both Ids must be the same.");
+		}
 		
 		User user;
 		Date date;
@@ -65,12 +68,9 @@ public class RouteService {
 		user = userService.findByPrincipal();
 		date = new Date();
 		
-		route.setCreator(user);
-		
 		if(route.getId() == 0) {
+			route.setCreator(user);
 			route.setDate(date);
-			route.setItemEnvelope("Close");
-			route.setVehicle(null);
 			
 			route = routeRepository.save(route);
 			
@@ -133,6 +133,20 @@ public class RouteService {
 	
 	public void flush() {
 		routeRepository.flush();
+	}
+	
+	private boolean checkItemEnvelope(String itemEnvelope) {
+		boolean res;
+		
+		res = false;
+
+		if(itemEnvelope.equals("Open") || itemEnvelope.equals("Closed") ||
+				itemEnvelope.equals("Both") || itemEnvelope.equals("Abierto") ||
+				itemEnvelope.equals("Cerrado") || itemEnvelope.equals("Ambos")) {
+			res = true;
+		}
+
+		return res;
 	}
 	
 }

@@ -11,34 +11,25 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="route/user/edit.do" modelAttribute="route">
+<form:form action="sizePrice/user/edit.do" modelAttribute="sizePrice">
 	<!-- Hidden Attributes -->
-	<form:hidden path="creator" />
-	<form:hidden path="date" />
+	<form:hidden path="route" />
 	
 	<!-- Editable Attributes -->
 	
-	<acme:textbox code="route.origin" path="origin"/>
+	<acme:textbox code="sizePrice.size" path="size"/>
 	
-	<acme:textbox code="route.destination" path="destination"/>
-		
-	<acme:textbox code="route.departureTime" path="departureTime"/>
-	
-	<acme:textbox code="route.arriveTime" path="arriveTime"/>
-	
-	<acme:textbox code="route.itemEnvelope" path="itemEnvelope"/>
-	
-	<acme:select items="${vehicles}" itemLabel="brand" code="route.vehicle" path="vehicle"/>
-		
+	<acme:textbox code="sizePrice.price" path="price"/>
+				
 	<br/>
 
 	<!-- Action buttons -->
-	<acme:submit name="save" code="route.save"/>
+	<acme:submit name="save" code="sizePrice.save"/>
 	
-	<jstl:if test="${route.id != 0}">
-		<acme:submit_confirm name="delete" code="route.delete" codeConfirm="route.confirm.delete"/>
+	<jstl:if test="${sizePrice.id != 0}">
+		<acme:submit_confirm name="delete" code="sizePrice.delete" codeConfirm="sizePrice.confirm.delete"/>
 	</jstl:if>
 	
-	<acme:cancel code="route.cancel" url="route/user/list.do"/>
+	<acme:cancel code="sizePrice.cancel" url="route/user/list.do"/>
 	
 </form:form>
