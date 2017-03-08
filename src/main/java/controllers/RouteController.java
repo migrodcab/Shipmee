@@ -50,7 +50,7 @@ public class RouteController extends AbstractController {
 			e.printStackTrace();
 		}
 				
-		result = new ModelAndView("search/list");
+		result = new ModelAndView("route/search");
 		result.addObject("routes", routes);
 
 		return result;
