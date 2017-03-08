@@ -11,6 +11,7 @@ before_install:
     - mysql -u root < initialize.sql
 
 script:
+    - mvn exec:java -Dexec.mainClass="utilities.PopulateDatabase"
     - mvn clean test
     - ls -lah
 
