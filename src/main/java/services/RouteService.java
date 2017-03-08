@@ -64,6 +64,7 @@ public class RouteService {
 	
 	public Route save(Route route) {
 		Assert.notNull(route);
+		Assert.isTrue(checkDates(route), "The departure date must be greater than the current date and the arrival date greater than the departure date.");
 		Assert.isTrue(checkItemEnvelope(route.getItemEnvelope()), "ItemEnvelope must be open, closed or both.");
 		if(route.getVehicle() != null) {
 			Assert.isTrue(route.getCreator().getId() == route.getVehicle().getUser().getId(), "Both Ids must be the same.");
@@ -153,6 +154,22 @@ public class RouteService {
 			res = true;
 		}
 
+		return res;
+	}
+	
+	private boolean checkDates(Route route) {
+		boolean res;
+		
+		res = true;
+		
+		if(route.getDate().compareTo(route.getDepartureTime()) >= 0) {
+			res = false;
+		}
+		
+		if(route.getDepartureTime().compareTo(route.getArriveTime()) >= 0) {
+			res = false;
+		}
+		
 		return res;
 	}
 	
