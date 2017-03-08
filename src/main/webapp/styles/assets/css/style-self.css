@@ -1,13 +1,19 @@
 /*	################################################################
 	1. GENERAL STRUCTURES
 ################################################################# */
+@font-face
+{
+ font-family: 'Aero';
+ src: url('../fonts/Aero.ttf');
+}
+
 
 #headerwrap {
   	background: url(../../../images/furgo.gif) no-repeat center center fixed; 
   	background-size: cover;
 	min-height: 550px;
 	padding-top: 4%;
-	padding-bottom: 14%;
+	padding-bottom: 20%;
 	text-align: center;
 }
 
@@ -95,30 +101,19 @@
 }
 
 
+
+
+
 .logoShp {
-	margin-top: 0.4%;
-	margin-left: 1%;
+	margin-top: -0.6%;
+	margin-left: 35%;
 	margin-right: 5%;
-	float: left;
-	width:6%;
-	height:0em;">
+	width:100%;
+	height:100%;">
 }
 
-@media (min-width: 768px) {
-  .logoShp {
-    width:12%;
-  }
-}
-@media (min-width: 992px) {
-  .logoShp {
-    width:12%;
-  }
-}
-@media (min-width: 1200px) {
-  .logoShp {
-    width:15%;
-  }
-}
+
+
 
 /*	Buttom search */
 
@@ -212,4 +207,9 @@ fieldset[disabled] .btnSample.active {
 .navbar-default .navbar-brand:focus {
 	color: #d9d9d9;
   background-color: transparent;
+}
 
+.navbar-brand {
+	font-family: Aero;
+	font-size: 30px;
+}
