@@ -13,7 +13,7 @@ import domain.Shipment;
 public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 	
 	@Query("select s from Shipment s where s.origin LIKE %?1% AND s.destination LIKE %?2% AND (?3 IS NULL OR s.date = ?3)"
-			+ "AND (?4 IS NULL OR r.departureTime = ?4) AND (?5 IS NULL OR r.itemEnvelope = ?5) AND (?6 IS NULL OR r.itemSize = ?6)")
+			+ "AND (?4 IS NULL OR s.departureTime = ?4) AND (?5 IS NULL OR s.itemEnvelope = ?5) AND (?6 IS NULL OR s.itemSize = ?6)")
 	Collection<Shipment> searchShipment(String origin, String destination, Date date, Date time, String envelope, String itemSize);
 
 }
