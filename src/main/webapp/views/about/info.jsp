@@ -17,7 +17,15 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<style>
 
+.hline{
+
+margin-bottom: 10%;
+
+}
+
+</style>
 
 	<div id="blue">
 	    <div class="container">
@@ -41,7 +49,138 @@
 		 		<!--<p><br/><a href="contact.html" class="btn btn-theme">Contact Us</a></p>-->
 	 		</div>
 	 	</div>
-	 </div>
+
+	<div class="row centered">
+		<h3 class="mb"><spring:message code="equipo" /></h3>
+
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars2.githubusercontent.com/u/12049827?v=3&s=460" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>Manuel López Ruiz</h4>
+			<h5 class="ctitle"><spring:message code="perfil.manolo" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars1.githubusercontent.com/u/8267403?v=3&s=460" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>Juan Ramón Rodríguez</h4>
+			<h5 class="ctitle"><spring:message code="perfil.juanrra" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars0.githubusercontent.com/u/22616365?v=3&s=460" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>Bartolomé Márquez</h4>
+			<h5 class="ctitle"><spring:message code="perfil.bart" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars3.githubusercontent.com/u/6894925?v=3&s=460" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>José Antonio Rodríguez</h4>
+			<h5 class="ctitle"><spring:message code="perfil.jose" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars3.githubusercontent.com/u/11299118?v=3&s=460" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>Miguel Rodríguez</h4>
+			<h5 class="ctitle"><spring:message code="perfil.migue" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<div class="he-wrap tpl6">
+				<img src="https://avatars1.githubusercontent.com/u/12424182?v=3&s=400" alt="">
+				<div class="he-view">
+					<div class="bg a0" data-animate="fadeIn">
+						<h3 class="a1" data-animate="fadeInDown"><spring:message code="contactar" /></h3>
+						<a href="#" class="dmbutton a2" data-animate="fadeInUp"><i
+							class="fa fa-envelope"></i></a> <a href="#" class="dmbutton a2"
+							data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+					</div>
+					<!-- he bg -->
+				</div>
+				<!-- he view -->
+			</div>
+			<!-- he wrap -->
+			<h4>Guillermo Alcalá</h4>
+			<h5 class="ctitle"><spring:message code="perfil.guille" /></h5>
+			<div class="hline"></div>
+		</div>
+		<! --/col-lg-3 -->
+	</div>
+	<! --/row -->
+
+
+</div>
 
 	
 	 <div id="twrap">
