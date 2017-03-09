@@ -137,16 +137,15 @@ public class ShipmentService {
 		
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
-		Date now = new Date();
 		
 		Assert.notNull(shipment); // shipment is not null.
 		Assert.isNull(shipment.getCarried()); // shipment has not a former selected carrier
-		Assert.isTrue(shipment.getDate().before(now)); // shipment was created in the past.
-		Assert.isTrue(shipment.getDepartureTime().after(now)); // shipment's departure time is future.
-		Assert.isTrue(shipment.getMaximumArriveTime().after(now)); // shipment's arrival time is future.
+		Assert.isTrue(checkDates(shipment)); // All shipment dates are valid.
 		Assert.notNull(carrier);
 		/*
-		 * Here comes the assert to check that a user can carry in our app.
+		 * Here comes the assert to:
+		 * 	check that a user can carry in our app.
+		 * 	the package size is good.
 		 */
 		
 		shipment.setCarried(carrier);

@@ -135,7 +135,6 @@ public class RouteService {
 
 		return result;
 	}
-	
 
 	// Other business methods -------------------------------------------------
 	
