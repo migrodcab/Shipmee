@@ -15,7 +15,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">Shipmee</a>
+          <a class="logoLetras navbar-brand" href="">Shipmee</a>
            <!--<img class="logo2" src="images/logo_circular.png" >-->
            <div class="logoShp">
 			<a href="" > 
