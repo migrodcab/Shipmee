@@ -25,7 +25,8 @@
 	background-color: #f7f7f7;
 	-webkit-box-shadow: 2px 2px 5px #999;
 	-moz-box-shadow: 2px 2px 5px #999;
-	margin-bottom: 5%
+	margin-bottom: 5%;
+	width:90%;
 }
 
 .rfecha {
@@ -59,11 +60,11 @@
 }
 
 .btn-llevar {
-	margin-top: 3%;
+	margin-top: 0.5%;
 }
 
 .imagen-envio {
-	margin-top: 2%;
+	margin-top: 0.5%;
 }
 
 .info-destino {
@@ -82,21 +83,21 @@
 			<div class="rfecha col-xs-7 col-sm-9">
 
 				<div class="row info-destino">
-					<div class="col-xs-2 text-right">
+					<div class="col-xs-2 col-sm-1 text-center">
 						<img class="img-responsive" src="images/origin.svg" width="40"
 							alt="Origen">
 					</div>
-					<div class="col-xs-3 text-left">
+					<div class="col-xs-10 col-sm-4 text-center">
 						<h4>Sevilla Santa Justa</h4>
 					</div>
-					<div class="col-xs-2 text-center">
+					<div class="col-sm-2 text-center">
 						<img class="center-block img-responsive" src="images/exchange.svg"
 							width="25" alt="Origen">
 					</div>
-					<div class="col-xs-3 text-left">
+					<div class="col-xs-10 col-sm-4 text-center">
 						<h4>Almeria</h4>
 					</div>
-					<div class="col-xs-2 text-left">
+					<div class="col-xs-2 col-sm-1 text-center">
 						<img class="img-responsive" src="images/destination.svg"
 							width="40" alt="Origen">
 					</div>
@@ -110,65 +111,49 @@
 								<img class="pull-right img-responsive imagen-envio"
 									src="images/departure.svg" width="25" alt="Llegada">
 							</div>
-							<div class="col-xs-10 text-left information">
-								Hora de salida: Lunes 13 de Marzo
-									13:00
-							</div>
+							<div class="col-xs-10 text-left information">Hora de
+								salida: Lunes 13 de Marzo 13:00</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="titulo col-sm-12 text-center">
-						<div class="row row-origen">
+				<div class="row info1">
+					<div class="col-xs-6">
+						<div class="row">
+							<div class="col-sm-9">
+								<p class="information text-center">Forma de envio:</p>
+							</div>
+							<div class="col-sm-3">
+								<img class=" pull-left img-responsive center-block" width="40"
+									height="40" src="images/package_open.svg">
+							</div>
+						</div>
 
-							<div class="col-xs-2">
-								<img class="pull-right img-responsive" src="images/arrival.svg"
-									width="25" alt="Llegada">
+					</div>
+					<div class="col-xs-6">
+						<div class="row">
+							<div class="col-sm-9 text-center">
+								<p class="information">Tamanyo del paquete</p>
 							</div>
-							<div class="col-xs-10 text-left information">
-								Hora de llegada: Lunes 13 de Marzo
-									19:00
+							<div class="col-sm-3">
+								<img class="img-responsive pull-left" width="40" height="40"
+									src="images/tag-l.png">
 							</div>
 						</div>
+
 					</div>
 				</div>
+
 
 			</div>
 			<div class="imagen col-xs-5 col-sm-3 center">
 				<div class="row text-center">
 					<div class="col-xs-12">
-						<img class="img-responsive center-block imagen-envio" width="100"
-							height="100" src="images/bycicle.svg">
+						<img class="img-responsive center-block imagen-envio" width="90"
+							height="90" src="images/bycicle.svg">
 					</div>
 					<div class="col-xs-12 text-center">
 						<button type="button" class="btn-llevar btn btn-success">Llevar
 							por 20 euros</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		<div class="row info1">
-			<div class="col-xs-6">
-				<div class="row">
-					<div class="col-sm-6">
-						<p class="information text-center">Forma de envio:</p>
-					</div>
-					<div class="col-sm-6">
-						<img class=" pull-left img-responsive center-block" width="40"
-							height="40" src="images/package_open.svg">
-					</div>
-				</div>
-
-			</div>
-			<div class="col-xs-6">
-				<div class="row">
-					<div class="col-sm-6 text-center">
-						<p class="information">Tamanyo del paquete</p>
-					</div>
-					<div class="col-sm-6">
-						<img class="img-responsive pull-left" width="40" height="40"
-							src="images/tag-l.png">
 					</div>
 				</div>
 
