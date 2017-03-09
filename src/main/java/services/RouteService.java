@@ -139,12 +139,12 @@ public class RouteService {
 
 	// Other business methods -------------------------------------------------
 	
-	public Collection<Route> searchRoute(String origin, String destination, Date date, Date time, String envelope){
+	public Collection<Route> searchRoute(String origin, String destination, Date date, Date time, String envelope, String itemSize){
 		Assert.isTrue(origin != "" && destination != "");
 		Collection<Route> result;
-		
-		result = routeRepository.searchRoute(origin, destination, date, time, envelope);
-		
+		System.out.println(origin+" - "+destination);
+		result = routeRepository.searchRoute(origin, destination, date, time, envelope, itemSize);
+		System.out.println(result);
 		return result;
 	}
 	

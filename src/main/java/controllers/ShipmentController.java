@@ -45,18 +45,21 @@ public class ShipmentController extends AbstractController {
 			
 			formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			shipments = new HashSet<Shipment>();
-			try {
-				time = formatter.parse(date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" "+hour);
-				shipments = shipmentService.searchShipment(origin, destination, date, time, envelope, itemSize);
-			} catch (ParseException e) {
-				e.printStackTrace();
+			
+			if(date!=null){
+				try {
+					time = formatter.parse(date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" "+hour);
+					shipments = shipmentService.searchShipment(origin, destination, date, time, envelope, itemSize);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
-					
+						
 			result = new ModelAndView("search/list");
 			result.addObject("shipments", shipments);
 
 			return result;
-		}
+			}
 		
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
 		public ModelAndView seeThread() {

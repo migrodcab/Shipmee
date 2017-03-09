@@ -10,14 +10,35 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<ul class="list-group">
-<jstl:forEach items="searchResult" var="route">
- 	<li class="list-group-item">
-		${route.creator.name}
-		${route.origin}
-		${route.destination}
-		${route.date}
-		${route.departureTime}
-	</li>
-</jstl:forEach>
-</ul>
+<style>
+.route {
+	margin-top: 10%;
+	border: 1px solid #ccc;
+	border-radius: 25px;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%
+}
+
+</style> 
+<div class="container route">
+	<jstl:choose>
+		<jstl:when test="${not empty routes}">
+			<ul class="list-group">
+			<jstl:forEach items="${routes}" var="route">
+			 	<li class="list-group-item">
+			 		${route.creator.name}
+					${route.origin}
+					${route.destination}
+					${route.date}
+					${route.departureTime}
+				</li>
+			</jstl:forEach>
+		</ul>
+		</jstl:when>
+		<jstl:otherwise>
+			<p>No se han encontrado resultados</p>
+		</jstl:otherwise>
+	</jstl:choose>
+</div>
