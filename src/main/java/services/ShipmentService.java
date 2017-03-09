@@ -118,6 +118,46 @@ public class ShipmentService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param shipmentId - Shipment's ID
+	 * 
+	 * This procedure does the selection of a shipment in the shipment's details view.
+	 * The carrier clicks in a button to select the shipment and the creator receives a notification
+	 */
+	public void selectShipment(int shipmentId){
+		
+		Assert.isTrue(shipmentId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		/*
+		 * Here comes session restrictions and other stuff.
+		 * I don't know if there is something missing above
+		 */
+		
+		
+		Shipment shipment = findOne(shipmentId);
+		User carrier = userService.findByPrincipal();
+		Date now = new Date();
+		
+		Assert.notNull(shipment); // shipment is not null.
+		Assert.isNull(shipment.getCarried()); // shipment has not a former selected carrier
+		Assert.isTrue(shipment.getDate().before(now)); // shipment was created in the past.
+		Assert.isTrue(shipment.getDepartureTime().after(now)); // shipment's departure time is future.
+		Assert.isTrue(shipment.getMaximumArriveTime().after(now)); // shipment's arrival time is future.
+		Assert.notNull(carrier);
+		/*
+		 * Here comes the assert to check that a user can carry in our app.
+		 */
+		
+		shipment.setCarried(carrier);
+		save(shipment);
+		
+		/*
+		 * Here comes the notification to the creator (Still not developed).
+		 */
+		
+	}
+	
 
 	// Other business methods -------------------------------------------------
 	
