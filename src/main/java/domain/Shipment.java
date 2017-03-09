@@ -23,7 +23,7 @@ public class Shipment extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private Date date;
 	private Date departureTime;
-	private Date maximunArriveTime;
+	private Date maximumArriveTime;
 	private String origin;
 	private String destination;
 	private double price;
@@ -53,11 +53,11 @@ public class Shipment extends DomainEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@NotNull
-	public Date getMaximunArriveTime() {
-		return maximunArriveTime;
+	public Date getMaximumArriveTime() {
+		return maximumArriveTime;
 	}
-	public void setMaximunArriveTime(Date maximunArriveTime) {
-		this.maximunArriveTime = maximunArriveTime;
+	public void setMaximumArriveTime(Date maximumArriveTime) {
+		this.maximumArriveTime = maximumArriveTime;
 	}
 	
 	@NotNull
@@ -120,7 +120,6 @@ public class Shipment extends DomainEntity {
 	}
 	
 	@Valid
-	@NotNull
 	@ManyToOne(optional=true)
 	public User getCarried() {
 		return carried;

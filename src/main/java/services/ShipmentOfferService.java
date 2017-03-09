@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.RouteOffer;
-import repositories.RouteOfferRepository;
+import domain.ShipmentOffer;
+import repositories.ShipmentOfferRepository;
 
 @Service
 @Transactional
-public class RouteOfferService {
+public class ShipmentOfferService {
 
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private RouteOfferRepository routeOfferRepository;
+	private ShipmentOfferRepository shipmentOfferRepository;
 
 	// Supporting services ----------------------------------------------------
 
@@ -26,24 +26,24 @@ public class RouteOfferService {
 	
 	// Constructors -----------------------------------------------------------
 
-	public RouteOfferService() {
+	public ShipmentOfferService() {
 		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
 	
-	public void delete(RouteOffer routeOffer) {
-		Assert.notNull(routeOffer);
-		Assert.isTrue(routeOffer.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete route offers");
+	public void delete(ShipmentOffer shipmentOffer) {
+		Assert.notNull(shipmentOffer);
+		Assert.isTrue(shipmentOffer.getId() != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete shipment offers");
 
-		routeOfferRepository.delete(routeOffer);
+		shipmentOfferRepository.delete(shipmentOffer);
 	}
 	
-	public RouteOffer findOne(int routeOfferId) {
-		RouteOffer result;
+	public ShipmentOffer findOne(int shipmentOfferId) {
+		ShipmentOffer result;
 		
-		result = routeOfferRepository.findOne(routeOfferId);
+		result = shipmentOfferRepository.findOne(shipmentOfferId);
 		
 		return result;
 	}
@@ -51,13 +51,13 @@ public class RouteOfferService {
 	// Other business methods -------------------------------------------------
 	
 	public void flush() {
-		routeOfferRepository.flush();
+		shipmentOfferRepository.flush();
 	}
 
-	public Collection<RouteOffer> findAllByRouteId(int routeId) {
-		Collection<RouteOffer> result;
+	public Collection<ShipmentOffer> findAllByShipmentId(int shipmentId) {
+		Collection<ShipmentOffer> result;
 		
-		result = routeOfferRepository.findAllByRouteId(routeId);
+		result = shipmentOfferRepository.findAllByShipmentId(shipmentId);
 
 		return result;
 	}

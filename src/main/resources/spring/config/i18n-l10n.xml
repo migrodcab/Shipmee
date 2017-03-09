@@ -15,6 +15,7 @@
 		
 		<value>/views/route/messages</value>
 		<value>/views/sizePrice/messages</value>
+		<value>/views/shipment/messages</value>
 	</util:list>
 
 </beans>

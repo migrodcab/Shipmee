@@ -15,6 +15,7 @@
 		
 		<value>/views/route/tiles.xml</value>
 		<value>/views/sizePrice/tiles.xml</value>
+		<value>/views/shipment/tiles.xml</value>
 	</util:list>
 
 </beans>
