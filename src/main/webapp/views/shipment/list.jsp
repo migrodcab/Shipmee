@@ -25,7 +25,8 @@
 	background-color: #f7f7f7;
 	-webkit-box-shadow: 2px 2px 5px #999;
 	-moz-box-shadow: 2px 2px 5px #999;
-	margin-bottom: 5%
+	margin-bottom: 5%;
+	width:90%;
 }
 
 .rfecha {
@@ -82,21 +83,21 @@
 			<div class="rfecha col-xs-7 col-sm-9">
 
 				<div class="row info-destino">
-					<div class="col-xs-2 col-sm-1 text-right">
+					<div class="col-xs-2 col-sm-1 text-center">
 						<img class="img-responsive" src="images/origin.svg" width="40"
 							alt="Origen">
 					</div>
-					<div class="col-xs-10 col-sm-4 text-left">
+					<div class="col-xs-10 col-sm-4 text-center">
 						<h4>Sevilla Santa Justa</h4>
 					</div>
 					<div class="col-sm-2 text-center">
 						<img class="center-block img-responsive" src="images/exchange.svg"
 							width="25" alt="Origen">
 					</div>
-					<div class="col-xs-10 col-sm-4 text-left">
+					<div class="col-xs-10 col-sm-4 text-center">
 						<h4>Almeria</h4>
 					</div>
-					<div class="col-xs-2 col-sm-1 text-left">
+					<div class="col-xs-2 col-sm-1 text-center">
 						<img class="img-responsive" src="images/destination.svg"
 							width="40" alt="Origen">
 					</div>
@@ -118,10 +119,10 @@
 				<div class="row info1">
 					<div class="col-xs-6">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-9">
 								<p class="information text-center">Forma de envio:</p>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<img class=" pull-left img-responsive center-block" width="40"
 									height="40" src="images/package_open.svg">
 							</div>
@@ -130,10 +131,10 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="row">
-							<div class="col-sm-6 text-center">
+							<div class="col-sm-9 text-center">
 								<p class="information">Tamanyo del paquete</p>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<img class="img-responsive pull-left" width="40" height="40"
 									src="images/tag-l.png">
 							</div>
