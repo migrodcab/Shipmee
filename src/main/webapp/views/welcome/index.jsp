@@ -14,58 +14,60 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
+				<div class="titlePrincipal">
 					<h3><spring:message code="welcome.sentence" /></h3>
-					<h1 class="titlePrincipal"><spring:message code="welcome.title" /></h1>
-					<h5><spring:message code="welcome.sentence2" /></h5>
+					<h1><spring:message code="welcome.title" /></h1>
+					</div>
+					<h4><spring:message code="welcome.sentence2" /></h4>
 								
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 himg">
 
 				</div>
 			</div>
-	     
-      	
-	    </div>
-	    
-	    <div class="container2">
-	    <div class="well-searchbox">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"><spring:message code="welcome.searcher.origin" /></label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="City">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"><spring:message code="welcome.searcher.destination" /></label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="City">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"><spring:message code="welcome.searcher.date" /></label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="Date">
-                        </div>
-                    </div>
+    <div id="panel" class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10" >
+        <h3 class="titleSearch"><spring:message code="welcome.searcher.title" /></h3>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"><spring:message code="welcome.searcher.time" /></label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="Time">
-                        </div>
-                    </div>
-
-                        <button type="submit" class="btnSample btn-success">Search</button>
-                </form>
+        <form>
+            <div class="group">
+                <input class="camp" type="text">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span> <spring:message code="welcome.searcher.origin" /> </label>
             </div>
-	    
-	    </div>
-	    
-	    
-	    
+
+            <div class="group">
+                <input class="camp" type="text">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
+            </div>
+
+            <div class="group">
+                <input class="camp" type="text">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="glyphicon glyphicon-calendar">&nbsp;</span><spring:message code="welcome.searcher.date" /></label>
+            </div>
+
+            <div class="group">
+                <input class="camp" type="text">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label><span class="glyphicon glyphicon-time">&nbsp;</span><spring:message code="welcome.searcher.time" /></label>
+            </div>
+            <div class="group">
+               <button type="submit" class="btnSearch btn-lg btnSample btn-block btn-success"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
+       		</div>
+        </form>
+
+    </div>
+
+
+		</div>
+	    	    
 	    
 	</div>
 	

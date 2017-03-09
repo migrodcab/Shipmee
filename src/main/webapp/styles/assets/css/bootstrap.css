@@ -1997,7 +1997,7 @@ select[multiple].input-lg {
   font-weight: normal;
   line-height: 1.42857143;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;

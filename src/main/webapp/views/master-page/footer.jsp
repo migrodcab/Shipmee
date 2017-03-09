@@ -17,6 +17,12 @@
 		 			<h4><spring:message code="master.page.about.foot" /></h4>
 		 			<div class="hline-w"></div>
 		 			<p><spring:message code="master.page.about.foot.text" /></p>
+		 			
+		 			<div class="language text-sample">
+		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> | 
+						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
+					</div>
+					
 		 		</div>
 		 		<div class="col-lg-4">
 		 			<h4><spring:message code="master.page.social.foot" /></h4>
@@ -40,10 +46,7 @@
 		 		</div>
 		 	
 		 	</div>
-		 	<div class="language text-sample">
-		 				<a id="es" href="?language=es"><img id="translate-flag" src="images/es.gif"/>Español</a> | 
-						<a id="en" href="?language=en"><img id="translate-flag" src="images/en.gif"/>English</a>
-			</div>
+		 	
 			<div class="licence text-sample">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Shipmee Co., Inc.</div>
 	 	</div>
 	 </div>

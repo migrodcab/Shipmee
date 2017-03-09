@@ -46,32 +46,28 @@
 	color: white;
 }
 
-.rfecha {
-	padding: 3%;
-}
-
-.info1 {
-	padding-top: 1%;
-	padding-left: 1%;
+.titulo {
+	padding: 0.5%
 }
 
 .row-origen {
-	padding-top: 2%;
+	padding-top: 0.5%;
 }
 
 .information {
-	font-size: 19px;
+	font-size: 16px;
 }
 
-.btn-llevar{
-	margin-top: 20%;
+.btn-llevar {
+	margin-top: 3%;
 }
-.titulo{
-	padding:1%;
-}
-.imagen-envio{
 
-margin-top:10%;
+.imagen-envio {
+	margin-top: 2%;
+}
+
+.info-destino {
+	padding-top: 0.5%;
 }
 </style>
 
@@ -85,7 +81,7 @@ margin-top:10%;
 		<div class="row info-envio">
 			<div class="rfecha col-xs-7 col-sm-9">
 
-				<div class="row">
+				<div class="row info-destino">
 					<div class="col-xs-2 text-right">
 						<img class="img-responsive" src="images/origin.svg" width="40"
 							alt="Origen">
@@ -115,39 +111,38 @@ margin-top:10%;
 									src="images/departure.svg" width="25" alt="Llegada">
 							</div>
 							<div class="col-xs-10 text-left information">
-								<p class="information">Hora de salida: Lunes 13 de Marzo
-									13:00</p>
+								Hora de salida: Lunes 13 de Marzo
+									13:00
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="titulo col-sm-12 text-center">
-						<div class="row row-llegada">
+						<div class="row row-origen">
 
-							<div class="col-xs-2 text-right">
+							<div class="col-xs-2">
 								<img class="pull-right img-responsive" src="images/arrival.svg"
 									width="25" alt="Llegada">
 							</div>
-							<div class="col-xs-10 text-left">
-								<p class="information">Hora de llegada: Lunes 13 de Marzo
-									19:00</p>
+							<div class="col-xs-10 text-left information">
+								Hora de llegada: Lunes 13 de Marzo
+									19:00
 							</div>
 						</div>
 					</div>
 				</div>
 
-
 			</div>
 			<div class="imagen col-xs-5 col-sm-3 center">
 				<div class="row text-center">
 					<div class="col-xs-12">
-						<img class="img-responsive center-block imagen-envio" width="100" height="100"
-							src="images/bycicle.svg">
+						<img class="img-responsive center-block imagen-envio" width="100"
+							height="100" src="images/bycicle.svg">
 					</div>
 					<div class="col-xs-12 text-center">
-						<button type="button"
-							class="btn-llevar btn btn-success">Llevar por 20 euros</button>
+						<button type="button" class="btn-llevar btn btn-success">Llevar
+							por 20 euros</button>
 					</div>
 				</div>
 
