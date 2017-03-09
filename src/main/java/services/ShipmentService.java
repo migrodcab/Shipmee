@@ -125,6 +125,15 @@ public class ShipmentService {
 		shipmentRepository.flush();
 	}
 	
+	public Collection<Shipment> searchShipment(String origin, String destination, Date date, Date time, String envelope, String itemSize){
+		Assert.isTrue(origin != "" && destination != "");
+		Collection<Shipment> result;
+		
+		result = shipmentRepository.searchShipment(origin, destination, date, time, envelope, itemSize);
+		
+		return result;
+	}
+	
 	private boolean checkItemEnvelope(String itemEnvelope) {
 		boolean res;
 		
