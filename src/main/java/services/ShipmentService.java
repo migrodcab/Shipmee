@@ -118,6 +118,21 @@ public class ShipmentService {
 		return result;
 	}
 	
+	// Other business methods -------------------------------------------------
+	
+	public void flush() {
+		shipmentRepository.flush();
+	}
+	
+	public Collection<Shipment> searchShipment(String origin, String destination, Date date, Date time, String envelope, String itemSize){
+		Assert.isTrue(origin != "" && destination != "");
+		Collection<Shipment> result;
+		
+		result = shipmentRepository.searchShipment(origin, destination, date, time, envelope, itemSize);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param shipmentId - Shipment's ID
@@ -155,22 +170,6 @@ public class ShipmentService {
 		 * Here comes the notification to the creator (Still not developed).
 		 */
 		
-	}
-	
-
-	// Other business methods -------------------------------------------------
-	
-	public void flush() {
-		shipmentRepository.flush();
-	}
-	
-	public Collection<Shipment> searchShipment(String origin, String destination, Date date, Date time, String envelope, String itemSize){
-		Assert.isTrue(origin != "" && destination != "");
-		Collection<Shipment> result;
-		
-		result = shipmentRepository.searchShipment(origin, destination, date, time, envelope, itemSize);
-		
-		return result;
 	}
 	
 	private boolean checkItemEnvelope(String itemEnvelope) {

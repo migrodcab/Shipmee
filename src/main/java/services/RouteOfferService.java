@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Route;
 import domain.RouteOffer;
 import repositories.RouteOfferRepository;
 
@@ -23,7 +24,7 @@ public class RouteOfferService {
 
 	@Autowired
 	private ActorService actorService;
-	
+		
 	// Constructors -----------------------------------------------------------
 
 	public RouteOfferService() {
@@ -60,6 +61,28 @@ public class RouteOfferService {
 		result = routeOfferRepository.findAllByRouteId(routeId);
 
 		return result;
+	}
+	
+	public void accept(int routeOfferId){
+		
+		Assert.isTrue(routeOfferId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		
+		RouteOffer routeOffer = findOne(routeOfferId);
+		Route route = routeOffer.getRoute();
+		
+		Assert.notNull(route);
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()));
+		
+		/*
+		 * Here comes:
+		 * - Update price of the route.
+		 * - Update user with his role.
+		 * - Save changes.
+		 * - Notification to the client.
+		 */
+		
+		
 	}
 	
 }
