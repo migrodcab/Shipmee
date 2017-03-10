@@ -114,6 +114,20 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/select", method = RequestMethod.POST)
+	public ModelAndView selectShipment(@Valid ShipmentForm shipmentForm, BindingResult binding){
+		ModelAndView result;
+		
+		try {
+			shipmentFormService.delete(shipmentForm);
+			result = new ModelAndView("redirect:list.do");
+		}catch(Throwable oops){
+			result = createEditModelAndView(shipmentForm, "shipment.commit.error");
+		}
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 	
 	protected ModelAndView createEditModelAndView(ShipmentForm shipmentForm) {

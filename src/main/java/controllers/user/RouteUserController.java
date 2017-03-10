@@ -127,6 +127,20 @@ public class RouteUserController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/select", method = RequestMethod.POST)
+	public ModelAndView selectRoute(@Valid RouteForm routeForm, BindingResult binding) {
+		ModelAndView result;
+		
+		try {
+			routeFormService.selectRoute(routeForm);
+			result = new ModelAndView("redirect:list.do");
+		} catch(Throwable oops){
+			result = createEditModelAndView(routeForm, "route.commit.error");
+		}
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 	
 	protected ModelAndView createEditModelAndView(RouteForm routeForm) {

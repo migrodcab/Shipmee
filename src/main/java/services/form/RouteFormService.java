@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import domain.Route;
 import domain.form.RouteForm;
 import services.RouteService;
+import services.UserService;
 
 @Service
 @Transactional
@@ -20,6 +21,9 @@ public class RouteFormService {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -108,5 +112,9 @@ public class RouteFormService {
 		Route route;
 		route = routeService.findOne(routeForm.getRouteId());
 		routeService.delete(route);
+	}
+	
+	public void selectRoute(RouteForm routeForm){
+		userService.selectRoute(routeForm.getRouteId());
 	}
 }
