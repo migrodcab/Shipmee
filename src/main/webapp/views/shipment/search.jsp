@@ -122,7 +122,7 @@
 							</div>
 							<div class="col-sm-3">
 								<img class=" pull-left img-responsive center-block" width="40"
-									height="40" src="images/package_open.svg">
+									height="40" src="images/package_${shipment.itemEnvelope}.svg">
 							</div>
 						</div>
 
@@ -134,7 +134,7 @@
 							</div>
 							<div class="col-sm-3">
 								<img class="img-responsive pull-left" width="40" height="40"
-									src="images/tag-l.png">
+									src="images/tag-${shipment.itemSize}.png">
 							</div>
 						</div>
 
