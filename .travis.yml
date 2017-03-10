@@ -15,6 +15,9 @@ script:
     - mvn clean test
     - ls -lah
 
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report -DrepoToken=$repoTokenCoverall
+
 cache:
     directories:
         - $HOME/.m2   # Cache para las dependencias de maven
