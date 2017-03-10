@@ -9,7 +9,6 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,30 +44,21 @@ public class ShipmentController extends AbstractController {
 			
 			formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			shipments = new HashSet<Shipment>();
+			time = null;
 			
 			if(date!=null){
 				try {
 					time = formatter.parse(date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" "+hour);
-					shipments = shipmentService.searchShipment(origin, destination, date, time, envelope, itemSize);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
+			
+			shipments = shipmentService.searchShipment(origin, destination, date, time, envelope, itemSize);
 						
-			result = new ModelAndView("search/list");
+			result = new ModelAndView("shipment/search");
 			result.addObject("shipments", shipments);
 
 			return result;
 			}
-		
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView seeThread() {
-			ModelAndView result;
-
-
-			result = new ModelAndView("shipment/list");
-			
-			return result;
-
-		}
 }

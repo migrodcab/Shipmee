@@ -129,7 +129,9 @@ public class ShipmentService {
 		Assert.isTrue(origin != "" && destination != "");
 		Collection<Shipment> result;
 		
+		System.out.println(origin+" - "+destination);
 		result = shipmentRepository.searchShipment(origin, destination, date, time, envelope, itemSize);
+		System.out.println(result);
 		
 		return result;
 	}
