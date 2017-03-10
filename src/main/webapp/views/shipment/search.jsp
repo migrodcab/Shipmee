@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -110,7 +111,7 @@
 									src="images/departure.svg" width="25" alt="Llegada">
 							</div>
 							<div class="col-xs-10 text-left information">Hora de
-								salida: Lunes 13 de Marzo 13:00</div>
+								salida: Lunes 13 de Marzo 13:00 test</div>
 						</div>
 					</div>
 				</div>
@@ -151,7 +152,9 @@
 					</div>
 					<div class="col-xs-12 text-center">
 						<button type="button" class="btn-llevar btn btn-success">Llevar
-							por ${shipment.price} euros</button>
+							por <jstl:set var="price" value="${fn:replace(shipment.price, 
+                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                '.', ',')}" />${priceFormated} euros</button>
 					</div>
 				</div>
 
