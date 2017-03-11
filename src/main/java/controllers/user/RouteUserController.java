@@ -102,7 +102,7 @@ public class RouteUserController extends AbstractController {
 				if(id == 0) {
 					result = new ModelAndView("redirect:../../sizePrice/user/create.do?routeId="+route.getId());
 				} else {
-					result = new ModelAndView("redirect:list.do");
+					result = new ModelAndView("redirect:../../sizePrice/user/edit.do?routeId="+route.getId());
 				}
 			} catch (Throwable oops) {
 

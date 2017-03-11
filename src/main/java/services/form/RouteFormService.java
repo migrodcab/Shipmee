@@ -7,8 +7,10 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import domain.Route;
+import domain.User;
 import domain.form.RouteForm;
 import services.RouteService;
 import services.UserService;
@@ -89,11 +91,15 @@ public class RouteFormService {
 		RouteForm result;
 		Route route;
 		String arriveTime, departureTime;
+		User user;
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
 		result = this.create();
 		route = routeService.findOne(routeId);
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(user.getId() == route.getCreator().getId());
 		
 		arriveTime = formatter.format(route.getArriveTime());
 		departureTime = formatter.format(route.getDepartureTime());

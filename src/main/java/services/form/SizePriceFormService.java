@@ -6,12 +6,15 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.SizePrice;
+import domain.User;
 import domain.form.SizePriceForm;
 import services.RouteService;
 import services.SizePriceService;
+import services.UserService;
 
 @Service
 @Transactional
@@ -24,6 +27,9 @@ public class SizePriceFormService {
 	
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -54,6 +60,13 @@ public class SizePriceFormService {
 
 	public SizePriceForm findOne(int routeId) {
 		SizePriceForm result;
+		Route route;
+		User user;
+		
+		route = routeService.findOne(routeId);
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(user.getId() == route.getCreator().getId());
 		
 		result = this.create(routeId);
 		
