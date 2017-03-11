@@ -116,7 +116,7 @@ public class RouteService {
 		
 		routeOffers = routeOfferService.findAllByRouteId(route.getId());
 		for(RouteOffer ro : routeOffers) {
-			routeOfferService.delete(ro);
+			routeOfferService.delete(ro.getId());
 		}
 						
 		routeRepository.delete(route);
