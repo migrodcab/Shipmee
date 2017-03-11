@@ -256,6 +256,7 @@ public class DatabaseUtil {
 					statement.execute(line);
 				}
 				connection.commit();
+				statement.close();
 			}
 		});
 	}
