@@ -1,9 +1,6 @@
 package controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,29 +30,16 @@ public class RouteController extends AbstractController {
 		
 	// Search ------------------------------------------------------------------		
 
-	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView search(String origin, String destination, @RequestParam(required=false) Date date,
+	public ModelAndView search(String origin, String destination, @RequestParam(required=false) String date,
 			@RequestParam(required=false) String hour, @RequestParam(required=false) String envelope,
 			@RequestParam(required=false) String itemSize) {
 		ModelAndView result;
-		SimpleDateFormat formatter;
-		Date time;
 		Collection<Route> routes;
 		
-		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		routes = new HashSet<Route>();
-		time = null;
-
-		if(date!=null){
-			try {
-				time = formatter.parse(date.getDate()+"/"+date.getMonth()+"/"+date.getYear()+" "+hour);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
 		
-		routes = routeService.searchRoute(origin, destination, date, time, envelope, itemSize);
+		routes = routeService.searchRoute(origin, destination, date, hour, envelope, itemSize);
 				
 		result = new ModelAndView("route/search");
 		result.addObject("routes", routes);
