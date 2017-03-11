@@ -87,10 +87,6 @@
 }
 
 
-
-
-
-
 /*	Buttom search */
 
 .btn-success {
@@ -231,6 +227,8 @@ fieldset[disabled] .btnSample.active {
 	-webkit-transition: 0.2s ease all;
 }
 
+
+
 /* active state */
 input:focus ~ label, input:valid ~ label {
 	top: -20px;
@@ -324,7 +322,7 @@ to {
 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	margin-top: 3%;
-	padding-top: 1%;
+	padding-top: 2%;
 	padding-left: 2%;
 	padding-right: 2%;
 	padding-bottom: 0%;

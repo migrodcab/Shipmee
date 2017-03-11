@@ -8,6 +8,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
+<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+
+<style>
+
+.dropdown-menu {
+	background-color: white;
+}
+
+</style>
+
+
  <body>
 
 <div id="headerwrap">
@@ -32,7 +45,7 @@
         <form class="form">
         
          	<div class="choose btn-group btn-toggle" data-toggle="buttons">
-						<label class="btn btn-lg btn-primary active"> 
+						<label class="btn btn-lg btn-primary active btn-default"> 
 						<input name="options" value="option1" checked="" type="radio"><spring:message code="welcome.searcher.choose1" /></label> 
 						<label class="btn btn-lg btn-default"> 
 						<input name="options" value="option2" type="radio"><spring:message code="welcome.searcher.choose2" /></label>
@@ -52,21 +65,17 @@
                 <span class="bar"></span>
                 <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
             </div>
-
+           
             <div class="group">
-                <input class="camp" type="date" > 
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-calendar">&nbsp;</span><spring:message code="welcome.searcher.date" /></label>
-              
-                
-            </div>
-   
-			
-			           
+   				<div class='input-group date input-text' id='datetimepicker1'>
+				<input name="fecha" style="backgroud-color: white;" type='text' class="form-control" /> 
+				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+			       
             <div class="group">
                <button type="submit" class="btnSearch btn-lg btnSample btn-block btn-success"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
-       		</div>
+       		</div> 
 					
 							
 					
@@ -111,25 +120,23 @@
 
 <script type="text/javascript">
 	
-              
+
+
+
 $('.btn-toggle').click(function() {
-    $(this).find('.btn').toggleClass('active');  
-    
-    if ($(this).find('.btn-primary').size()>0) {
-        $(this).find('.btn').toggleClass('btn-primary');
-    }
-    if ($(this).find('.btn-danger').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-danger');
-    }
-    if ($(this).find('.btn-success').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-success');
-    }
-    if ($(this).find('.btn-info').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-info');
-    }
-    
-    $(this).find('.btn').toggleClass('btn-default');
-       
+    $(this).children('.btn').toggleClass('active');  
+    $(this).children('.btn').toggleClass('btn-primary');
+    e.stopPropagation(); 
+    e.preventDefault();
+});
+
+
+
+$(function() {
+	$('#datetimepicker1').datetimepicker({
+		viewMode : 'days',
+		format : 'DD/MM/YYYY'
+	});
 });
               
 </script>

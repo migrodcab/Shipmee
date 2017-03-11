@@ -41,7 +41,7 @@
 	 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="styles/assets/js/bootstrap.min.js"></script>
 	<script src="styles/assets/js/retina-1.1.0.js"></script>
 	<script src="styles/assets/js/jquery.hoverdir.js"></script>
