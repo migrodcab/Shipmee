@@ -23,7 +23,6 @@
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
-
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +42,7 @@
 	 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="styles/assets/js/bootstrap.min.js"></script>
 	<script src="styles/assets/js/retina-1.1.0.js"></script>
 	<script src="styles/assets/js/jquery.hoverdir.js"></script>
@@ -51,7 +50,7 @@
 	<script src="styles/assets/js/jquery.prettyPhoto.js"></script>
   	<script src="styles/assets/js/jquery.isotope.min.js"></script>
   	<script src="styles/assets/js/custom.js"></script>
-	<script type="text/javascript" src="styles/assets/js/modernizr.js"></script>
+	
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
