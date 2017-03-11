@@ -167,7 +167,7 @@
 		<property name="arriveTime" value="2017/03/12 19:00"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
-		<property name="itemEnvelope" value="both"/>
+		<property name="itemEnvelope" value="Both"/>
 		<property name="creator" ref="user1"/>
 		<property name="vehicle" ref="vehicle1"/>
 	</bean>

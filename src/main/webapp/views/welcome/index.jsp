@@ -6,11 +6,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+ <body>
 
-  <body>
-
-	<div id="headerwrap">
+<div id="headerwrap">
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
@@ -29,8 +29,16 @@
 
     <div id="panel" class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10" >
         <h3 class="titleSearch"><spring:message code="welcome.searcher.title" /></h3>
-
-        <form>
+        <form class="form">
+        
+         	<div class="choose btn-group btn-toggle" data-toggle="buttons">
+						<label class="btn btn-lg btn-primary active"> 
+						<input name="options" value="option1" checked="" type="radio"><spring:message code="welcome.searcher.choose1" /></label> 
+						<label class="btn btn-lg btn-default"> 
+						<input name="options" value="option2" type="radio"><spring:message code="welcome.searcher.choose2" /></label>
+			</div>
+			
+			
             <div class="group">
                 <input class="camp" type="text">
                 <span class="highlight"></span>
@@ -46,30 +54,34 @@
             </div>
 
             <div class="group">
-                <input class="camp" type="text">
+                <input class="camp" type="date" > 
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label><span class="glyphicon glyphicon-calendar">&nbsp;</span><spring:message code="welcome.searcher.date" /></label>
+              
+                
             </div>
-
-            <div class="group">
-                <input class="camp" type="text">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-time">&nbsp;</span><spring:message code="welcome.searcher.time" /></label>
-            </div>
+   
+			
+			           
             <div class="group">
                <button type="submit" class="btnSearch btn-lg btnSample btn-block btn-success"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
        		</div>
-        </form>
+					
+							
+					
+		</form>
 
-    </div>
+
+    	</div>
 
 
 		</div>
 	    	    
-	    
+   
 	</div>
+	
+	
 	
 	
 	 <div id="service">
@@ -93,6 +105,34 @@
 	 		</div>
 	 	</div>
 	 </div>
+
+
+
+
+<script type="text/javascript">
+	
+              
+$('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    
+    if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+    }
+    if ($(this).find('.btn-danger').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-danger');
+    }
+    if ($(this).find('.btn-success').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-success');
+    }
+    if ($(this).find('.btn-info').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-info');
+    }
+    
+    $(this).find('.btn').toggleClass('btn-default');
+       
+});
+              
+</script>
+</body>
 	
 	
-	</body>

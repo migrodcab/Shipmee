@@ -7,10 +7,13 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import domain.Shipment;
+import domain.User;
 import domain.form.ShipmentForm;
 import services.ShipmentService;
+import services.UserService;
 
 @Service
 @Transactional
@@ -20,6 +23,9 @@ public class ShipmentFormService {
 
 	@Autowired
 	private ShipmentService shipmentService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -89,11 +95,15 @@ public class ShipmentFormService {
 		ShipmentForm result;
 		Shipment shipment;
 		String maximumArriveTime, departureTime;
+		User user;
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
 		result = this.create();
 		shipment = shipmentService.findOne(shipmentId);
+		user = userService.findByPrincipal();
+		
+		Assert.isTrue(user.getId() == shipment.getCreator().getId());
 		
 		maximumArriveTime = formatter.format(shipment.getMaximumArriveTime());
 		departureTime = formatter.format(shipment.getDepartureTime());
