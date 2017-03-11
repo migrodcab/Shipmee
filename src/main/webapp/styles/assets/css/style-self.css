@@ -218,7 +218,7 @@ fieldset[disabled] .btnSample.active {
 	outline: none;
 }
 
-label {
+.group label {
 	color: #fff;
 	font-size: 18px;
 	font-weight: normal;
@@ -344,6 +344,10 @@ h3,
 .titleSearch{
 	color: white;
 	padding-top: 1%;
+	padding-bottom: 5%;
+}
+
+.choose{
 	padding-bottom: 15%;
 }
 
