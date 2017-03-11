@@ -62,6 +62,8 @@ public class ShipmentFormService {
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
+			result.setItemName(shipmentForm.getItemName());
+			result.setItemPicture(shipmentForm.getItemPicture());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);			
@@ -71,6 +73,8 @@ public class ShipmentFormService {
 			result.setDestination(shipmentForm.getDestination());
 			result.setItemEnvelope(shipmentForm.getItemEnvelope());
 			result.setPrice(shipmentForm.getPrice());
+			result.setItemName(shipmentForm.getItemName());
+			result.setItemPicture(shipmentForm.getItemPicture());
 			result.setItemSize(shipmentForm.getItemSize());
 			result.setMaximumArriveTime(maximumArriveTime);
 			result.setDepartureTime(departureTime);
@@ -98,6 +102,8 @@ public class ShipmentFormService {
 		result.setDestination(shipment.getDestination());
 		result.setItemEnvelope(shipment.getItemEnvelope());
 		result.setPrice(shipment.getPrice());
+		result.setItemName(shipment.getItemName());
+		result.setItemPicture(shipment.getItemPicture());
 		result.setItemSize(shipment.getItemSize());
 		result.setMaximumArriveTime(maximumArriveTime);
 		result.setDepartureTime(departureTime);

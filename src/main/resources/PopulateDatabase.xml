@@ -216,6 +216,8 @@
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
 		<property name="price" value="2.00"/>
+		<property name="itemName" value="Equipo de música"/>
+		<property name="itemPicture" value="http://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
 		<property name="itemSize" value="L"/>
 		<property name="itemEnvelope" value="open"/>
 		<property name="creator" ref="user2"/>

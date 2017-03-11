@@ -42,6 +42,10 @@
 	<form:errors path="itemSize" cssClass="error" />
 	
 	<acme:textbox code="shipment.price" path="price"/>
+	
+	<acme:textbox code="shipment.itemName" path="itemName"/>
+	
+	<acme:textbox code="shipment.itemPicture" path="itemPicture"/>
 		
 	<form:label path="itemEnvelope">
 		<spring:message code="shipment.itemEnvelope" />
