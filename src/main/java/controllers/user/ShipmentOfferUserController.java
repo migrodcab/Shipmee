@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
-import domain.RouteOffer;
-import services.RouteOfferService;
+import domain.ShipmentOffer;
+import services.ShipmentOfferService;
 
 @Controller
-@RequestMapping("/routeOffer/user")
-public class RouteOfferUserController extends AbstractController {
+@RequestMapping("/shipmentOffer/user")
+public class ShipmentOfferUserController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private RouteOfferService routeOfferService;
+	private ShipmentOfferService shipmentOfferService;
 
 	// Constructors -----------------------------------------------------------
 
-	public RouteOfferUserController() {
+	public ShipmentOfferUserController() {
 		super();
 	}
 
@@ -35,23 +35,23 @@ public class RouteOfferUserController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int routeId) {
+	public ModelAndView create(@RequestParam int shipmentId) {
 		ModelAndView result;
-		RouteOffer routeOffer;
+		ShipmentOffer offer;
 
-		routeOffer = routeOfferService.create(routeId);
-		result = createEditModelAndView(routeOffer);
+		offer = shipmentOfferService.create(shipmentId);
+		result = createEditModelAndView(offer);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/createClone", method = RequestMethod.GET)
-	public ModelAndView createFromClone(@RequestParam int routeOfferId) {
+	public ModelAndView createFromClone(@RequestParam int shipmentOfferId) {
 		ModelAndView result;
-		RouteOffer routeOffer;
+		ShipmentOffer shipmentOffer;
 
-		routeOffer = routeOfferService.createFromClone(routeOfferId);
-		result = createEditModelAndView(routeOffer);
+		shipmentOffer = shipmentOfferService.createFromClone(shipmentOfferId);
+		result = createEditModelAndView(shipmentOffer);
 
 		return result;
 	}
@@ -59,30 +59,30 @@ public class RouteOfferUserController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int routeOfferId) {
+	public ModelAndView edit(@RequestParam int shipmentOfferId) {
 		ModelAndView result;
-		RouteOffer routeOffer;
+		ShipmentOffer shipmentOffer;
 
-		routeOffer = routeOfferService.findOne(routeOfferId);
-		Assert.notNull(routeOffer, "controller.user.routeOffer.edit.isNull");
-		result = createEditModelAndView(routeOffer);
+		shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
+		Assert.notNull(shipmentOffer, "controller.user.shipmentOffer.edit.isNull");
+		result = createEditModelAndView(shipmentOffer);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid RouteOffer routeOffer, BindingResult binding) {
+	public ModelAndView save(@Valid ShipmentOffer shipmentOffer, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(routeOffer);
+			result = createEditModelAndView(shipmentOffer);
 		} else {
 			try {
-				routeOffer = routeOfferService.save(routeOffer);
+				shipmentOffer = shipmentOfferService.save(shipmentOffer);
 
-				result = new ModelAndView("redirect:details.do?routeId=" + routeOffer.getRoute().getId());
+				result = new ModelAndView("redirect:details.do?shipmentId=" + shipmentOffer.getShipment().getId());
 			} catch (Throwable oops) {
-				result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
+				result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
 			}
 		}
 
@@ -91,7 +91,7 @@ public class RouteOfferUserController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(RouteOffer input) {
+	protected ModelAndView createEditModelAndView(ShipmentOffer input) {
 		ModelAndView result;
 
 		result = createEditModelAndView(input, null);
@@ -99,11 +99,11 @@ public class RouteOfferUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(RouteOffer input, String message) {
+	protected ModelAndView createEditModelAndView(ShipmentOffer input, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("routeOffer/edit");
-		result.addObject("routeOffer", input);
+		result = new ModelAndView("shipmentOffer/edit");
+		result.addObject("shipmentOffer", input);
 		result.addObject("message", message);
 
 		return result;

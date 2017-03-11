@@ -94,11 +94,11 @@ public class ShipmentService {
 		
 		user = userService.findByPrincipal();
 
-		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "Only the user who created the route can delete it");
+		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "Only the user who created the shipment can delete it");
 		
 		shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
 		for(ShipmentOffer so : shipmentOffers) {
-			shipmentOfferService.delete(so);
+			shipmentOfferService.delete(so.getId());
 		}
 						
 		shipmentRepository.delete(shipment);

@@ -17,6 +17,7 @@
 		<value>/views/routeOffer/tiles.xml</value>
 		<value>/views/sizePrice/tiles.xml</value>
 		<value>/views/shipment/tiles.xml</value>
+		<value>/views/shipmentOffer/tiles.xml</value>
 
 		<value>/views/about/tiles.xml</value>
 	</util:list>
