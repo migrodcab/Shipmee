@@ -21,6 +21,8 @@ public class RouteOffer extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private double amount;
 	private String description;
+	private boolean acceptedByCarrier;
+	private boolean rejectedByCarrier;
 	
 	@Min(0)
 	@Digits(integer=9,fraction=2)
@@ -42,6 +44,21 @@ public class RouteOffer extends DomainEntity {
 		this.description = description;
 	}
 	
+	public boolean getAcceptedByCarrier() {
+		return acceptedByCarrier;
+	}
+	public void setAcceptedByCarrier(boolean acceptedByCarrier) {
+		this.acceptedByCarrier = acceptedByCarrier;
+	}
+
+	public boolean getRejectedByCarrier() {
+		return rejectedByCarrier;
+	}
+	public void setRejectedByCarrier(boolean rejectedByCarrier) {
+		this.rejectedByCarrier = rejectedByCarrier;
+	}
+
+
 	// Relationships ----------------------------------------------------------
 	private Route route;
 	private User user;
