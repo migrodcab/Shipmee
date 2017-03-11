@@ -54,7 +54,8 @@ public class RouteOfferService {
 	}
 
 	public RouteOffer createFromClone(int routeOfferId) {
-		RouteOffer res, act;
+		RouteOffer res;
+		RouteOffer act;
 		act = this.findOne(routeOfferId);
 		Assert.notNull(act, "service.routeOffer.createFromClone.isNullROute");
 

@@ -54,7 +54,8 @@ public class ShipmentOfferService {
 	}
 
 	public ShipmentOffer createFromClone(int shipmentOfferId) {
-		ShipmentOffer res, act;
+		ShipmentOffer res;
+		ShipmentOffer act;
 		act = this.findOne(shipmentOfferId);
 		Assert.notNull(act, "service.shipmentOffer.createFromClone.isNullShipment");
 
