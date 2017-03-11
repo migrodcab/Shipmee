@@ -1,8 +1,10 @@
 package services;
 
+import java.awt.print.Pageable;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -22,9 +24,6 @@ public class RouteOfferService {
 	private RouteOfferRepository routeOfferRepository;
 
 	// Supporting services ----------------------------------------------------
-
-	@Autowired
-	private ActorService actorService;
 	
 	@Autowired
 	private UserService userService;
@@ -46,8 +45,6 @@ public class RouteOfferService {
 		
 		route = routeService.findOne(routeId);
 		Assert.notNull(route, "service.routeOffer.create.isNullRoute");
-		Assert.isTrue(actorService.checkAuthority("USER"), "service.routeOffer.create.notIsUserAuthority");
-	
 		
 		res = new RouteOffer();
 		res.setRoute(route);
@@ -75,8 +72,6 @@ public class RouteOfferService {
 
 		
 		Assert.notNull(input, "service.routeOffer.save.isNull");
-		Assert.isTrue(actorService.checkAuthority("USER"), "service.routeOffer.save.notIsUserAuthority");
-		Assert.isTrue(! input.getUser().equals(input.getRoute().getCreator()), "service.routeOffer.save.equalsCreatorAndProposer");
 		
 		actUser = userService.findByPrincipal();
 		
@@ -104,35 +99,30 @@ public class RouteOfferService {
 			Assert.isTrue(false, "service.routeOffer.save.userNotPermitted");
 			return null;
 		}
+		Assert.isTrue(! tmp.getUser().equals(tmp.getRoute().getCreator()), "service.routeOffer.save.equalsCreatorAndProposer");
+
 		tmp = routeOfferRepository.save(tmp);
 		
 		return tmp;		
 	}
 		
+	
+	public void delete(int routeOfferId) {
+		RouteOffer a;
 		
-	
-	
-	public void delete(RouteOffer routeOffer) {
-		Assert.notNull(routeOffer);
-		Assert.isTrue(routeOffer.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only an user can delete route offers");
+		a = this.findOne(routeOfferId);
+		
+		Assert.isTrue(this.checkPermission(a), "service.routeOffer.delete.notPermitted");
 
-		routeOfferRepository.delete(routeOffer);
+		routeOfferRepository.delete(a);
 	}
 	
 	public RouteOffer findOne(int routeOfferId) {
 		RouteOffer result;
-		User actUser;
-		Assert.isTrue(actorService.checkAuthority("USER"), "service.routeOffer.findOne.notIsUserAuthority");
-
 		result = routeOfferRepository.findOne(routeOfferId);
 
-		if (result != null) {
-			actUser = userService.findByPrincipal();
-
-			if (!(actUser.equals(result.getUser()) || actUser.equals(result.getRoute().getCreator()))) {
+		if (! this.checkPermission(result)) {
 				result = null;
-			}
 		}
 
 		return result;
@@ -146,10 +136,47 @@ public class RouteOfferService {
 
 	public Collection<RouteOffer> findAllByRouteId(int routeId) {
 		Collection<RouteOffer> result;
+		User actUser;
 		
+		actUser = userService.findByPrincipal();
+				
 		result = routeOfferRepository.findAllByRouteId(routeId);
+		
+		if(!result.isEmpty()){
+			Assert.isTrue(result.iterator().next().getRoute().getCreator().equals(actUser),
+					"service.routeOffer.delete.notPermitted");
+		}
 
 		return result;
+	}
+	
+	public Page<RouteOffer> findAllByOrRouteIdAndOrUserId(int routeId, int userId, Pageable page) {
+		Page<RouteOffer> result;
+		User actUser;
+		Assert.isTrue(routeId + userId > 0, "service.routeOffer.findAllByOrRouteIdAndOrUserId.notRouteOrUser");
+		
+		actUser = userService.findByPrincipal();
+				
+		result = routeOfferRepository.findAllByRouteIdAndUserId(routeId, userId, page);
+		
+		if(!result.hasContent()){
+			Assert.isTrue(result.iterator().next().getRoute().getCreator().equals(actUser),
+					"service.routeOffer.delete.notPermitted");
+		}
+
+		return result;
+	}
+	
+	private boolean checkPermission(RouteOffer input){
+		User actUser;
+		
+		actUser = userService.findByPrincipal();  // Inside check if it's null
+
+		if (input != null){
+			return actUser.equals(input.getUser()) || actUser.equals(input.getRoute().getCreator());
+		}else{
+			return false;
+		}
 	}
 	
 }
