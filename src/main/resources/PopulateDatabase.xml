@@ -167,7 +167,7 @@
 		<property name="arriveTime" value="2017/03/12 19:00"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
-		<property name="itemEnvelope" value="Both"/>
+		<property name="itemEnvelope" value="both"/>
 		<property name="creator" ref="user1"/>
 		<property name="vehicle" ref="vehicle1"/>
 	</bean>
@@ -176,32 +176,32 @@
 	
 	<bean id="sizePrice1" class="domain.SizePrice">
 		<property name="size" value="S"/>
-		<property name="price" value="1.5"/>
+		<property name="price" value="1.50"/>
 		<property name="route" ref="route1"/>
 	</bean>
 	
 	<bean id="sizePrice2" class="domain.SizePrice">
 		<property name="size" value="M"/>
-		<property name="price" value="2.0"/>
+		<property name="price" value="2.00"/>
 		<property name="route" ref="route1"/>
 	</bean>
 	
 	<bean id="sizePrice3" class="domain.SizePrice">
 		<property name="size" value="L"/>
-		<property name="price" value="2.5"/>
+		<property name="price" value="2.50"/>
 		<property name="route" ref="route1"/>
 	</bean>
 	
 	<bean id="sizePrice4" class="domain.SizePrice">
 		<property name="size" value="XL"/>
-		<property name="price" value="3.5"/>
+		<property name="price" value="3.50"/>
 		<property name="route" ref="route1"/>
 	</bean>
 	
 	<!-- RouteOffer -->
 	
 	<bean id="routeOffer1" class="domain.RouteOffer">
-		<property name="amount" value="2.0"/>
+		<property name="amount" value="2.00"/>
 		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
 		<property name="user" ref="user2"/>
 		<property name="route" ref="route1"/>
@@ -215,9 +215,11 @@
 		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
 		<property name="origin" value="Almeria"/>
 		<property name="destination" value="Sevilla"/>
-		<property name="price" value="2.0"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Equipo de música"/>
+		<property name="itemPicture" value="http://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
 		<property name="itemSize" value="L"/>
-		<property name="itemEnvelope" value="Abierto"/>
+		<property name="itemEnvelope" value="open"/>
 		<property name="creator" ref="user2"/>
 		<!-- <property name="carried" ref=""/> -->
 	</bean>
@@ -225,8 +227,8 @@
 	<!-- ShipmentOffer -->
 	
 	<bean id="shipmentOffer1" class="domain.ShipmentOffer">
-		<property name="amount" value="2.5"/>
-		<property name="description" value="Te llevo ese artículo por 2.5€ debido a su tamaño."/>
+		<property name="amount" value="2.50"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
 		<property name="user" ref="user1"/>
 		<property name="shipment" ref="shipment1"/>
 	</bean>

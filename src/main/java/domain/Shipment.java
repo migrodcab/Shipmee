@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -27,6 +28,8 @@ public class Shipment extends DomainEntity {
 	private String origin;
 	private String destination;
 	private double price;
+	private String itemName;
+	private String itemPicture;
 	private String itemSize;
 	private String itemEnvelope;
 	
@@ -89,6 +92,25 @@ public class Shipment extends DomainEntity {
 	
 	@NotNull
 	@NotBlank
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	
+	@NotNull
+	@NotBlank
+	@URL
+	public String getItemPicture() {
+		return itemPicture;
+	}
+	public void setItemPicture(String itemPicture) {
+		this.itemPicture = itemPicture;
+	}
+	
+	@NotNull
+	@NotBlank
 	public String getItemSize() {
 		return itemSize;
 	}
@@ -104,7 +126,7 @@ public class Shipment extends DomainEntity {
 	public void setItemEnvelope(String itemEnvelope) {
 		this.itemEnvelope = itemEnvelope;
 	}
-	
+
 	// Relationships ----------------------------------------------------------
 	private User creator;
 	private User carried;

@@ -1,21 +1,16 @@
-<%--
- * index.jsp
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 
 <style>
 .envio {
@@ -71,7 +66,11 @@
 	padding-top: 0.5%;
 }
 </style>
-
+<div class="container route">
+	<jstl:choose>
+		<jstl:when test="${not empty shipments}">
+			<jstl:forEach items="${shipments}" var="shipment">
+			 	
 <div class="container">
 	<div class="row envio">
 		<div class="row rtitulo">
@@ -88,14 +87,14 @@
 							alt="Origen">
 					</div>
 					<div class="col-xs-10 col-sm-4 text-center">
-						<h4>Sevilla Santa Justa</h4>
+						<h4>${shipment.origin}</h4>
 					</div>
 					<div class="col-sm-2 text-center">
 						<img class="center-block img-responsive" src="images/exchange.svg"
 							width="25" alt="Origen">
 					</div>
 					<div class="col-xs-10 col-sm-4 text-center">
-						<h4>Almeria</h4>
+						<h4>${shipment.destination}</h4>
 					</div>
 					<div class="col-xs-2 col-sm-1 text-center">
 						<img class="img-responsive" src="images/destination.svg"
@@ -112,7 +111,7 @@
 									src="images/departure.svg" width="25" alt="Llegada">
 							</div>
 							<div class="col-xs-10 text-left information">Hora de
-								salida: Lunes 13 de Marzo 13:00</div>
+								salida: Lunes 13 de Marzo 13:00 test</div>
 						</div>
 					</div>
 				</div>
@@ -124,7 +123,7 @@
 							</div>
 							<div class="col-sm-3">
 								<img class=" pull-left img-responsive center-block" width="40"
-									height="40" src="images/package_open.svg">
+									height="40" src="images/package_${shipment.itemEnvelope}.svg">
 							</div>
 						</div>
 
@@ -136,7 +135,7 @@
 							</div>
 							<div class="col-sm-3">
 								<img class="img-responsive pull-left" width="40" height="40"
-									src="images/tag-l.png">
+									src="images/tag-${shipment.itemSize}.png">
 							</div>
 						</div>
 
@@ -153,7 +152,9 @@
 					</div>
 					<div class="col-xs-12 text-center">
 						<button type="button" class="btn-llevar btn btn-success">Llevar
-							por 20 euros</button>
+							por <jstl:set var="price" value="${fn:replace(shipment.price, 
+                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                '.', ',')}" />${priceFormated} euros</button>
 					</div>
 				</div>
 
@@ -161,4 +162,12 @@
 		</div>
 
 	</div>
+</div>
+
+			</jstl:forEach>
+		</jstl:when>
+		<jstl:otherwise>
+			<p>No se han encontrado resultados</p>
+		</jstl:otherwise>
+	</jstl:choose>
 </div>

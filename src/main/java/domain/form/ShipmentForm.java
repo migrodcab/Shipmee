@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 
 public class ShipmentForm {
@@ -14,6 +15,8 @@ public class ShipmentForm {
 	private String origin;
 	private String destination;
 	private double price;
+	private String itemName;
+	private String itemPicture;
 	private String itemSize;
 	private String itemEnvelope;
 	private int shipmentId;
@@ -61,6 +64,25 @@ public class ShipmentForm {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	@NotNull
+	@NotBlank
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	
+	@NotNull
+	@NotBlank
+	@URL
+	public String getItemPicture() {
+		return itemPicture;
+	}
+	public void setItemPicture(String itemPicture) {
+		this.itemPicture = itemPicture;
 	}
 	
 	@NotNull
