@@ -85,9 +85,9 @@ public class PopulateDatabase {
 		int passCounter;
 		boolean done;
 
-		result = new LinkedList<Entry<String, Object>>();
+		result = new LinkedList<>();
 		result.addAll(entityMap.entrySet());
-		cache = new LinkedList<Entry<String, Object>>();
+		cache = new LinkedList<>();
 		passCounter = 0;
 
 		do {
@@ -108,7 +108,7 @@ public class PopulateDatabase {
 				cache.clear();
 			} catch (final Throwable oops) {
 				databaseUtil.undoTransaction();
-				done = (passCounter >= entityMap.size() - 1);
+				done = passCounter >= entityMap.size() - 1;
 				entry = result.removeFirst();
 				cache.addAll(result);
 				cache.addLast(entry);
@@ -127,7 +127,7 @@ public class PopulateDatabase {
 	protected static HashMap<String, Integer> persist(final DatabaseUtil databaseUtil, final List<Entry<String, Object>> sortedEntities) {
 		String name;
 		DomainEntity entity;
-		HashMap<String, Integer> persistedEntities = new HashMap<String, Integer>();
+		HashMap<String, Integer> persistedEntities = new HashMap<>();
 
 		System.out.println();
 		databaseUtil.openTransaction();
@@ -200,14 +200,14 @@ public class PopulateDatabase {
 	}
 
 	private static Node getEntity(Document doc, Integer entityId, String name) {
-		Element company = doc.createElement("entity");
-		company.setAttribute("beanId", name);
-		company.appendChild(getEntityElements(doc, company, "databaseId", entityId.toString()));
-		return company;
+		Element entity = doc.createElement("entity");
+		entity.setAttribute("beanId", name);
+		entity.appendChild(getEntityElements(doc, "databaseId", entityId.toString()));
+		return entity;
 	}
 
 	// utility method to create text node
-	private static Node getEntityElements(Document doc, Element element, String name, String value) {
+	private static Node getEntityElements(Document doc, String name, String value) {
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));
 		return node;

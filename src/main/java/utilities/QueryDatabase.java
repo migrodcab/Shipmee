@@ -86,7 +86,7 @@ public class QueryDatabase {
 				break;
 			case "select":
 				objects = databaseUtil.executeSelect(line);
-				System.out.printf("%d object%s selected%n", objects.size(), (objects.size() == 1 ? "" : "s"));
+				System.out.printf("%d object%s selected%n", objects.size(), objects.size() == 1 ? "" : "s");
 				SchemaPrinter.print(objects);
 				break;
 			default:
