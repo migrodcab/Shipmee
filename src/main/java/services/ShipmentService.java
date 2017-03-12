@@ -164,16 +164,15 @@ public class ShipmentService {
 	public void selectShipment(int shipmentId){
 		
 		Assert.isTrue(shipmentId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user (carrier) can select a shipment");
 		/*
 		 * Here comes session restrictions and other stuff.
 		 * I don't know if there is something missing above
 		 */
-		
-		
+				
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
-		
+				
 		Assert.notNull(shipment); // shipment is not null.
 		Assert.isNull(shipment.getCarried()); // shipment has not a former selected carrier
 		Assert.isTrue(checkDates(shipment)); // All shipment dates are valid.
@@ -185,6 +184,7 @@ public class ShipmentService {
 		 */
 		
 		shipment.setCarried(carrier);
+		
 		save(shipment);
 		
 		/*
@@ -198,8 +198,8 @@ public class ShipmentService {
 		
 		res = false;
 
-		if(itemEnvelope.equals("Open") || itemEnvelope.equals("Closed") ||
-				itemEnvelope.equals("Abierto") || itemEnvelope.equals("Cerrado")) {
+		if(itemEnvelope.equals("open") || itemEnvelope.equals("closed") ||
+				itemEnvelope.equals("abierto") || itemEnvelope.equals("cerrado")) {
 			res = true;
 		}
 

@@ -126,8 +126,4 @@ public class ShipmentFormService {
 		shipment = shipmentService.findOne(shipmentForm.getShipmentId());
 		shipmentService.delete(shipment);
 	}
-	
-	public void selectShipment(ShipmentForm shipmentForm) {
-		shipmentService.selectShipment(shipmentForm.getShipmentId());
-	}
 }
