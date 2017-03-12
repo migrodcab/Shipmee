@@ -29,6 +29,7 @@ import domain.Route;
 import domain.Vehicle;
 import domain.form.RouteForm;
 import services.RouteService;
+import services.UserService;
 import services.VehicleService;
 import services.form.RouteFormService;
 
@@ -46,6 +47,9 @@ public class RouteUserController extends AbstractController {
 	
 	@Autowired
 	private VehicleService vehicleService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -128,14 +132,16 @@ public class RouteUserController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/select", method = RequestMethod.POST)
-	public ModelAndView selectRoute(@Valid RouteForm routeForm, BindingResult binding) {
+	public ModelAndView selectRoute(@RequestParam int routeId) {
 		ModelAndView result;
 		
+		Route route = routeService.findOne(routeId);
+		
 		try {
-			routeFormService.selectRoute(routeForm);
-			result = new ModelAndView("redirect:list.do");
+			userService.selectRoute(routeId);
+			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
 		} catch(Throwable oops){
-			result = createEditModelAndView(routeForm, "route.commit.error");
+			result = createEditModelAndView(route, "route.commit.error");
 		}
 		
 		return result;
@@ -151,6 +157,14 @@ public class RouteUserController extends AbstractController {
 		return result;
 	}	
 	
+	protected ModelAndView createEditModelAndView(Route route) {
+		ModelAndView result;
+
+		result = createEditModelAndView(route, null);
+		
+		return result;
+	}
+	
 	protected ModelAndView createEditModelAndView(RouteForm routeForm, String message) {
 		ModelAndView result;
 		Collection<Vehicle> vehicles;
@@ -159,6 +173,20 @@ public class RouteUserController extends AbstractController {
 				
 		result = new ModelAndView("route/edit");
 		result.addObject("routeForm", routeForm);
+		result.addObject("message", message);
+		result.addObject("vehicles", vehicles);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(Route route, String message) {
+		ModelAndView result;
+		Collection<Vehicle> vehicles;
+		
+		vehicles = vehicleService.findAllByUser();
+				
+		result = new ModelAndView("route/search");
+		result.addObject("route", route);
 		result.addObject("message", message);
 		result.addObject("vehicles", vehicles);
 

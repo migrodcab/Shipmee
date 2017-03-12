@@ -143,6 +143,28 @@
 
 					</div>
 				</div>
+				
+				<div class="imagen col-xs-5 col-sm-3 center">
+					<div class="row text-center">
+						<div class="col-xs-12">
+							<img class="img-responsive center-block imagen-envio"
+								width="70" height="70" src="images/bycicle.svg">
+						</div>
+												
+						<!-- Hecho por Guillermo para poder meter el link
+						Si es necesario cambiarlo, no hay problemas -->	
+											
+						<form action="shipment/user/select.do?shipmentId=${route.id}" method="get">
+							<input type=submit class="btn-xs btn-llevar btn btn-success "
+								value= "Llevar por <jstl:set var="price" value="${fn:replace(route.price, 
+                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                '.', ',')}" />${priceFormated} euros"/></input>
+						</form>
+												
+					</div>
+
+				</div>
+			</div>
 
 
 			</div>
@@ -161,9 +183,11 @@
 
 			</jstl:forEach>
 		</jstl:when>
+		
 		<jstl:otherwise>
 			<p>No se han encontrado resultados</p>
 		</jstl:otherwise>
+		
 	</jstl:choose>
 </div>
 

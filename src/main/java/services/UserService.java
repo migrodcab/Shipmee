@@ -2,7 +2,6 @@ package services;
 
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,12 +92,9 @@ public class UserService {
 		
 		Route route = routeService.findOne(routeId);
 		User client = findByPrincipal();
-		Date now = new Date();
 		
 		Assert.notNull(route); // route is not null.
-		Assert.isTrue(route.getDate().before(now)); // route was created in the past.
-		Assert.isTrue(route.getDepartureTime().after(now)); // route's departure time is future.
-		Assert.isTrue(route.getArriveTime().after(now)); // route's arrival time is future.
+		Assert.isTrue(checkDates(route)); // All shipment dates are valid.
 		Assert.notNull(client);
 		/*
 		 * Here comes the assert to:
@@ -111,6 +107,22 @@ public class UserService {
 		/*
 		 * Here comes the notification to the creator (Still not developed).
 		 */
+	}
+	
+	private boolean checkDates(Route route) {
+		boolean res;
+		
+		res = true;
+		
+		if(route.getDate().compareTo(route.getDepartureTime()) >= 0) {
+			res = false;
+		}
+		
+		if(route.getDepartureTime().compareTo(route.getArriveTime()) >= 0) {
+			res = false;
+		}
+		
+		return res;
 	}
 
 }
