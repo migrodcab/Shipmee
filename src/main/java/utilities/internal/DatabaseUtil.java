@@ -249,14 +249,17 @@ public class DatabaseUtil {
 
 			@Override
 			public void execute(Connection connection) throws SQLException {
-				Statement statement;
+				Statement statement = null;
 
-				statement = connection.createStatement();
-				for (String line : script) {
-					statement.execute(line);
+				try {
+					statement = connection.createStatement();
+					for (String line : script) {
+						statement.execute(line);
+					}
+					connection.commit();
+				} finally {
+					statement.close();
 				}
-				connection.commit();
-				statement.close();
 			}
 		});
 	}
