@@ -2,6 +2,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -145,28 +146,32 @@ public class RouteService {
 
 	// Other business methods -------------------------------------------------
 	
-	@SuppressWarnings("deprecation")
 	public Collection<Route> searchRoute(String origin, String destination, String date, String hour, String envelope, String itemSize){
 		Assert.isTrue(origin != "" && destination != "");
 		Collection<Route> result;
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
+		Calendar calendar;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
+		calendar = Calendar.getInstance();
 		
 		if(date!=null){
 			try {
 				finalDate = formatter.parse(date+" 00:00");
-				time = formatter.parse(finalDate.getDate()+"/"+finalDate.getMonth()+"/"+finalDate.getYear()+" "+hour);
+				calendar.setTime(finalDate);
+				if(hour!=null){
+					time = formatter.parse(Calendar.DATE+"/"+Calendar.MONTH+"/"+Calendar.YEAR+" "+hour);
+				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		log.trace(origin+" - "+destination);
+		log.trace(origin+" - "+destination+" at "+finalDate);
 		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize);
 		log.trace(result);
 		return result;

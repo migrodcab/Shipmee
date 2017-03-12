@@ -162,7 +162,7 @@
 	<!-- Route -->
 	
 	<bean id="route1" class="domain.Route">
-		<property name="date" value="2017/03/09 11:02"/>
+		<property name="date" value="2017/03/12 00:00"/>
 		<property name="departureTime" value="2017/03/12 16:00"/>
 		<property name="arriveTime" value="2017/03/12 19:00"/>
 		<property name="origin" value="Almeria"/>
@@ -212,7 +212,7 @@
 	<!-- Shipment -->
 	
 	<bean id="shipment1" class="domain.Shipment">
-		<property name="date" value="2017/03/09 11:02"/>
+		<property name="date" value="2017/03/12 00:00"/>
 		<property name="departureTime" value="2017/03/12 16:00"/>
 		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
 		<property name="origin" value="Almeria"/>
