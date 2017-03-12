@@ -71,7 +71,7 @@
 <div class="container route">
 	<jstl:choose>
 		<jstl:when test="${not empty routes}">
-			<jstl:forEach items="${routes}" var="shipment">
+			<jstl:forEach items="${routes}" var="route">
 			 	
 <div class="container">
 	<div class="row envio">
