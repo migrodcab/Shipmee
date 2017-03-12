@@ -21,6 +21,8 @@ public class ShipmentOffer extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private double amount;
 	private String description;
+	private boolean acceptedBySender;
+	private boolean rejectedBySender;	
 	
 	@Min(0)
 	@Digits(integer=9, fraction=2)
@@ -42,6 +44,22 @@ public class ShipmentOffer extends DomainEntity {
 		this.description = description;
 	}
 	
+	public boolean getAcceptedBySender() {
+		return acceptedBySender;
+	}
+	public void setAcceptedBySender(boolean acceptedBySender) {
+		this.acceptedBySender = acceptedBySender;
+	}
+	
+	public boolean getRejectedBySender() {
+		return rejectedBySender;
+	}
+	public void setRejectedBySender(boolean rejectedBySender) {
+		this.rejectedBySender = rejectedBySender;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------
 	private User user;
 	private Shipment shipment;

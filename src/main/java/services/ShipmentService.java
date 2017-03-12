@@ -1,5 +1,7 @@
 package services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,11 +94,11 @@ public class ShipmentService {
 		
 		user = userService.findByPrincipal();
 
-		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "Only the user who created the route can delete it");
+		Assert.isTrue(user.getId() == shipment.getCreator().getId(), "Only the user who created the shipment can delete it");
 		
 		shipmentOffers = shipmentOfferService.findAllByShipmentId(shipment.getId());
 		for(ShipmentOffer so : shipmentOffers) {
-			shipmentOfferService.delete(so);
+			shipmentOfferService.delete(so.getId());
 		}
 						
 		shipmentRepository.delete(shipment);
@@ -124,12 +126,29 @@ public class ShipmentService {
 		shipmentRepository.flush();
 	}
 	
-	public Collection<Shipment> searchShipment(String origin, String destination, Date date, Date time, String envelope, String itemSize){
+	@SuppressWarnings("deprecation")
+	public Collection<Shipment> searchShipment(String origin, String destination, String date, String hour, String envelope, String itemSize){
 		Assert.isTrue(origin != "" && destination != "");
 		Collection<Shipment> result;
+		SimpleDateFormat formatter;
+		Date time;
+		Date finalDate;
+		
+		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		time = null;
+		finalDate = null;
+		
+		if(date!=null){
+			try {
+				finalDate = formatter.parse(date+" 00:00");
+				time = formatter.parse(finalDate.getDate()+"/"+finalDate.getMonth()+"/"+finalDate.getYear()+" "+hour);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		System.out.println(origin+" - "+destination);
-		result = shipmentRepository.searchShipment(origin, destination, date, time, envelope, itemSize);
+		result = shipmentRepository.searchShipment(origin, destination, finalDate, time, envelope, itemSize);
 		System.out.println(result);
 		
 		return result;

@@ -6,11 +6,24 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
+<link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
+<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
+
+<style>
+
+.dropdown-menu {
+	background-color: white;
+}
+
+</style>
 
 
-  <body>
+ <body>
 
-	<div id="headerwrap">
+<div id="headerwrap">
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
@@ -29,8 +42,16 @@
 
     <div id="panel" class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10" >
         <h3 class="titleSearch"><spring:message code="welcome.searcher.title" /></h3>
-
-        <form>
+        <form class="form">
+        
+         	<div class="choose btn-group btn-toggle" data-toggle="buttons">
+						<label class="btn btn-lg btn-primary active btn-default"> 
+						<input name="options" value="option1" checked="" type="radio"><spring:message code="welcome.searcher.choose1" /></label> 
+						<label class="btn btn-lg btn-default"> 
+						<input name="options" value="option2" type="radio"><spring:message code="welcome.searcher.choose2" /></label>
+			</div>
+			
+			
             <div class="group">
                 <input class="camp" type="text">
                 <span class="highlight"></span>
@@ -44,32 +65,32 @@
                 <span class="bar"></span>
                 <label><span class="glyphicon glyphicon-pushpin">&nbsp;</span><spring:message code="welcome.searcher.destination" /></label>
             </div>
-
+           
             <div class="group">
-                <input class="camp" type="text">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-calendar">&nbsp;</span><spring:message code="welcome.searcher.date" /></label>
-            </div>
-
-            <div class="group">
-                <input class="camp" type="text">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label><span class="glyphicon glyphicon-time">&nbsp;</span><spring:message code="welcome.searcher.time" /></label>
-            </div>
+   				<div class='input-group date input-text' id='datetimepicker1'>
+				<input name="fecha" style="backgroud-color: white;" type='text' class="form-control" /> 
+				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+			       
             <div class="group">
                <button type="submit" class="btnSearch btn-lg btnSample btn-block btn-success"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
-       		</div>
-        </form>
+       		</div> 
+					
+							
+					
+		</form>
 
-    </div>
+
+    	</div>
 
 
 		</div>
 	    	    
-	    
+   
 	</div>
+	
+	
 	
 	
 	 <div id="service">
@@ -93,6 +114,32 @@
 	 		</div>
 	 	</div>
 	 </div>
+
+
+
+
+<script type="text/javascript">
+	
+
+
+
+$('.btn-toggle').click(function() {
+    $(this).children('.btn').toggleClass('active');  
+    $(this).children('.btn').toggleClass('btn-primary');
+    e.stopPropagation(); 
+    e.preventDefault();
+});
+
+
+
+$(function() {
+	$('#datetimepicker1').datetimepicker({
+		viewMode : 'days',
+		format : 'DD/MM/YYYY'
+	});
+});
+              
+</script>
+</body>
 	
 	
-	</body>

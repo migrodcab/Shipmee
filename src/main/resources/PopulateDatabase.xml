@@ -203,6 +203,8 @@
 	<bean id="routeOffer1" class="domain.RouteOffer">
 		<property name="amount" value="2.00"/>
 		<property name="description" value="Te doy 2€ por un artículo de tamaño L y me estoy arriesgando."/>
+		<property name="acceptedByCarrier" value="false"/>
+		<property name="rejectedByCarrier" value="false"/>
 		<property name="user" ref="user2"/>
 		<property name="route" ref="route1"/>
 	</bean>
@@ -229,6 +231,8 @@
 	<bean id="shipmentOffer1" class="domain.ShipmentOffer">
 		<property name="amount" value="2.50"/>
 		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+				<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
 		<property name="user" ref="user1"/>
 		<property name="shipment" ref="shipment1"/>
 	</bean>
