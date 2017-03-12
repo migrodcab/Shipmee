@@ -1,16 +1,28 @@
 package utilities;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.Entity;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import utilities.internal.DatabaseUtil;
 import utilities.internal.EclipseConsole;
@@ -24,6 +36,7 @@ public class PopulateDatabase {
 		ApplicationContext populationContext;
 		Map<String, Object> entityMap;
 		List<Entry<String, Object>> sortedEntities;
+		HashMap<String, Integer> persistedEntities;
 
 		EclipseConsole.fix();
 		LogManager.getLogger("org.hibernate").setLevel(Level.OFF);
@@ -50,7 +63,10 @@ public class PopulateDatabase {
 			sortedEntities = PopulateDatabase.sort(databaseUtil, entityMap);
 
 			System.out.println("Trying to save the best order found.");
-			PopulateDatabase.persist(databaseUtil, sortedEntities);
+			persistedEntities = PopulateDatabase.persist(databaseUtil, sortedEntities);
+			
+			System.out.println("Trying to persist in a file the best order found.");
+			persistIds(persistedEntities);
 		} catch (final Throwable oops) {
 			ThrowablePrinter.print(oops);
 		} finally {
@@ -108,9 +124,10 @@ public class PopulateDatabase {
 		return result;
 	}
 
-	protected static void persist(final DatabaseUtil databaseUtil, final List<Entry<String, Object>> sortedEntities) {
+	protected static HashMap<String, Integer> persist(final DatabaseUtil databaseUtil, final List<Entry<String, Object>> sortedEntities) {
 		String name;
 		DomainEntity entity;
+		HashMap<String, Integer> persistedEntities = new HashMap<String, Integer>();
 
 		System.out.println();
 		databaseUtil.openTransaction();
@@ -124,9 +141,11 @@ public class PopulateDatabase {
 			// TODO: print the entity using SchemaPrinter.  This should get a map in which 
 			// every persisted entity is mapped onto the corresponding bean name in the 
 			// PopulateDatabase.xml file; otherwise traceability will be a nightmare.
+			persistedEntities.put(name, entity.getId());
 		}
 		databaseUtil.closeTransaction();
 		System.out.println();
+		return persistedEntities;
 	}
 
 	protected static void cleanEntities(final LinkedList<Entry<String, Object>> result) {
@@ -137,6 +156,61 @@ public class PopulateDatabase {
 			entity.setId(0);
 			entity.setVersion(0);
 		}
+	}
+
+	protected static void persistIds(HashMap<String, Integer> input) {
+		DocumentBuilderFactory icFactory;
+		DocumentBuilder icBuilder;
+		Document doc;
+		Element mainRootElement;
+		Transformer transformer;
+		DOMSource source;
+		File file;
+
+		try {
+			icFactory = DocumentBuilderFactory.newInstance();
+			icBuilder = icFactory.newDocumentBuilder();
+
+			doc = icBuilder.newDocument();
+
+			mainRootElement = doc.createElement("entities");
+			doc.appendChild(mainRootElement);
+
+			// append child elements to root element
+			for (Map.Entry<String, Integer> entry : input.entrySet()) {
+				mainRootElement.appendChild(getEntity(doc, entry.getValue(), entry.getKey()));
+			}
+
+			// output DOM XML to console
+			transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			source = new DOMSource(doc);
+
+			file = new File("tmp/persistedIds.xml");
+			file.getParentFile().mkdirs();
+
+			StreamResult console = new StreamResult(file);
+			transformer.transform(source, console);
+
+			System.out.println("\nXML DOM Created Successfully..");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static Node getEntity(Document doc, Integer entityId, String name) {
+		Element company = doc.createElement("entity");
+		company.setAttribute("beanId", name);
+		company.appendChild(getEntityElements(doc, company, "databaseId", entityId.toString()));
+		return company;
+	}
+
+	// utility method to create text node
+	private static Node getEntityElements(Document doc, Element element, String name, String value) {
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
 	}
 
 }

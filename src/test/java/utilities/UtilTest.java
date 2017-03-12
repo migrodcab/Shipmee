@@ -1,13 +1,16 @@
 package utilities;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import javax.persistence.Entity;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public abstract class UtilTest {
 
@@ -16,22 +19,26 @@ public abstract class UtilTest {
 	/**
 	 * Reads the population context of the application and, assuming a sequential behaviour of
 	 * ids when populating, maps each bean name read in the xml with its id in the database.
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
+	 * @throws SAXException 
 	 */
-	public static void mapBeansToIds() {
+	public static void mapBeansToIds() throws SAXException, IOException, ParserConfigurationException {
 		beans = new HashMap<String,Integer>();
+		Document doc;
+
+		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File("tmp/persistedIds.xml"));
+
+		doc.getDocumentElement().normalize();
 		
-		@SuppressWarnings("resource")
-		ApplicationContext populationContext = new ClassPathXmlApplicationContext("classpath:PopulateDatabase.xml");
+		NodeList a = doc.getElementsByTagName("entity");
 		
-		int beanId = 0;
-		for (Entry<String,Object> entry: populationContext.getBeansWithAnnotation(Entity.class).entrySet()) {
-			String beanName;
-			
-			beanName = entry.getKey();
-			beanId++;
-			
-			beans.put(beanName, beanId);
+		for (int i = 0; i < a.getLength(); i++){
+			String bean = ((Element) a.item(i)).getAttribute("beanId");
+			int id = Integer.parseInt(a.item(i).getTextContent().trim());
+			beans.put(bean, id);
 		}
+
 	}
 	
 	/**

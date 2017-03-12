@@ -1,5 +1,9 @@
 package utilities;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,7 @@ import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.xml.sax.SAXException;
 
 import security.LoginService;
 
@@ -27,7 +32,15 @@ public abstract class AbstractTest {
 			PopulateDatabase.main(null);
 			populate = false;
 			
-			UtilTest.mapBeansToIds();
+			try {
+				UtilTest.mapBeansToIds();
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			}
 		}
 
 		unauthenticate();
