@@ -302,14 +302,25 @@ label {
 												<img class="img-responsive center-block imagen-envio"
 													width="70" height="70" src="images/bycicle.svg">
 											</div>
-											<div class="col-xs-12 text-center">
-												<button type="button"
-													class="btn-xs btn-llevar btn btn-success ">
-													Llevar por<b></b> <jstl:set var="price" value="${fn:replace(shipment.price, 
+											
+											<!-- Hecho por Bartolomé y Torres -->
+<!-- 											<div class="col-xs-12 text-center"> -->
+<!-- 												<button type="button" -->
+<!-- 													class="btn-xs btn-llevar btn btn-success "> -->
+<%-- 													Llevar por<b></b> <jstl:set var="price" value="${fn:replace(shipment.price,  --%>
+<%-- 		                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price,		                                 '.', ',')}" />${priceFormated}</b> euros</button> --%>
+<!-- 												</button> -->
+												
+											<!-- Hecho por Guillermo para poder meter el link
+											Si es necesario cambiarlo, no hay problemas -->	
+											
+											<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
+    											<input type=submit class="btn-xs btn-llevar btn btn-success "
+    												value= "Llevar por <jstl:set var="price" value="${fn:replace(shipment.price, 
                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                '.', ',')}" />${priceFormated}</b> euros</button>
-												</button>
-											</div>
+                                '.', ',')}" />${priceFormated} euros"/></input>
+											</form>
+												
 										</div>
 
 									</div>

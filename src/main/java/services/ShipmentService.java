@@ -125,7 +125,6 @@ public class ShipmentService {
 		return result;
 	}
 	
-
 	// Other business methods -------------------------------------------------
 	
 	public void flush() {
@@ -166,13 +165,52 @@ public class ShipmentService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param shipmentId - Shipment's ID
+	 * 
+	 * This procedure does the selection of a shipment in the shipment's details view.
+	 * The carrier clicks in a button to select the shipment and the creator receives a notification
+	 */
+	public void selectShipment(int shipmentId){
+		
+		Assert.isTrue(shipmentId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user (carrier) can select a shipment");
+		/*
+		 * Here comes session restrictions and other stuff.
+		 * I don't know if there is something missing above
+		 */
+				
+		Shipment shipment = findOne(shipmentId);
+		User carrier = userService.findByPrincipal();
+				
+		Assert.notNull(shipment); // shipment is not null.
+		Assert.isNull(shipment.getCarried()); // shipment has not a former selected carrier
+		Assert.isTrue(checkDates(shipment)); // All shipment dates are valid.
+		Assert.notNull(carrier);
+		/*
+		 * Here comes the assert to:
+		 * 	check that a user can carry in our app.
+		 * 	the package size is good.
+		 */
+		
+		shipment.setCarried(carrier);
+		
+		save(shipment);
+		
+		/*
+		 * Here comes the notification to the creator (Still not developed).
+		 */
+		
+	}
+	
 	private boolean checkItemEnvelope(String itemEnvelope) {
 		boolean res;
 		
 		res = false;
 
-		if(itemEnvelope.equals("Open") || itemEnvelope.equals("Closed") ||
-				itemEnvelope.equals("Abierto") || itemEnvelope.equals("Cerrado")) {
+		if(itemEnvelope.equals("open") || itemEnvelope.equals("closed") ||
+				itemEnvelope.equals("abierto") || itemEnvelope.equals("cerrado")) {
 			res = true;
 		}
 

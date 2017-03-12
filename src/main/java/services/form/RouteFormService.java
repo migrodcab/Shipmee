@@ -119,4 +119,8 @@ public class RouteFormService {
 		route = routeService.findOne(routeForm.getRouteId());
 		routeService.delete(route);
 	}
+	
+	public void selectRoute(RouteForm routeForm){
+		userService.selectRoute(routeForm.getRouteId());
+	}
 }

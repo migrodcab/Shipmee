@@ -26,10 +26,13 @@ public class ShipmentOfferService {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private UserService userService;
-
+	private ActorService actorService;
+	
 	@Autowired
 	private ShipmentService shipmentService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -154,7 +157,28 @@ public class ShipmentOfferService {
 
 		return result;
 	}
-
+	
+	public void accept(int shipmentOfferId){
+		
+		Assert.isTrue(shipmentOfferId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		
+		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
+		Shipment shipment = shipmentOffer.getShipment();
+		
+		Assert.notNull(shipment);
+		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()));
+		
+		shipment.setCarried(shipmentOffer.getUser());
+		shipment.setPrice(shipmentOffer.getAmount());
+		shipmentService.save(shipment);
+		
+		/*
+		 * Here comes the notification to the carrier (Still not developed) 
+		 */
+		
+	}
+	
 	// IDs could be <= 0 to ignore in the find
 	public Page<ShipmentOffer> findAllByOrShipmentIdAndOrUserId(int shipmentId, int userId, Pageable page) {
 		Page<ShipmentOffer> result;

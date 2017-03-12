@@ -26,6 +26,9 @@ public class RouteOfferService {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
+	private ActorService actorService;
+
+	@Autowired	
 	private UserService userService;
 
 	@Autowired
@@ -153,7 +156,29 @@ public class RouteOfferService {
 
 		return result;
 	}
-
+	
+	public void accept(int routeOfferId){
+		
+		Assert.isTrue(routeOfferId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		
+		RouteOffer routeOffer = findOne(routeOfferId);
+		Route route = routeOffer.getRoute();
+		
+		Assert.notNull(route);
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()));
+		
+		/*
+		 * Here comes:
+		 * - Update price of the route.
+		 * - Update user with his role.
+		 * - Save changes.
+		 * - Notification to the client.
+		 */
+		
+		
+	}
+	
 	// IDs could be <= 0 to ignore in the find
 	public Page<RouteOffer> findAllByOrRouteIdAndOrUserId(int routeId, int userId, Pageable page) {
 		Page<RouteOffer> result;

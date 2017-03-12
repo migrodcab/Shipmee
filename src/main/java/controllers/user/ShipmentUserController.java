@@ -114,6 +114,23 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
+	public ModelAndView selectShipment(@RequestParam int shipmentId){
+		ModelAndView result;
+		
+		Shipment shipment = shipmentService.findOne(shipmentId);
+		
+		try {			
+			shipmentService.selectShipment(shipmentId);
+			result = new ModelAndView("redirect:../search.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+		}catch(Throwable oops){
+			System.out.println(oops);
+			result = createEditModelAndView(shipment, "shipment.commit.error");
+		}
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 	
 	protected ModelAndView createEditModelAndView(ShipmentForm shipmentForm) {
@@ -124,11 +141,29 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}	
 	
+	protected ModelAndView createEditModelAndView(Shipment shipment) {
+		ModelAndView result;
+
+		result = createEditModelAndView(shipment, null);
+		
+		return result;
+	}	
+	
 	protected ModelAndView createEditModelAndView(ShipmentForm shipmentForm, String message) {
 		ModelAndView result;
 						
 		result = new ModelAndView("shipment/edit");
 		result.addObject("shipmentForm", shipmentForm);
+		result.addObject("message", message);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(Shipment shipment, String message) {
+		ModelAndView result;
+						
+		result = new ModelAndView("shipment/search");
+		result.addObject("shipmentForm", shipment);
 		result.addObject("message", message);
 
 		return result;
