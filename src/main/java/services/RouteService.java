@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import repositories.RouteRepository;
 @Service
 @Transactional
 public class RouteService {
+	
+	static Logger log = Logger.getLogger(ShipmentService.class);
 
 	// Managed repository -----------------------------------------------------
 
@@ -162,9 +166,9 @@ public class RouteService {
 			}
 		}
 		
-		System.out.println(origin+" - "+destination);
+		log.trace(origin+" - "+destination);
 		result = routeRepository.searchRoute(origin, destination, finalDate, time, envelope, itemSize);
-		System.out.println(result);
+		log.trace(result);
 		return result;
 	}
 	
