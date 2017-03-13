@@ -43,6 +43,8 @@ public class RouteController extends AbstractController {
 				
 		result = new ModelAndView("route/search");
 		result.addObject("routes", routes);
+		result.addObject("origin", origin);
+		result.addObject("destination", destination);
 
 		return result;
 	}

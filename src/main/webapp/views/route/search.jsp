@@ -59,68 +59,75 @@
 
 						<ul class="nav">
 
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-map-marker img-origin"></i><spring:message code="route.origin" />
+							<li class="active"><a href=""> <i
+									class="glyphicon glyphicon-map-marker img-origin"></i> Origen
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text"></li>
-							<li class="active"><a> <i
+								class="form-control input-text" value="${origin}" required></li>
+							<li class="active"><a href=""> <i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
-									<spring:message code="route.destination" />
+									Destino
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text"></li>
-							<li class="active"><a target="_blank"> <i
-									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
+								class="form-control input-text" value="${destination}" required></li>
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-plane"></i> Fecha
 							</a></li>
-							
 							<li class="li-input">
 								<div class='input-group date input-text' id='datetimepicker1'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
+									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</li>
-							<!--
-							<li class="li-input">
-								<div class='input-group date input-text' id='datetimepicker2'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
-										class="form-control" /> <span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</li> -->
-							
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-eye-open"></i><spring:message code="route.package" />
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-time"></i> Hora de salida
+							</a></li>
+							<li style="text-align: center" class="li-input">
+								<select class="selectpicker input-text" name="hour">
+									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:choose>	
+											<jstl:when test="${i.index lt 10 }">
+												<option>0${i.index}:00</option>
+											</jstl:when>
+											<jstl:otherwise>
+												<option>${i.index}:00</option>
+											</jstl:otherwise>
+										</jstl:choose>
+									</jstl:forEach>
+								</select>
+							</li>
+							<li class="active"><a href="#"> <i
+									class="glyphicon glyphicon-eye-open"></i> Tipo de paquete
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
+										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i>Abierto
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
+										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i>Cerrado
 									</label>
 								</div>
 
 							</li>
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
+							<li class="active"><a href="#"> <i
+									class="glyphicon glyphicon-resize-full"></i> Tamaño del paquete
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text" multiple name="tam">
-									<option selected="selected" value="xs">XS</option>
-									<option selected="selected" value="s">S</option>
-									<option selected="selected" value="m">M</option>
-									<option selected="selected" value="l">L</option>
-									<option selected="selected" value="xl">XL</option>
+								class="selectpicker input-text" name="itemSize">
+									<option selected="selected" disabled value=''>Seleccione un tamaño</option>
+									<option value="xs">XS</option>
+									<option value="s">S</option>
+									<option value="m">M</option>
+									<option value="l">L</option>
+									<option value="xl">XL</option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
-									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
+									Search <span class="glyphicon glyphicon-search"></span>
 								</button></li>
 						</ul>
 					</form>

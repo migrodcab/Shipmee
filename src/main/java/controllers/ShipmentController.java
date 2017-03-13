@@ -42,6 +42,8 @@ public class ShipmentController extends AbstractController {
 						
 			result = new ModelAndView("shipment/search");
 			result.addObject("shipments", shipments);
+			result.addObject("origin", origin);
+			result.addObject("destination", destination);
 
 			return result;
 			}

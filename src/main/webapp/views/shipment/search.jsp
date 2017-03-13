@@ -176,24 +176,40 @@ label {
 									class="glyphicon glyphicon-map-marker img-origin"></i> Origen
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text"></li>
+								class="form-control input-text" value="${origin}" required></li>
 							<li class="active"><a href=""> <i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									Destino
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text"></li>
+								class="form-control input-text" value="${destination}" required></li>
 							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-plane
-"></i> Fecha
+									class="glyphicon glyphicon-plane"></i> Fecha
 							</a></li>
 							<li class="li-input">
 								<div class='input-group date input-text' id='datetimepicker1'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
+									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
+							</li>
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-time"></i> Hora de salida
+							</a></li>
+							<li style="text-align: center" class="li-input">
+								<select class="selectpicker input-text" name="hour">
+									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:choose>	
+											<jstl:when test="${i.index lt 10 }">
+												<option>0${i.index}:00</option>
+											</jstl:when>
+											<jstl:otherwise>
+												<option>${i.index}:00</option>
+											</jstl:otherwise>
+										</jstl:choose>
+									</jstl:forEach>
+								</select>
 							</li>
 							<li class="active"><a href="#"> <i
 									class="glyphicon glyphicon-eye-open"></i> Tipo de paquete
@@ -201,10 +217,10 @@ label {
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1"
+										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
 										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i>Abierto
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2"
+										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
 										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i>Cerrado
 									</label>
 								</div>
@@ -214,12 +230,13 @@ label {
 									class="glyphicon glyphicon-resize-full"></i> Tamaño del paquete
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text" multiple name="tam">
-									<option selected="selected" value="xs">XS</option>
-									<option selected="selected" value="s">S</option>
-									<option selected="selected" value="m">M</option>
-									<option selected="selected" value="l">L</option>
-									<option selected="selected" value="xl">XL</option>
+								class="selectpicker input-text" name="itemSize">
+									<option selected="selected" disabled value=''>Seleccione un tamaño</option>
+									<option value="xs">XS</option>
+									<option value="s">S</option>
+									<option value="m">M</option>
+									<option value="l">L</option>
+									<option value="xl">XL</option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -268,19 +285,14 @@ label {
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<i class="glyphicon glyphicon-plane
-"></i> Salida: Sabado 11
+												<i class="glyphicon glyphicon-plane"></i> Salida: Sabado 11
 												de Marzo a las 11 a.m
-
-
 											</div>
 										</div>
 										<div class="row info1">
 											<div class="col-xs-6">
 												<i class="demo-icon icon-package-1">&#xe800;</i>Paquete
 												abierto
-
-
 											</div>
 											<div class="col-xs-6">
 												<i class="demo-icon icon-package-1">&#xe802;</i>Tamaño del
