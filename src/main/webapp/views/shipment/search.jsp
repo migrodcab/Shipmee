@@ -153,25 +153,43 @@
 				<!-- END MENU -->
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="profile-content">
-				<jstl:choose>
+		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
+									
+						
+<div class="container">
+	<div class="row">
+		<section class="content">
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						
+						<div class="table-container">
+							<table class="table table-filter">
+								<tbody>
+								
+								
+								<jstl:choose>
 					<jstl:when test="${not empty shipments}">
 						<jstl:forEach items="${shipments}" var="shipment">
-							<div class="row envio">
-								<div class="row rtitulo">
-									<div class="rtitulo col-sm-12 text-center ">
-										<h4 class="titulo">${shipment.itemName}</h4>
-									</div>
-								</div>
-								<div class="row info-envio">
-									<div class="rfecha col-xs-7 col-sm-9">
-
-										<div class="row info-lugar">
+								
+									<tr>
+										
+										<td>
+											<div class="media">
+												<div class="pull-left">
+													<img src="${shipment.itemPicture}" class="media-photo-shipment">
+												</div>
+												<div class="media-body">
+													<span class="media-meta pull-right">${shipment.date}</span>
+													<h4 class="title">
+														${shipment.itemName}
+														<span class="pull-right cantidad"></span>
+													</h4>
+													
+													<div class="row info-lugar">
 
 											<div class="col-xs-12 col-sm-4 text-center">
-												<a> <i
-													class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
+												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
 												</a>
 											</div>
 
@@ -185,78 +203,56 @@
 												</a>
 											</div>
 										</div>
-
+													
+												</div>
+											</div>
+											
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<i class="glyphicon glyphicon-plane"></i>
-												<spring:message code="shipment.departureTime" />: 
-												<fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${shipment.date}" />
-											</div>
-										</div>
-										<div class="row info1">
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe800;</i>
-													<jstl:choose>
-													    <jstl:when test="${shipment.itemEnvelope eq 'open'}">
-													        <spring:message code="shipment.package_opened" />
-													        <br />
-													    </jstl:when>    
-													    <jstl:otherwise>
-													        <spring:message code="shipment.package_closed" />
-													        <br />
-													    </jstl:otherwise>
-													</jstl:choose>
-											</div>
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe802;</i><spring:message code="shipment.itemSize" />
-
-
-											</div>
-										</div>
-
-
-									</div>
-									<div class="imagen col-xs-5 col-sm-3 center">
-										<div class="row text-center">
-											<div class="col-xs-12">
-												<img class="img-responsive center-block imagen-envio"
-													width="70" height="70" src="${shipment.itemPicture}">
-											</div>
-											
-											<!-- Hecho por Bartolomé y Torres -->
-<!-- 											<div class="col-xs-12 text-center"> -->
-<!-- 												<button type="button" -->
-<!-- 													class="btn-xs btn-llevar btn btn-success "> -->
-<%-- 													Llevar por<b></b> <jstl:set var="price" value="${fn:replace(shipment.price,  --%>
-<%-- 		                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price,		                                 '.', ',')}" />${priceFormated}</b> euros</button> --%>
-<!-- 												</button> -->
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="route/display.do?id=${route.id}">
 												
-											<!-- Hecho por Guillermo para poder meter el link
-											Si es necesario cambiarlo, no hay problemas -->	
-											<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
-    											<input type=submit class="btn-xs btn-llevar btn btn-success "
-    												value= "Llevar por <jstl:set var="price" value="${fn:replace(shipment.price, 
-                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                '.', ',')}" />${priceFormated} euros"/></input>
-											</form>
-											<br />
-											<security:authorize access="hasRole('USER')">
-												<input type=submit class="btn-xs btn-llevar btn btn-success "
-														value= "Hacer contraoferta" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"/></input>
- 											</security:authorize>
-									</div>
+						
+												
+													<spring:message code="route.details" />
+													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
+													
+													
+													
+												</div>
 
-									</div>
-								</div>
-
-							</div>
-						</jstl:forEach>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.departureTime" />: ${shipment.date} / ${shipment.departureTime}
+												<br/>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}
+												
+													
+											</div>
+										</div>
+											
+										
+											
+										</td>
+									</tr>
+									</jstl:forEach>
 					</jstl:when>
 					<jstl:otherwise>
 						<p>No se han encontrado resultados</p>
 					</jstl:otherwise>
 				</jstl:choose>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</section>
+		
+	</div>
+</div>
+										
 			</div>
 
 
@@ -264,6 +260,10 @@
 
 	</div>
 </div>
+
+
+
+
 
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
 import services.RouteService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/route")
@@ -20,7 +21,10 @@ public class RouteController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private RouteService routeService;	
+	private RouteService routeService;
+	
+	@Autowired
+	private UserService userService;	
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -45,6 +49,34 @@ public class RouteController extends AbstractController {
 		result.addObject("routes", routes);
 		result.addObject("origin", origin);
 		result.addObject("destination", destination);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView seeThread(@RequestParam int id) {
+		ModelAndView result;
+		
+		result = createListModelAndView(id);
+		
+		return result;
+
+	}
+	
+	private ModelAndView createListModelAndView(int id){
+		ModelAndView result;
+		Route route;
+		
+		route = routeService.findOne(id);
+		
+		Integer loggedUserId;
+
+		
+		loggedUserId = userService.findByPrincipal().getId();
+
+		result = new ModelAndView("route/display");
+		result.addObject("route", route);
+		result.addObject("loggedUserId", loggedUserId);
 
 		return result;
 	}
