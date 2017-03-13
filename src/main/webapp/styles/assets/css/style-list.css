@@ -3,6 +3,19 @@
 	margin: 0px auto;
 }
 
+.envio {
+	margin-top: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%;
+	width: 100%;
+	padding-bottom: 2%;
+	
+}
+
 .ruta {
 	margin-top: 5%;
 	border: 1px solid #ccc;

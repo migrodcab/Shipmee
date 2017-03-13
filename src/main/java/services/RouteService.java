@@ -2,7 +2,6 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -151,19 +150,16 @@ public class RouteService {
 		SimpleDateFormat formatter;
 		Date time;
 		Date finalDate;
-		Calendar calendar;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		time = null;
 		finalDate = null;
-		calendar = Calendar.getInstance();
 		
-		if(date!=null){
+		if(date!="" && date!=null){
 			try {
 				finalDate = formatter.parse(date+" 00:00");
-				calendar.setTime(finalDate);
-				if(hour!=null){
-					time = formatter.parse(Calendar.DATE+"/"+Calendar.MONTH+"/"+Calendar.YEAR+" "+hour);
+				if(hour!="" && hour!=null){
+					time = formatter.parse(date+" "+hour);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
