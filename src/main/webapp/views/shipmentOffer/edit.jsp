@@ -16,8 +16,8 @@
 	<form:hidden path="id" />
 	<form:hidden path="shipment" />
 	<form:hidden path="user" />
-	<form:hidden path="acceptedByCarrier" />
-	<form:hidden path="rejectedByCarrier" />
+	<form:hidden path="acceptedBySender" />
+	<form:hidden path="rejectedBySender" />
 	
 	<!-- Editable Attributes -->
 	
