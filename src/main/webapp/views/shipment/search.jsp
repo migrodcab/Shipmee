@@ -313,15 +313,18 @@ label {
 												
 											<!-- Hecho por Guillermo para poder meter el link
 											Si es necesario cambiarlo, no hay problemas -->	
-											
 											<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
     											<input type=submit class="btn-xs btn-llevar btn btn-success "
     												value= "Llevar por <jstl:set var="price" value="${fn:replace(shipment.price, 
                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
                                 '.', ',')}" />${priceFormated} euros"/></input>
 											</form>
-												
-										</div>
+											<br />
+											<security:authorize access="hasRole('USER')">
+												<input type=submit class="btn-xs btn-llevar btn btn-success "
+														value= "Hacer contraoferta" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"/></input>
+ 											</security:authorize>
+									</div>
 
 									</div>
 								</div>
