@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
+import domain.Shipment;
 import domain.ShipmentOffer;
 import services.ShipmentOfferService;
 
@@ -86,6 +87,42 @@ public class ShipmentOfferUserController extends AbstractController {
 			}
 		}
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/accept", method = RequestMethod.GET)
+	public ModelAndView accept(@RequestParam int shipmentOfferId){
+		ModelAndView result;
+		
+		ShipmentOffer shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
+		Shipment shipment = shipmentOffer.getShipment();
+		
+		try{
+			shipmentOfferService.accept(shipmentOfferId);
+			// This reditect may be change to other url.
+			result = new ModelAndView("redirect:../search.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+		}catch(Throwable oops){
+			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/deny", method = RequestMethod.GET)
+	public ModelAndView deny(@RequestParam int shipmentOfferId){
+		ModelAndView result;
+		
+		ShipmentOffer shipmentOffer = shipmentOfferService.findOne(shipmentOfferId);
+		Shipment shipment = shipmentOffer.getShipment();
+		
+		try{
+			shipmentOfferService.deny(shipmentOfferId);
+			// This reditect may be change to other url.
+			result = new ModelAndView("redirect:../search.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+		}catch(Throwable oops){
+			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+		}
+		
 		return result;
 	}
 

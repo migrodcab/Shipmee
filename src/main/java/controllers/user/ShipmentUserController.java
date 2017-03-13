@@ -124,7 +124,6 @@ public class ShipmentUserController extends AbstractController {
 			shipmentService.selectShipment(shipmentId);
 			result = new ModelAndView("redirect:../search.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
 		}catch(Throwable oops){
-			System.out.println(oops);
 			result = createEditModelAndView(shipment, "shipment.commit.error");
 		}
 		
