@@ -107,10 +107,6 @@
 	pading-bottom: 0.5%;
 }
 
-.dropdown-menu {
-	background-color: white;
-}
-
 label {
 	color: #495766 !important;
 	font-weight: normal !important;

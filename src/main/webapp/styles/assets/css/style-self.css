@@ -89,96 +89,16 @@
 
 /*	Buttom search */
 
-.btn-success {
+.btnSearch {
     color: #fff;
     background-color: #428bca;
     border-color: #428bca;
 }
 
-.btnSample {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.btnSample:focus,
-.btnSample:active:focus,
-.btnSample.active:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-.btnSample:hover,
-.btnSample:focus {
-  color: #333;
-  text-decoration: none;
-}
-.btnSample:active,
-.btnSample.active {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-}
-
-.btnSample-primary .badge {
-  color: #428bca;
-  background-color: #fff;
-}
-.btnSample-success {
-  color: #fff;
-  background-color: #428bca;
-  border-color: #428bca;
-}
-.btnSample:hover,
-.btnSample:focus,
-.btnSample:active,
-.btnSample.active,
-.open .dropdown-toggle.btnSample {
-  color: #fff;
-  background-color: #384452;
-  border-color: #384452;
-}
-
-.btnSample:active,
-.btnSample.active,
-.open .dropdown-toggle.btn-success {
-  background-image: none;
-}
-.btnSample.disabled,
-.btnSample[disabled],
-fieldset[disabled] .btnSample,
-.btnSample.disabled:hover,
-.btnSample[disabled]:hover,
-fieldset[disabled] .btnSample:hover,
-.btnSample.disabled:focus,
-.btn-success[disabled]:focus,
-fieldset[disabled] .btnSample:focus,
-.btnSample.disabled:active,
-.btnSample[disabled]:active,
-fieldset[disabled] .btnSample:active,
-.btnSample.disabled.active,
-.btnSample[disabled].active,
-fieldset[disabled] .btnSample.active {
-  background-color: #384452;
-  border-color: #4cae4c;
-}
-.btnSample .badge {
-  color: #384452;
-  background-color: #fff;
+.btnSearch:hover {
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -346,10 +266,15 @@ h3,
 }
 
 .choose{
-	padding-bottom: 15%;
+	padding-bottom: 10%;
 }
 
 .btnSearch{
 	font-size: 20px;
 }
+
+.date .dropdown-menu {
+	background-color: white;
+}
+
 

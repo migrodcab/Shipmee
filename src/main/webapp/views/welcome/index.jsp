@@ -12,13 +12,6 @@
 <script type="text/javascript" src="scripts/moment.js"></script>
 <script type="text/javascript" src="scripts/datetimepicker.min.js"></script>
 
-<style>
-
-.dropdown-menu {
-	background-color: white;
-}
-
-</style>
 
 
  <body>
