@@ -217,7 +217,7 @@ public class ShipmentService {
 		return res;
 	}
 	
-	private boolean checkDates(Shipment shipment) {
+	public boolean checkDates(Shipment shipment) {
 		boolean res;
 		
 		res = true;
