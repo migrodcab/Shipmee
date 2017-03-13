@@ -134,8 +134,8 @@
 									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text" name="itemSize">
-									<option selected="selected" disabled value=''>Seleccione un tamaño</option>
+								class="selectpicker input-text selecciona" name="itemSize">
+									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="xs">XS</option>
 									<option value="s">S</option>
 									<option value="m">M</option>
@@ -238,7 +238,7 @@
 									</jstl:forEach>
 					</jstl:when>
 					<jstl:otherwise>
-						<p>No se han encontrado resultados</p>
+						<p><spring:message code="shipment.results" /></p>
 					</jstl:otherwise>
 				</jstl:choose>
 								</tbody>
