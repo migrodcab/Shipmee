@@ -28,105 +28,9 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
 	type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
 
 <style>
-.input-text {
-	width: 90%;
-	margin: 0px auto;
-}
-
-.envio {
-	margin-top: 5%;
-	border: 1px solid #ccc;
-	border-radius: 25px;
-	background-color: #f7f7f7;
-	-webkit-box-shadow: 2px 2px 5px #999;
-	-moz-box-shadow: 2px 2px 5px #999;
-	margin-bottom: 5%;
-	width: 100%;
-	padding-bottom: 2%;
-}
-
-.rfecha {
-	border-top: 1px solid #ccc;
-}
-
-.precio {
-	border: 1px solid #ccc;
-	border-radius: 25px;
-	background-color: #f7f7f7;
-	margin: auto;
-	padding-top: 1%;
-	padding-bottom: 1%;
-	width: 20%;
-	height: 20%;
-	background-color: darkred;
-	color: white;
-}
-
-.titulo {
-	padding: 0.5%
-}
-
-.row-origen {
-	padding-top: 0.5%;
-}
-
-.information {
-	font-size: 16px;
-}
-
-.imagen-envio {
-	margin-bottom: 0.5%;
-}
-
-.btn {
-	white-space: normal;
-}
-
-.row {
-	margin-left: 0px !important;
-}
-
-.info-lugar {
-	padding-top: 0.5%;
-	font-size: 120%;
-	color: black;
-}
-
-.img-origin {
-	color: green;
-}
-
-.img-destination {
-	color: red;
-}
-
-.info-salida {
-	padding-top: 1%;
-	pading-bottom: 0.5%;
-}
-
-label {
-	color: #495766 !important;
-	font-weight: normal !important;
-	position: relative;
-}
-
-.bootstrap-select.btn-group .dropdown-toggle .filter-option {
-	width: auto !important;
-}
-
-.li-input {
-	padding: 3%;
-}
-</style>
-
-<style>
-.i-code {
-	display: none;
-}
-
 @font-face {
 	font-family: 'icons';
 	src: url('styles/assets/fonts/iconos/iconos.eot?58322891');
@@ -172,20 +76,20 @@ label {
 
 						<ul class="nav">
 
-							<li class="active"><a href=""> <i
-									class="glyphicon glyphicon-map-marker img-origin"></i> Origen
+							<li class="active"><a> <i
+									class="glyphicon glyphicon-map-marker img-origin"></i> <spring:message code="shipment.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
 								class="form-control input-text"></li>
-							<li class="active"><a href=""> <i
+							<li class="active"><a><i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
-									Destino
+									<spring:message code="shipment.destination" />
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
 								class="form-control input-text"></li>
 							<li class="active"><a href="" target="_blank"> <i
 									class="glyphicon glyphicon-plane
-"></i> Fecha
+"></i> <spring:message code="shipment.date" />
 							</a></li>
 							<li class="li-input">
 								<div class='input-group date input-text' id='datetimepicker1'>
@@ -195,23 +99,23 @@ label {
 									</span>
 								</div>
 							</li>
-							<li class="active"><a href="#"> <i
-									class="glyphicon glyphicon-eye-open"></i> Tipo de paquete
+							<li class="active"><a> <i
+									class="glyphicon glyphicon-eye-open"></i> <spring:message code="shipment.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
 										class="form-check-input" type="checkbox" id="inlineCheckbox1"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i>Abierto
+										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="shipment.open" />
 									</label> <label class="form-check-label"> <input
 										class="form-check-input" type="checkbox" id="inlineCheckbox2"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i>Cerrado
+										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="shipment.closed" />
 									</label>
 								</div>
 
 							</li>
-							<li class="active"><a href="#"> <i
-									class="glyphicon glyphicon-resize-full"></i> Tamaño del paquete
+							<li class="active"><a> <i
+									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
 								class="selectpicker input-text" multiple name="tam">
@@ -223,7 +127,7 @@ label {
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
-									Search <span class="glyphicon glyphicon-search"></span>
+									<spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span>
 								</button></li>
 						</ul>
 					</form>
@@ -240,7 +144,7 @@ label {
 							<div class="row envio">
 								<div class="row rtitulo">
 									<div class="rtitulo col-sm-12 text-center ">
-										<h4 class="titulo">Bicicleta de coleccion</h4>
+										<h4 class="titulo">${shipment.itemName}</h4>
 									</div>
 								</div>
 								<div class="row info-envio">
@@ -249,7 +153,7 @@ label {
 										<div class="row info-lugar">
 
 											<div class="col-xs-12 col-sm-4 text-center">
-												<a href="#"> <i
+												<a> <i
 													class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
 												</a>
 											</div>
@@ -259,7 +163,7 @@ label {
 											</div>
 
 											<div class="col-xs-12 col-sm-4 text-center">
-												<a href="#"> <i
+												<a> <i
 													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
 												</a>
 											</div>
@@ -268,23 +172,27 @@ label {
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<i class="glyphicon glyphicon-plane
-"></i> Salida: Sabado 11
-												de Marzo a las 11 a.m
-
-
+												<i class="glyphicon glyphicon-plane"></i>
+												<spring:message code="shipment.departureTime" />: 
+												<fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${shipment.date}" />
 											</div>
 										</div>
 										<div class="row info1">
 											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe800;</i>Paquete
-												abierto
-
-
+												<i class="demo-icon icon-package-1">&#xe800;</i>
+													<jstl:choose>
+													    <jstl:when test="${shipment.itemEnvelope eq 'open'}">
+													        <spring:message code="shipment.package_opened" />
+													        <br />
+													    </jstl:when>    
+													    <jstl:otherwise>
+													        <spring:message code="shipment.package_closed" />
+													        <br />
+													    </jstl:otherwise>
+													</jstl:choose>
 											</div>
 											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe802;</i>Tamaño del
-												paquete
+												<i class="demo-icon icon-package-1">&#xe802;</i><spring:message code="shipment.itemSize" />
 
 
 											</div>
@@ -296,7 +204,7 @@ label {
 										<div class="row text-center">
 											<div class="col-xs-12">
 												<img class="img-responsive center-block imagen-envio"
-													width="70" height="70" src="images/bycicle.svg">
+													width="70" height="70" src="${shipment.itemPicture}">
 											</div>
 											
 											<!-- Hecho por Bartolomé y Torres -->
