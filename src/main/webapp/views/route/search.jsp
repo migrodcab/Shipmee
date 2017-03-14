@@ -74,7 +74,7 @@
 									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
 							</a></li>
 							<li class="li-input">
-								<div class='input-group date input-text' id='datetimepicker1'>
+								<div class='input-group input-text fondoDesplegable' id='datetimepicker1'>
 									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -82,10 +82,10 @@
 								</div>
 							</li>
 							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-time"></i> Hora de salida
+									class="glyphicon glyphicon-time"></i> <spring:message code="route.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
-								<select class="selectpicker input-text" name="hour">
+								<select class="selectpicker fondoDesplegable input-text" name="hour">
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
@@ -117,7 +117,7 @@
 									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text selecciona" name="itemSize">
+								class="selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="xs">XS</option>
 									<option value="s">S</option>

@@ -60,7 +60,7 @@
             </div>
            
             <div class="group">
-   				<div class='input-group date input-text' id='datetimepicker1'>
+   				<div class='input-group date fondoDesplegable input-text' id='datetimepicker1'>
 				<input id="date" name="fecha" style="backgroud-color: white;" type='text' class="form-control" /> 
 				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				</div>
