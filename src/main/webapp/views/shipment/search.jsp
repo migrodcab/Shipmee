@@ -45,7 +45,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 .demo-icon {
 	font-family: "icons";
 	font-style: normal;
@@ -54,7 +53,6 @@
 	text-transform: none;
 	font-size: 150%;
 }
-
 .size-icon {
 	font-family: "package-open";
 	font-style: normal;
@@ -238,35 +236,7 @@
 											</div>
 										</div>
 											
-											<!-- Hecho por Bartolomé y Torres -->
-<!-- 											<div class="col-xs-12 text-center"> -->
-<!-- 												<button type="button" -->
-<!-- 													class="btn-xs btn-llevar btn btn-success "> -->
-<%-- 													Llevar por<b></b> <jstl:set var="price" value="${fn:replace(shipment.price,  --%>
-<%-- 		                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price,		                                 '.', ',')}" />${priceFormated}</b> euros</button> --%>
-<!-- 												</button> -->
-											
-											<security:authorize access="hasRole('USER')">
-												<input type=submit class="btn-xs btn-llevar btn btn-success "
-														value= "Llevar por <jstl:set var="price" value="${fn:replace(shipment.price, 
-                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                '.', ',')}" />${priceFormated} euros" onclick="location.href = 'shipment/user/select.do?shipmentId=${shipment.id}';"/></input>
- 											</security:authorize>
-											
-											<br />
-											
-											<security:authorize access="hasRole('USER')">
-												<input type=submit class="btn-xs btn-llevar btn btn-success "
-														value= "Hacer contraoferta" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"/></input>
- 											</security:authorize>
-
-									</div>
-
-									</div>
-								</div>
-
-							</div>
-						</jstl:forEach>										
+										
 											
 										</td>
 									</tr>
