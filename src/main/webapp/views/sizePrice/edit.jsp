@@ -16,18 +16,14 @@
 	<form:hidden path="routeId" />
 	
 	<!-- Editable Attributes -->
+			
+	<acme:number code="sizePrice.priceS" path="priceS" min="0" step="0.10"/>
 	
-	<acme:textbox code="sizePrice.priceS" path="priceS"/>
-	<form:checkbox path="S"/>
+	<acme:number code="sizePrice.priceM" path="priceM" min="0" step="0.10"/>
 	
-	<acme:textbox code="sizePrice.priceM" path="priceM"/>
-	<form:checkbox path="M"/>
+	<acme:number code="sizePrice.priceL" path="priceL" min="0" step="0.10"/>
 	
-	<acme:textbox code="sizePrice.priceL" path="priceL"/>
-	<form:checkbox path="L"/>
-	
-	<acme:textbox code="sizePrice.priceXL" path="priceXL"/>
-	<form:checkbox path="XL"/>
+	<acme:number code="sizePrice.priceXL" path="priceXL" min="0" step="0.10"/>
 			
 	<br/>
 
