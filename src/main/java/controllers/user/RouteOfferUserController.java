@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
+import domain.Route;
 import domain.RouteOffer;
 import services.RouteOfferService;
 
@@ -88,7 +89,43 @@ public class RouteOfferUserController extends AbstractController {
 
 		return result;
 	}
-
+	
+	@RequestMapping(value = "/accept", method = RequestMethod.GET)
+	public ModelAndView accept(@RequestParam int routeOfferId){
+		ModelAndView result;
+		
+		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
+		Route route = routeOffer.getRoute();
+		
+		try{
+			routeOfferService.accept(routeOfferId);
+			// This reditect may be change to other url.
+			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
+		}catch(Throwable oops){
+			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/deny", method = RequestMethod.GET)
+	public ModelAndView deny(@RequestParam int routeOfferId){
+		ModelAndView result;
+		
+		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
+		Route route = routeOffer.getRoute();
+		
+		try{
+			routeOfferService.deny(routeOfferId);
+			// This reditect may be change to other url.
+			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
+		}catch(Throwable oops){
+			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
+		}
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(RouteOffer input) {

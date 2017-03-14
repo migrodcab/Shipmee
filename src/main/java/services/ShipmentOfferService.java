@@ -230,7 +230,8 @@ public class ShipmentOfferService {
 		 * - As a carrier could have more than one vehicle, we must know the vehicle he wants to use to perform this assert.
 		 */
 		
-		shipmentOffer.setAcceptedBySender(false); // The offer is accepted
+		shipmentOffer.setAcceptedBySender(false);
+		shipmentOffer.setRejectedBySender(true); // The offer is rejected.
 		save(shipmentOffer);
 		
 		/*

@@ -33,6 +33,9 @@ public class RouteOfferService {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -157,6 +160,12 @@ public class RouteOfferService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param routeOfferId - The if of the RouteOffer
+	 * 
+	 * The carrier (the user that created the route) accept the counter offer proposed by the client.
+	 */
 	public void accept(int routeOfferId){
 		
 		Assert.isTrue(routeOfferId != 0);
@@ -165,8 +174,19 @@ public class RouteOfferService {
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
-		Assert.notNull(route);
-		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()));
+		Assert.notNull(route, "The route related to the offer must exist.");
+		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
+		
+		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");
+		
+		/*
+		 * More possible constraints:
+		 * 1. The creator of the route (the carrier) is verified.
+		 * 2. The carrier has at least one vehicle.
+		 * 3. We look if the vehicle has the package size required by the user.
+		 * - As a carrier could have more than one vehicle, we must know the vehicle he wants to use to perform this assert.
+		 */
 		
 		/*
 		 * Here comes:
@@ -176,6 +196,30 @@ public class RouteOfferService {
 		 * - Notification to the client.
 		 */
 		
+		routeOffer.setAcceptedByCarrier(false);
+		routeOffer.setRejectedByCarrier(true);
+		save(routeOffer);
+		
+	}
+	
+	/**
+	 * 
+	 * @param routeOfferId - The id of the RouteOffer
+	 * 
+	 * The carrier (the user that created the route) deny the counter offer proposed by the client.
+	 */
+	public void deny(int routeOfferId){
+		
+		Assert.isTrue(routeOfferId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
+		
+		RouteOffer routeOffer = findOne(routeOfferId);
+		Route route = routeOffer.getRoute();
+		
+		Assert.notNull(route, "The route related to the offer must exist.");
+		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
+		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
+
 		
 	}
 	

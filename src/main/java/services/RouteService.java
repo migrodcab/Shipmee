@@ -190,7 +190,7 @@ public class RouteService {
 		return res;
 	}
 	
-	private boolean checkDates(Route route) {
+	public boolean checkDates(Route route) {
 		boolean res;
 		
 		res = true;
