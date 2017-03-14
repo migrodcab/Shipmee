@@ -80,35 +80,51 @@
 									class="glyphicon glyphicon-map-marker img-origin"></i> <spring:message code="shipment.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text"></li>
+								class="form-control input-text" value="${origin}" required></li>
 							<li class="active"><a><i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									<spring:message code="shipment.destination" />
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text"></li>
+								class="form-control input-text" value="${destination}" required></li>
 							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-plane
-"></i> <spring:message code="shipment.date" />
+									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
 							</a></li>
 							<li class="li-input">
 								<div class='input-group date input-text' id='datetimepicker1'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
+									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</li>
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-eye-open"></i> <spring:message code="shipment.package" />
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.package" />
+							</a></li>
+							<li style="text-align: center" class="li-input">
+								<select class="selectpicker input-text" name="hour">
+									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:choose>	
+											<jstl:when test="${i.index lt 10 }">
+												<option>0${i.index}:00</option>
+											</jstl:when>
+											<jstl:otherwise>
+												<option>${i.index}:00</option>
+											</jstl:otherwise>
+										</jstl:choose>
+									</jstl:forEach>
+								</select>
+							</li>
+							<li class="active"><a href="#"> <i
+									class="glyphicon glyphicon-eye-open"></i> Tipo de paquete
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1"
+										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
 										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="shipment.open" />
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2"
+										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
 										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="shipment.closed" />
 									</label>
 								</div>
@@ -118,12 +134,13 @@
 									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text" multiple name="tam">
-									<option selected="selected" value="xs">XS</option>
-									<option selected="selected" value="s">S</option>
-									<option selected="selected" value="m">M</option>
-									<option selected="selected" value="l">L</option>
-									<option selected="selected" value="xl">XL</option>
+								class="selectpicker input-text selecciona" name="itemSize">
+									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
+									<option value="xs">XS</option>
+									<option value="s">S</option>
+									<option value="m">M</option>
+									<option value="l">L</option>
+									<option value="xl">XL</option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -136,25 +153,43 @@
 				<!-- END MENU -->
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="profile-content">
-				<jstl:choose>
+		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
+									
+						
+<div class="container">
+	<div class="row">
+		<section class="content">
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						
+						<div class="table-container">
+							<table class="table table-filter">
+								<tbody>
+								
+								
+								<jstl:choose>
 					<jstl:when test="${not empty shipments}">
 						<jstl:forEach items="${shipments}" var="shipment">
-							<div class="row envio">
-								<div class="row rtitulo">
-									<div class="rtitulo col-sm-12 text-center ">
-										<h4 class="titulo">${shipment.itemName}</h4>
-									</div>
-								</div>
-								<div class="row info-envio">
-									<div class="rfecha col-xs-7 col-sm-9">
-
-										<div class="row info-lugar">
+								
+									<tr>
+										
+										<td>
+											<div class="media">
+												<div class="pull-left">
+													<img src="${shipment.itemPicture}" class="media-photo-shipment">
+												</div>
+												<div class="media-body">
+													<span class="media-meta pull-right">${shipment.date}</span>
+													<h4 class="title">
+														${shipment.itemName}
+														<span class="pull-right cantidad"></span>
+													</h4>
+													
+													<div class="row info-lugar">
 
 											<div class="col-xs-12 col-sm-4 text-center">
-												<a> <i
-													class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
+												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
 												</a>
 											</div>
 
@@ -168,44 +203,33 @@
 												</a>
 											</div>
 										</div>
-
+													
+												</div>
+											</div>
+											
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<i class="glyphicon glyphicon-plane"></i>
-												<spring:message code="shipment.departureTime" />: 
-												<fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${shipment.date}" />
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="route/display.do?id=${route.id}">
+												
+						
+												
+													<spring:message code="route.details" />
+													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
+													
+													
+													
+												</div>
+
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.departureTime" />: ${shipment.date} / ${shipment.departureTime}
+												<br/>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}
+												
+													
 											</div>
 										</div>
-										<div class="row info1">
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe800;</i>
-													<jstl:choose>
-													    <jstl:when test="${shipment.itemEnvelope eq 'open'}">
-													        <spring:message code="shipment.package_opened" />
-													        <br />
-													    </jstl:when>    
-													    <jstl:otherwise>
-													        <spring:message code="shipment.package_closed" />
-													        <br />
-													    </jstl:otherwise>
-													</jstl:choose>
-											</div>
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe802;</i><spring:message code="shipment.itemSize" />
-
-
-											</div>
-										</div>
-
-
-									</div>
-									<div class="imagen col-xs-5 col-sm-3 center">
-										<div class="row text-center">
-											<div class="col-xs-12">
-												<img class="img-responsive center-block imagen-envio"
-													width="70" height="70" src="${shipment.itemPicture}">
-											</div>
 											
 											<!-- Hecho por Bartolomé y Torres -->
 <!-- 											<div class="col-xs-12 text-center"> -->
@@ -235,12 +259,28 @@
 								</div>
 
 							</div>
-						</jstl:forEach>
+						</jstl:forEach>										
+											
+										</td>
+									</tr>
+									</jstl:forEach>
 					</jstl:when>
 					<jstl:otherwise>
-						<p>No se han encontrado resultados</p>
+						<p><spring:message code="shipment.results" /></p>
 					</jstl:otherwise>
 				</jstl:choose>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</section>
+		
+	</div>
+</div>
+										
 			</div>
 
 
@@ -248,6 +288,10 @@
 
 	</div>
 </div>
+
+
+
+
 
 
 

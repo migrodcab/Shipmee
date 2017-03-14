@@ -1,5 +1,5 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,10 +7,9 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
@@ -28,6 +27,7 @@
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
 
 <style>
 
@@ -59,71 +59,64 @@
 
 						<ul class="nav">
 
-							<li class="active"><a href=""> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-origin"></i><spring:message code="route.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text" value="${origin}" required></li>
-							<li class="active"><a href=""> <i
+								class="form-control input-text"></li>
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
 									<spring:message code="route.destination" />
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text" value="${destination}" required></li>
-							<li class="active"><a href="" target="_blank"> <i
+								class="form-control input-text"></li>
+							<li class="active"><a target="_blank"> <i
 									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
 							</a></li>
+							
 							<li class="li-input">
 								<div class='input-group date input-text' id='datetimepicker1'>
-									<input name="date" style="backgroud-color: white;" type='text'
+									<input name="fecha" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</li>
-							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-time"></i> Hora de salida
-							</a></li>
-							<li style="text-align: center" class="li-input">
-								<select class="selectpicker input-text" name="hour">
-									<jstl:forEach begin="0" end="23" varStatus="i">
-										<jstl:choose>	
-											<jstl:when test="${i.index lt 10 }">
-												<option>0${i.index}:00</option>
-											</jstl:when>
-											<jstl:otherwise>
-												<option>${i.index}:00</option>
-											</jstl:otherwise>
-										</jstl:choose>
-									</jstl:forEach>
-								</select>
-							</li>
-							<li class="active"><a href="#"> <i
+							<!--
+							<li class="li-input">
+								<div class='input-group date input-text' id='datetimepicker2'>
+									<input name="fecha" style="backgroud-color: white;" type='text'
+										class="form-control" /> <span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</li> -->
+							
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-eye-open"></i><spring:message code="route.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
+										class="form-check-input" type="checkbox" id="inlineCheckbox1"
 										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
+										class="form-check-input" type="checkbox" id="inlineCheckbox2"
 										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
 									</label>
 								</div>
 
 							</li>
-							<li class="active"><a href="#"> <i
+							<li class="active"><a> <i
 									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text selecciona" name="itemSize">
-									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
-									<option value="xs">XS</option>
-									<option value="s">S</option>
-									<option value="m">M</option>
-									<option value="l">L</option>
-									<option value="xl">XL</option>
+								class="selectpicker input-text" multiple name="tam">
+									<option selected="selected" value="xs">XS</option>
+									<option selected="selected" value="s">S</option>
+									<option selected="selected" value="m">M</option>
+									<option selected="selected" value="l">L</option>
+									<option selected="selected" value="xl">XL</option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -138,46 +131,23 @@
 		</div>
 		
 		
+		
+		
+		
+		
 		<div class="col-md-9">
 			<div class="profile-content">
 			<h3><spring:message code="route.routes" /></h3>
-				
-						
-						
-<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
-									
-						
-<div class="container">
-	<div class="row">
-		<section class="content">
-			<div class="col-md-8">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-								
-								
-								<jstl:choose>
-					<jstl:when test="${not empty routes}">
-						<jstl:forEach items="${routes}" var="route">
-								
-									<tr>
-										
-										<td>
-											<div class="media">
-												<div class="pull-left">
-													<img src="images/anonymous.png" class="media-photo-route">
-												</div>
-												<div class="media-body">
-													<span class="media-meta pull-right">${route.date}</span>
-													<h4 class="title">
-														${route.creator.name}
-														<span class="pull-right cantidad"></span>
-													</h4>
-													
-													<div class="row info-lugar">
+							<div class="row ruta">
+								<div class="row rtitulo">
+									<div class="rtitulo col-sm-12 text-center ">
+										<h4 class="titulo">${route.creator.name}</h4>
+									</div>
+								</div>
+								<div class="row info-ruta">
+									<div class="rfecha col-xs-7 col-sm-9">
+
+										<div class="row info-lugar">
 
 											<div class="col-xs-12 col-sm-4 text-center">
 												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}
@@ -194,58 +164,74 @@
 												</a>
 											</div>
 										</div>
-													
-												</div>
-											</div>
-											
+
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
-
-												<div class="view" style="float: right;"><h4><a href="route/display.do?id=${route.id}">
-												
-						
-												
-													<spring:message code="route.details" />
-													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
-													
-													
-													
-												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="route.departureTime" />: ${route.date} / ${route.departureTime}
 												<br/>
-												
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="route.arriveTime" />: ${route.arriveTime}
-														
-												
-													
+
 											</div>
 										</div>
-											
+										<div class="row info1">
+											<div class="col-xs-6">
+												<i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.itemEnvelope" />: 
+												${route.itemEnvelope}
+
+
+											</div>
+											<div class="col-xs-6">
+												<i class="demo-icon icon-package-1">&#xe802;</i><spring:message code="route.size" />: XXX
+
+
+											</div>
+										</div>
 										
+
+									</div>
+									<div class="imagen col-xs-5 col-sm-3 center">
+										<div class="row text-center">
+											<div class="col-xs-12">
+												<img class="img-responsive center-block imagen-envio"
+													width="70" height="70" src="images/anonymous.png">
+											</div>
 											
-										</td>
-									</tr>
-									</jstl:forEach>
-					</jstl:when>
-					<jstl:otherwise>
-						<p><spring:message code="route.results" /></p>
-					</jstl:otherwise>
-				</jstl:choose>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+										</div>
+
+									</div>
 				
-			</div>
-		</section>
-		
-	</div>
-</div>
-										
+				<div class="imagen col-xs-5 col-sm-3 center">
+					<div class="row text-center">
+												
+						<!-- Hecho por Guillermo para poder meter el link
+						Si es necesario cambiarlo, no hay problemas -->	
+											
+						<form action="shipment/user/select.do?shipmentId=${route.id}" method="get">
+							<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+								value= "<spring:message code="route.hire" /> <jstl:set var="price" value="${fn:replace(price,
+                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                '.', ',')}" />${priceFormated} euros"/></input>
+						</form>
+						
+						<security:authorize access="hasRole('USER')">
+							<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
+								value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
+						</security:authorize>
+												
+					</div>
+
+				</div>
+					
+									
+									
+									
+								</div>
+
+							</div>
+						
 			</div>
 
 
@@ -253,7 +239,6 @@
 
 	</div>
 </div>
-
 
 
 
