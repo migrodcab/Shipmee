@@ -27,7 +27,7 @@ margin-bottom: 10%;
 
 </style>
 
-	<div id="blue">
+	<div class="blue-barra">
 	    <div class="container">
 			<div class="row">
 				<h3><spring:message code="info.title" /></h3>
