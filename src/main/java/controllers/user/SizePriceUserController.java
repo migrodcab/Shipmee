@@ -50,6 +50,7 @@ public class SizePriceUserController extends AbstractController {
 		SizePriceForm sizePriceForm;
 
 		sizePriceForm = sizePriceFormService.create(routeId);
+		sizePriceForm.setSizePriceFormId(0);
 		
 		result = createEditModelAndView(sizePriceForm);
 
@@ -65,6 +66,7 @@ public class SizePriceUserController extends AbstractController {
 
 		sizePriceForm = sizePriceFormService.findOne(routeId);		
 		Assert.notNull(sizePriceForm);
+		sizePriceForm.setSizePriceFormId(routeId);
 		result = createEditModelAndView(sizePriceForm);
 
 		return result;
@@ -80,7 +82,7 @@ public class SizePriceUserController extends AbstractController {
 		} else {
 			try {
 				sizePriceFormService.reconstruct(sizePriceForm);				
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:../../");
 			} catch (Throwable oops) {
 
 				result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");				
@@ -96,7 +98,7 @@ public class SizePriceUserController extends AbstractController {
 
 		try {			
 			sizePriceFormService.delete(sizePriceForm);
-			result = new ModelAndView("redirect:list.do");						
+			result = new ModelAndView("redirect:../../");						
 		} catch (Throwable oops) {
 			result = createEditModelAndView(sizePriceForm, "sizePrice.commit.error");
 		}

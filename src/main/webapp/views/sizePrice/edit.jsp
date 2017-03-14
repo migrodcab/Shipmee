@@ -14,6 +14,7 @@
 <form:form action="sizePrice/user/edit.do" modelAttribute="sizePriceForm">
 	<!-- Hidden Attributes -->
 	<form:hidden path="routeId" />
+	<form:hidden path="sizePriceFormId" />
 	
 	<!-- Editable Attributes -->
 			
@@ -30,7 +31,7 @@
 	<!-- Action buttons -->
 	<acme:submit name="save" code="sizePrice.save"/>
 	
-	<jstl:if test="${sizePrice.id != 0}">
+	<jstl:if test="${sizePriceForm.sizePriceFormId != 0}">
 		<acme:submit_confirm name="delete" code="sizePrice.delete" codeConfirm="sizePrice.confirm.delete"/>
 	</jstl:if>
 	
