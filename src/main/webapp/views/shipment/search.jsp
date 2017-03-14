@@ -30,6 +30,7 @@
 	type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
 
+
 <style>
 @font-face {
 	font-family: 'icons';
@@ -91,7 +92,7 @@
 									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
 							</a></li>
 							<li class="li-input">
-								<div class='input-group date input-text' id='datetimepicker1'>
+								<div class='input-group fondoDesplegable input-text' id='datetimepicker1'>
 									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -99,10 +100,10 @@
 								</div>
 							</li>
 							<li class="active"><a href="" target="_blank"> <i
-									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.package" />
+									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.hour" />
 							</a></li>
 							<li style="text-align: center" class="li-input">
-								<select class="selectpicker input-text" name="hour">
+								<select class="selectpicker input-text fondoDesplegable" name="hour">
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
@@ -116,7 +117,7 @@
 								</select>
 							</li>
 							<li class="active"><a href="#"> <i
-									class="glyphicon glyphicon-eye-open"></i> Tipo de paquete
+									class="glyphicon glyphicon-eye-open"></i><spring:message code="shipment.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
@@ -134,7 +135,7 @@
 									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text selecciona" name="itemSize">
+								class="selectpicker input-text fondoDesplegable" name="itemSize">
 									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
 									<option value="xs">XS</option>
 									<option value="s">S</option>
@@ -153,6 +154,12 @@
 				<!-- END MENU -->
 			</div>
 		</div>
+		
+		
+		<div class="col-md-9">
+			<div class="profile-content">
+			<h3><spring:message code="shipment.shipments" /></h3>
+		
 		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
 									
 						
@@ -210,7 +217,7 @@
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="route/display.do?id=${route.id}">
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?id=${shipment.id}">
 												
 						
 												
