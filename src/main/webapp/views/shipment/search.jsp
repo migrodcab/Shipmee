@@ -189,7 +189,7 @@
 												<div class="media-body">
 													<span class="media-meta pull-right">${shipment.date}</span>
 													<h4 class="title">
-														${shipment.itemName}
+														<a>${shipment.itemName}</a>
 														<span class="pull-right cantidad"></span>
 													</h4>
 													
@@ -217,7 +217,7 @@
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?id=${shipment.id}">
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
 												
 						
 												

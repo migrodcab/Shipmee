@@ -24,7 +24,7 @@
 	margin-top: 5%;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	background-color: #f7f7f7;
+	background-color: white;
 	-webkit-box-shadow: 2px 2px 5px #999;
 	-moz-box-shadow: 2px 2px 5px #999;
 	margin-bottom: 5%;
@@ -274,3 +274,4 @@ body {
 .table-filter .media .summary {
 	font-size: 14px;
 }
+

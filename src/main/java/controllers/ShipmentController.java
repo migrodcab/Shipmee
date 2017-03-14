@@ -6,6 +6,7 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +21,7 @@ public class ShipmentController extends AbstractController {
 
 	@Autowired
 	private ShipmentService shipmentService;	
+
 
 	// Constructors -----------------------------------------------------------
 	
@@ -47,4 +49,27 @@ public class ShipmentController extends AbstractController {
 
 			return result;
 			}
+		
+		@RequestMapping(value = "/display", method = RequestMethod.GET)
+		public ModelAndView seeThread(@RequestParam int shipmentId) {
+			ModelAndView result;
+			
+			result = createListModelAndView(shipmentId);
+			
+			return result;
+
+		}
+		
+		private ModelAndView createListModelAndView(int shipmentId){
+			ModelAndView result;
+			Shipment shipment;
+			
+			shipment = shipmentService.findOne(shipmentId);
+			
+			
+			result = new ModelAndView("shipment/display");
+			result.addObject("shipment", shipment);
+
+			return result;
+		}
 }

@@ -168,12 +168,12 @@
 										<td>
 											<div class="media">
 												<div class="pull-left">
-													<img src="images/anonymous.png" class="media-photo-route">
+													<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
 												</div>
 												<div class="media-body">
 													<span class="media-meta pull-right">${route.date}</span>
 													<h4 class="title">
-														${route.creator.name}
+														<a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a>
 														<span class="pull-right cantidad"></span>
 													</h4>
 													
@@ -201,7 +201,7 @@
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><h4><a href="route/display.do?id=${route.id}">
+												<div class="view" style="float: right;"><h4><a href="route/display.do?routeId=${route.id}">
 												
 						
 												

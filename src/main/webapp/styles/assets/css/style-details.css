@@ -1,0 +1,175 @@
+.input-text {
+	width: 90%;
+	margin: 0px auto;
+}
+
+.envio {
+	margin-top: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%;
+	width: 100%;
+	padding-bottom: 2%;
+	
+}
+
+.selecciona .dropdown-menu {
+	background-color: white;
+}
+
+.ruta {
+	margin-top: 5%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+	-webkit-box-shadow: 2px 2px 5px #999;
+	-moz-box-shadow: 2px 2px 5px #999;
+	margin-bottom: 5%;
+	width: 100%;
+	padding-bottom: 2%;
+}
+
+.rfecha {
+	border-top: 1px solid #ccc;
+}
+
+.precio {
+	border: 1px solid #ccc;
+	border-radius: 25px;
+	background-color: #f7f7f7;
+	margin: auto;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	width: 20%;
+	height: 20%;
+	background-color: darkred;
+	color: white;
+}
+
+.titulo {
+	padding: 0.5%;
+	color: #428bca;
+	font-size: 150%;
+}
+
+.titulos {
+	padding: 0.5%;
+	color: #384452;
+	font-size: 150%;
+}
+
+.titles-details{
+	font-size: 100%;
+	padding-left: 2%;
+	color: #2e3436;
+}
+
+.titles-info{
+	font-size: 150%;
+	padding: 2%;
+	color: #428bca;
+}
+
+.titles-info-price{
+	font-size: 150%;
+	padding: 2%;
+	color:#d9534f;
+	font-weight: bold;
+}
+
+.row-origen {
+	padding-top: 0.5%;
+}
+
+.information {
+	font-size: 16px;
+}
+
+.imagen-envio {
+	margin-bottom: 0.5%;
+	margin-top: 20%;
+	margin-right: 20%;
+	width: 100%x;
+}
+
+.btn {
+	white-space: normal;
+}
+
+.row {
+	margin-left: 0px !important;
+}
+
+.info-lugar {
+	padding-top: -0.5%;
+	font-size: 180%;
+	color: black;
+}
+
+.img-origin {
+	color: green;
+}
+
+.img-destination {
+	color: red;
+}
+
+.info-salida {
+	pading-bottom: 0.5%;
+}
+
+label {
+	color: #495766 !important;
+	font-weight: normal !important;
+	position: relative;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	width: auto !important;
+}
+
+.li-input {
+	padding: 3%;
+}
+
+.i-code {
+	display: none;
+}
+
+
+.demo-icon {
+	font-family: "icons";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 150%;
+}
+
+.size-icon {
+	font-family: "package-open";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 150%;
+}
+
+.contraoferta{
+	margin-top: 4px;
+}
+
+.ok{
+	margin-top: 4px;
+	font-size: 16px;
+	font-weight:bold;
+}
+
+.view h4{
+margin-top: 5%;
+
+
+}

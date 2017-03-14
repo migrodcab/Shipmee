@@ -138,13 +138,16 @@
 		
 		
 		
+		
+		
+		
 		<div class="col-md-9">
 			<div class="profile-content">
-			<h3><spring:message code="route.route" /></h3>
+			<h3><spring:message code="shipment.shipment" /></h3>
 							<div class="row ruta">
 								<div class="row rtitulo">
 									<div class="rtitulo col-sm-12 text-center ">
-										<h4 class="titulo">${route.creator.name}</h4>
+										<h4 class="titulo">${shipment.itemName}</h4>
 									</div>
 								</div>
 								
@@ -157,8 +160,8 @@
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
 										<div class="row titles-details"><i
-									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<span class="titles-info">${route.origin}</span>&nbsp;&nbsp;<i
-									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<span class="titles-info">${route.destination}</span></div>
+									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
 										
 										
 										
@@ -171,13 +174,13 @@
 											<div class="info-salida col-sm-12 ">
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: <span class="titles-info">${route.date}</span>
+												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.date}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: <span class="titles-info">${route.departureTime}</span>
+												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.departureTime}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.arriveTime" />: <span class="titles-info">${route.arriveTime}</span>
+												<spring:message code="shipment.maximumArriveTime" />: <span class="titles-info">${shipment.maximumArriveTime}</span>
 
 											</div>
 										</div>
@@ -185,13 +188,13 @@
 										<div class="row info1">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
-												<span class="titles-info">${route.itemEnvelope}</span>
+												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
+												<span class="titles-info">${shipment.itemEnvelope}</span>
 											
 											<br/>
 											
-												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />: 
-												<span class="titles-info">XXX</span>
+												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="shipment.itemSize" />: 
+												<span class="titles-info">${shipment.itemSize}</span>
 											</div>
 											
 										</div>
@@ -199,8 +202,8 @@
 										<div class="row info1">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-xs-6">
-												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="route.itemEnvelope" />: 
-												<span class="titles-info-price">X euros</span>
+												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
+												<span class="titles-info-price">${shipment.price} euros</span>
 
 
 											</div>
@@ -209,17 +212,11 @@
 										
 
 									</div>
-		
-		
-		
-		
-		
-		
 									<div class="imagen col-xs-5 col-sm-3 center">
 										<div class="row text-center">
 											<div class="col-xs-12">
-												<img class="img-responsive center-block imagen-envio"
-													width="70" height="70" src="images/anonymous.png">
+												<img class="imagen-envio"
+													 src="${shipment.itemPicture}">
 											</div>
 											
 										</div>
@@ -232,7 +229,7 @@
 						<!-- Hecho por Guillermo para poder meter el link
 						Si es necesario cambiarlo, no hay problemas -->	
 											
-						<form action="shipment/user/select.do?shipmentId=${route.id}" method="get">
+						<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
 							<input type=submit class="btn-sm btn-llevar btn btn-success ok"
 								value= "<spring:message code="route.hire" /> <jstl:set var="price" value="${fn:replace(price,
                                 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
@@ -241,7 +238,7 @@
 						
 						<security:authorize access="hasRole('USER')">
 							<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-								value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
+								value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
 						</security:authorize>
 												
 					</div>
