@@ -26,7 +26,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 <link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
-<link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
 <link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
 
 <style>
@@ -55,68 +54,75 @@
 			<div class="profile-sidebar">
 
 				<div class="profile-usermenu">
-					<form method="get" action="route/search.do">
+					<form method="get" action="shipment/search.do">
 
 						<ul class="nav">
 
 							<li class="active"><a> <i
-									class="glyphicon glyphicon-map-marker img-origin"></i><spring:message code="route.origin" />
+									class="glyphicon glyphicon-map-marker img-origin"></i> <spring:message code="shipment.origin" />
 							</a></li>
 							<li class="li-input"><input type="text" name="origin"
-								class="form-control input-text"></li>
-							<li class="active"><a> <i
+								class="form-control input-text" value="${origin}" required></li>
+							<li class="active"><a><i
 									class="glyphicon glyphicon-map-marker img-destination"></i>
-									<spring:message code="route.destination" />
+									<spring:message code="shipment.destination" />
 							</a></li>
 							<li class="li-input"><input name="destination" type="text"
-								class="form-control input-text"></li>
-							<li class="active"><a target="_blank"> <i
-									class="glyphicon glyphicon-plane"></i><spring:message code="route.date" />
+								class="form-control input-text" value="${destination}" required></li>
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-plane"></i> <spring:message code="shipment.date" />
 							</a></li>
-							
 							<li class="li-input">
-								<div class='input-group date input-text' id='datetimepicker1'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
+								<div class='input-group fondoDesplegable input-text' id='datetimepicker1'>
+									<input name="date" style="backgroud-color: white;" type='text'
 										class="form-control" /> <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</li>
-							<!--
-							<li class="li-input">
-								<div class='input-group date input-text' id='datetimepicker2'>
-									<input name="fecha" style="backgroud-color: white;" type='text'
-										class="form-control" /> <span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</li> -->
-							
-							<li class="active"><a> <i
-									class="glyphicon glyphicon-eye-open"></i><spring:message code="route.package" />
+							<li class="active"><a href="" target="_blank"> <i
+									class="glyphicon glyphicon-time"></i> <spring:message code="shipment.hour" />
+							</a></li>
+							<li style="text-align: center" class="li-input">
+								<select class="selectpicker input-text fondoDesplegable" name="hour">
+									<jstl:forEach begin="0" end="23" varStatus="i">
+										<jstl:choose>	
+											<jstl:when test="${i.index lt 10 }">
+												<option>0${i.index}:00</option>
+											</jstl:when>
+											<jstl:otherwise>
+												<option>${i.index}:00</option>
+											</jstl:otherwise>
+										</jstl:choose>
+									</jstl:forEach>
+								</select>
+							</li>
+							<li class="active"><a href="#"> <i
+									class="glyphicon glyphicon-eye-open"></i><spring:message code="shipment.package" />
 							</a></li>
 							<li style="padding-bottom: 2%;">
 								<div class="form-check form-check-inline input-text">
 									<label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox1"
-										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.open" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox1" name="envelope"
+										value="open"> <i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="shipment.open" />
 									</label> <label class="form-check-label"> <input
-										class="form-check-input" type="checkbox" id="inlineCheckbox2"
-										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="route.closed" />
+										class="form-check-input" type="checkbox" id="inlineCheckbox2" name="envelope"
+										value="close"> <i class="demo-icon icon-package-1">&#xe801;</i><spring:message code="shipment.closed" />
 									</label>
 								</div>
 
 							</li>
 							<li class="active"><a> <i
-									class="glyphicon glyphicon-resize-full"></i><spring:message code="route.sizes" />
+									class="glyphicon glyphicon-resize-full"></i> <spring:message code="shipment.itemSize" />
 							</a></li>
 							<li style="text-align: center" class="li-input"><select
-								class="selectpicker input-text" multiple name="tam">
-									<option selected="selected" value="xs">XS</option>
-									<option selected="selected" value="s">S</option>
-									<option selected="selected" value="m">M</option>
-									<option selected="selected" value="l">L</option>
-									<option selected="selected" value="xl">XL</option>
+								class="selectpicker input-text fondoDesplegable" name="itemSize">
+									<option selected="selected" disabled value=''><spring:message code="shipment.select.sizes" /></option>
+									<option value="xs">XS</option>
+									<option value="s">S</option>
+									<option value="m">M</option>
+									<option value="l">L</option>
+									<option value="xl">XL</option>
 							</select></li>
 							<li class="active"><button type="submit"
 									class="btnSearch btn-lg btnSample btn-block btn-success">
@@ -132,66 +138,83 @@
 		
 		
 		
-		
-		
-		
 		<div class="col-md-9">
 			<div class="profile-content">
-			<h3><spring:message code="route.routes" /></h3>
+			<h3><spring:message code="route.route" /></h3>
 							<div class="row ruta">
 								<div class="row rtitulo">
 									<div class="rtitulo col-sm-12 text-center ">
 										<h4 class="titulo">${route.creator.name}</h4>
 									</div>
 								</div>
+								
+								
+								
+								
 								<div class="row info-ruta">
 									<div class="rfecha col-xs-7 col-sm-9">
-
-										<div class="row info-lugar">
-
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${route.origin}
-												</a>
-											</div>
-
-											<div class="col-sm-2 text-center">
-												<i class="glyphicon glyphicon-sort"></i>
-											</div>
-
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a> <i
-													class="glyphicon glyphicon-map-marker img-destination"></i>${route.destination}
-												</a>
-											</div>
-										</div>
+										
+										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
+										
+										<div class="row titles-details"><i
+									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<span class="titles-info">${route.origin}</span>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<span class="titles-info">${route.destination}</span></div>
+										
+										
+										
+						
+										
+										
 
 										<div class="row">
+										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: ${route.date} / ${route.departureTime}
+												<spring:message code="route.departureTime" />: <span class="titles-info">${route.date}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.arriveTime" />: ${route.arriveTime}
-
-											</div>
-										</div>
-										<div class="row info1">
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe800;</i><spring:message code="route.itemEnvelope" />: 
-												${route.itemEnvelope}
-
-
-											</div>
-											<div class="col-xs-6">
-												<i class="demo-icon icon-package-1">&#xe802;</i><spring:message code="route.size" />: XXX
-
+												<spring:message code="route.departureTime" />: <span class="titles-info">${route.departureTime}</span>
+												<br/>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="route.arriveTime" />: <span class="titles-info">${route.arriveTime}</span>
 
 											</div>
 										</div>
 										
+										<div class="row info1">
+										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
+											<div class="col-xs-6">
+												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
+												<span class="titles-info">${route.itemEnvelope}</span>
+											
+											<br/>
+											
+												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />: 
+												<span class="titles-info">XXX</span>
+											</div>
+											
+										</div>
+										
+										<div class="row info1">
+										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
+											<div class="col-xs-6">
+												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="route.itemEnvelope" />: 
+												<span class="titles-info-price">X euros</span>
+
+
+											</div>
+											
+										</div>
+										
 
 									</div>
+		
+		
+		
+		
+		
+		
 									<div class="imagen col-xs-5 col-sm-3 center">
 										<div class="row text-center">
 											<div class="col-xs-12">

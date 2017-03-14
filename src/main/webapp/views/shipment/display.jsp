@@ -1,5 +1,5 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,10 +7,9 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <link rel="stylesheet" href="styles/assets/css/datetimepicker.min.css" />
 <script type="text/javascript" src="scripts/moment.js"></script>
@@ -26,12 +25,11 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
-<link rel="stylesheet" href="styles/assets/css/lateral-menu.css"
-	type="text/css">
-<link rel="stylesheet" href="styles/assets/css/style-list.css" type="text/css">
-
+<link rel="stylesheet" href="styles/assets/css/lateral-menu.css" type="text/css">
+<link rel="stylesheet" href="styles/assets/css/style-details.css" type="text/css">
 
 <style>
+
 @font-face {
 	font-family: 'icons';
 	src: url('styles/assets/fonts/iconos/iconos.eot?58322891');
@@ -45,22 +43,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
-.demo-icon {
-	font-family: "icons";
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	font-size: 150%;
-}
-.size-icon {
-	font-family: "package-open";
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	font-size: 150%;
-}
+
 </style>
 
 
@@ -154,110 +137,121 @@
 		</div>
 		
 		
+		
+		
+		
+		
 		<div class="col-md-9">
 			<div class="profile-content">
-			<h3><spring:message code="shipment.shipments" /></h3>
-		
-		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
-									
-						
-<div class="container">
-	<div class="row">
-		<section class="content">
-			<div class="col-md-8">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
+			<h3><spring:message code="shipment.shipment" /></h3>
+							<div class="row ruta">
+								<div class="row rtitulo">
+									<div class="rtitulo col-sm-12 text-center ">
+										<h4 class="titulo">${shipment.itemName}</h4>
+									</div>
+								</div>
 								
 								
-								<jstl:choose>
-					<jstl:when test="${not empty shipments}">
-						<jstl:forEach items="${shipments}" var="shipment">
 								
-									<tr>
+								
+								<div class="row info-ruta">
+									<div class="rfecha col-xs-7 col-sm-9">
 										
-										<td>
-											<div class="media">
-												<div class="pull-left">
-													<img src="${shipment.itemPicture}" class="media-photo-shipment">
-												</div>
-												<div class="media-body">
-													<span class="media-meta pull-right">${shipment.date}</span>
-													<h4 class="title">
-														<a>${shipment.itemName}</a>
-														<span class="pull-right cantidad"></span>
-													</h4>
-													
-													<div class="row info-lugar">
+										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
+										
+										<div class="row titles-details"><i
+									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
+									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
+										
+										
+										
+						
+										
+										
 
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a><i class="glyphicon glyphicon-map-marker img-origin"></i>${shipment.origin}
-												</a>
-											</div>
-
-											<div class="col-sm-2 text-center">
-												<i class="glyphicon glyphicon-sort"></i>
-											</div>
-
-											<div class="col-xs-12 col-sm-4 text-center">
-												<a> <i
-													class="glyphicon glyphicon-map-marker img-destination"></i>${shipment.destination}
-												</a>
-											</div>
-										</div>
-													
-												</div>
-											</div>
-											
 										<div class="row">
+										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
-												
-						
-												
-													<spring:message code="route.details" />
-													<i class="glyphicon glyphicon-chevron-right"></i></a></h4>
-													
-													
-													
-												</div>
-
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: ${shipment.date} / ${shipment.departureTime}
+												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.date}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}
-												
-													
+												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.departureTime}</span>
+												<br/>
+												<i class="glyphicon glyphicon-plane"></i> 
+												<spring:message code="shipment.maximumArriveTime" />: <span class="titles-info">${shipment.maximumArriveTime}</span>
+
 											</div>
 										</div>
-											
 										
+										<div class="row info1">
+										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
+											<div class="col-xs-6">
+												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
+												<span class="titles-info">${shipment.itemEnvelope}</span>
 											
-										</td>
-									</tr>
-									</jstl:forEach>
-					</jstl:when>
-					<jstl:otherwise>
-						<p><spring:message code="shipment.results" /></p>
-					</jstl:otherwise>
-				</jstl:choose>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+											<br/>
+											
+												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="shipment.itemSize" />: 
+												<span class="titles-info">${shipment.itemSize}</span>
+											</div>
+											
+										</div>
+										
+										<div class="row info1">
+										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
+											<div class="col-xs-6">
+												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
+												<span class="titles-info-price">${shipment.price} euros</span>
+
+
+											</div>
+											
+										</div>
+										
+
+									</div>
+									<div class="imagen col-xs-5 col-sm-3 center">
+										<div class="row text-center">
+											<div class="col-xs-12">
+												<img class="imagen-envio"
+													 src="${shipment.itemPicture}">
+											</div>
+											
+										</div>
+
+									</div>
 				
-			</div>
-		</section>
-		
-	</div>
-</div>
-										
+				<div class="imagen col-xs-5 col-sm-3 center">
+					<div class="row text-center">
+												
+						<!-- Hecho por Guillermo para poder meter el link
+						Si es necesario cambiarlo, no hay problemas -->	
+											
+						<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
+							<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+								value= "<spring:message code="route.hire" /> <jstl:set var="price" value="${fn:replace(price,
+                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                '.', ',')}" />${priceFormated} euros"/></input>
+						</form>
+						
+						<security:authorize access="hasRole('USER')">
+							<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
+								value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
+						</security:authorize>
+												
+					</div>
+
+				</div>
+					
+									
+									
+									
+								</div>
+
+							</div>
+						
 			</div>
 
 
@@ -268,10 +262,6 @@
 
 
 
-
-
-
-
 <script type="text/javascript">
 	$(function() {
 		$('#datetimepicker1').datetimepicker({
@@ -279,4 +269,9 @@
 			format : 'DD/MM/YYYY'
 		});
 	});
+	
+	
+      $(function () {
+          $('#datetimepicker2').datetimepicker();
+      });
 </script>
