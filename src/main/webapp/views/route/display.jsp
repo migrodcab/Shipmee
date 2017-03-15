@@ -156,39 +156,33 @@
 								
 								
 								
+								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right">${route.date}</span>
 								
 								<div class="row info-ruta">
-									<div class="rfecha col-xs-7 col-sm-9">
-										
+										<div class="col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
 										<div class="row titles-details"><i
 									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="route.origin" />:<span class="titles-info">${route.origin}</span>&nbsp;&nbsp;<i
 									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="route.destination" />:<span class="titles-info">${route.destination}</span></div>
 										
-										
-										
+										</div>
 						
-										
-										
-
-										<div class="row">
+										<div class="row col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
-
+												
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: <span class="titles-info">${route.date}</span>
+												<spring:message code="route.departureTime" />: <span class="titles-info">${departureTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${departureTime_hour}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: <span class="titles-info">${route.departureTime}</span>
-												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.arriveTime" />: <span class="titles-info">${route.arriveTime}</span>
+												<spring:message code="route.arriveTime" />: <span class="titles-info">${arriveTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${arriveTime_hour}</span>
+												
 
 											</div>
 										</div>
 										
-										<div class="row info1">
+										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-6">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
@@ -202,15 +196,17 @@
 											
 										</div>
 										
-										<div class="row info1">
+										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
-											<div class="col-xs-6">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info-price">X euros</span>
 
-
-											</div>
-											
+												<security:authorize access="hasRole('USER')">
+													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
+													value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
+												</security:authorize>
+												<br/>	
+				
 										</div>
 										
 
@@ -221,42 +217,25 @@
 		
 		
 		
-									<div class="imagen col-xs-5 col-sm-3 center">
-										<div class="row text-center">
-											<div class="col-xs-12">
-												<img class="img-responsive center-block imagen-envio"
-													width="70" height="70" src="images/anonymous.png">
-											</div>
-											
-										</div>
-
-									</div>
+									
 				
-				<div class="imagen col-xs-5 col-sm-3 center">
-					<div class="row text-center">
-												
-						<!-- Hecho por Guillermo para poder meter el link
-						Si es necesario cambiarlo, no hay problemas -->	
-											
-						<form action="shipment/user/select.do?shipmentId=${route.id}" method="get">
-							<input type=submit class="btn-sm btn-llevar btn btn-success ok"
-								value= "<spring:message code="route.hire" /> <jstl:set var="price" value="${fn:replace(price,
-                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                '.', ',')}" />${priceFormated} euros"/></input>
-						</form>
-						
-						<security:authorize access="hasRole('USER')">
-							<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-								value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
-						</security:authorize>
-												
-					</div>
+									
+									
+									<div class="rfecha separador-final"></div>
 
-				</div>
-					
-									
-									
-									
+
+
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+										
+											<form action="shipment/user/select.do?routeId=${route.id}" method="get">
+											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+											value= "<spring:message code="route.contract" /> <jstl:set var="price" value="${fn:replace(price,
+                               				 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                				'.', ',')}" />${priceFormated}"/></input>
+											</form>
+
+								</div>
+								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /></a></div>
 								</div>
 
 							</div>
@@ -267,7 +246,6 @@
 		</div>
 
 	</div>
-</div>
 
 
 

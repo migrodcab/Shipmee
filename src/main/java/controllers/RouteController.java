@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -67,10 +68,21 @@ public class RouteController extends AbstractController {
 		
 		route = routeService.findOne(routeId);
 		
+		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
+		String departureTime_hour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
+		
+		String arriveTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getArriveTime());
+		String arriveTime_hour = new SimpleDateFormat("HH':'mm").format(route.getArriveTime());
+
 
 		result = new ModelAndView("route/display");
 		result.addObject("route", route);
-
+		result.addObject("departureTime", departureTime);
+		result.addObject("departureTime_hour", departureTime_hour);
+		result.addObject("arriveTime", arriveTime);
+		result.addObject("arriveTime_hour", arriveTime_hour);
+		
+		
 		return result;
 	}
 }
