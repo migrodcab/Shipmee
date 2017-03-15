@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -66,9 +67,21 @@ public class ShipmentController extends AbstractController {
 			
 			shipment = shipmentService.findOne(shipmentId);
 			
+			String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getDepartureTime());
+			String departureTime_hour = new SimpleDateFormat("HH':'mm").format(shipment.getDepartureTime());
+			
+			String maximumArriveTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(shipment.getMaximumArriveTime());
+			String maximumArriveTime_hour = new SimpleDateFormat("HH':'mm").format(shipment.getMaximumArriveTime());
+
 			
 			result = new ModelAndView("shipment/display");
 			result.addObject("shipment", shipment);
+			result.addObject("departureTime", departureTime);
+			result.addObject("departureTime_hour", departureTime_hour);
+			result.addObject("maximumArriveTime", maximumArriveTime);
+			result.addObject("maximumArriveTime_hour", maximumArriveTime_hour);
+
+			
 
 			return result;
 		}
