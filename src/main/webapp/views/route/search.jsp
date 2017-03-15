@@ -47,7 +47,15 @@
 
 </style>
 
-
+<div class="blue-barra">
+	    <div class="container">
+			<div class="row">
+				<h3><spring:message code="route.routes" /></h3>
+			</div><!-- /row -->
+	    </div>
+	</div>
+	
+	
 <div class="container">
 
 	<div class="row profile">
@@ -140,7 +148,6 @@
 		
 		<div class="col-md-9">
 			<div class="profile-content">
-			<h3><spring:message code="route.routes" /></h3>
 				
 						
 						

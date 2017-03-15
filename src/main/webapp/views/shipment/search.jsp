@@ -64,6 +64,14 @@
 </style>
 
 
+<div class="blue-barra">
+	    <div class="container">
+			<div class="row">
+				<h3><spring:message code="shipment.shipments" /></h3>
+			</div><!-- /row -->
+	    </div>
+	</div>
+
 <div class="container">
 
 	<div class="row profile">
@@ -156,7 +164,6 @@
 		
 		<div class="col-md-9">
 			<div class="profile-content">
-			<h3><spring:message code="shipment.shipments" /></h3>
 		
 		<!-- 2016 Thanks to TavoQiqe https://www.facebook.com/tavo.qiqe.lucero -->						
 									

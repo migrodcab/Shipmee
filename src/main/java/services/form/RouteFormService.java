@@ -52,11 +52,11 @@ public class RouteFormService {
 		departureTime = null;
 		arriveTime = null;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		try {
-			departureTime = formatter.parse(routeForm.getDepartureTime());
-			arriveTime = formatter.parse(routeForm.getArriveTime());
+			departureTime = formatter.parse(routeForm.getDepartureTime().toString());
+			arriveTime = formatter.parse(routeForm.getArriveTime().toString());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +93,7 @@ public class RouteFormService {
 		String arriveTime, departureTime;
 		User user;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		result = this.create();
 		route = routeService.findOne(routeId);

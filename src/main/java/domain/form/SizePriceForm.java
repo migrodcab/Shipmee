@@ -9,11 +9,8 @@ public class SizePriceForm {
 	private Double priceM;
 	private Double priceL;
 	private Double priceXL;
-	private boolean S;
-	private boolean M;
-	private boolean L;
-	private boolean XL;
 	private int routeId;
+	private int sizePriceFormId;
 	
 	@Min(0)
 	@Digits(integer=9,fraction=2)
@@ -51,38 +48,6 @@ public class SizePriceForm {
 		this.priceXL = priceXL;
 	}
 	
-	
-	public boolean isS() {
-		return S;
-	}
-	public void setS(boolean s) {
-		S = s;
-	}
-	
-	
-	public boolean isM() {
-		return M;
-	}
-	public void setM(boolean m) {
-		M = m;
-	}
-	
-	
-	public boolean isL() {
-		return L;
-	}
-	public void setL(boolean l) {
-		L = l;
-	}
-	
-	
-	public boolean isXL() {
-		return XL;
-	}
-	public void setXL(boolean xL) {
-		XL = xL;
-	}
-	
 	@Min(0)
 	public int getRouteId() {
 		return routeId;
@@ -91,5 +56,12 @@ public class SizePriceForm {
 		this.routeId = routeId;
 	}
 	
+	@Min(0)
+	public int getSizePriceFormId() {
+		return sizePriceFormId;
+	}
+	public void setSizePriceFormId(int sizePriceFormId) {
+		this.sizePriceFormId = sizePriceFormId;
+	}
 	
 }

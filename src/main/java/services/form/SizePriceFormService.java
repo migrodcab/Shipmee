@@ -86,6 +86,8 @@ public class SizePriceFormService {
 	}
 	
 	private Collection<SizePrice> saveCreate(SizePriceForm sizePriceForm) {
+		Assert.isTrue(checkSizePrices(sizePriceForm));
+		
 		Collection<SizePrice> result;
 		SizePrice sizePrice;
 		Route route;
@@ -93,7 +95,7 @@ public class SizePriceFormService {
 		result = new ArrayList<SizePrice>();
 		route = routeService.findOne(sizePriceForm.getRouteId());
 		
-		if(sizePriceForm.isS()) {
+		if(sizePriceForm.getPriceS() != null) {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("S");
@@ -104,7 +106,7 @@ public class SizePriceFormService {
 			result.add(sizePrice);
 		}
 		
-		if(sizePriceForm.isM()) {
+		if(sizePriceForm.getPriceM() != null) {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("M");
@@ -115,7 +117,7 @@ public class SizePriceFormService {
 			result.add(sizePrice);
 		}
 		
-		if(sizePriceForm.isL()) {
+		if(sizePriceForm.getPriceL() != null) {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("L");
@@ -126,7 +128,7 @@ public class SizePriceFormService {
 			result.add(sizePrice);
 		}
 		
-		if(sizePriceForm.isXL()) {
+		if(sizePriceForm.getPriceXL() != null) {
 			sizePrice = sizePriceService.create();
 			
 			sizePrice.setSize("XL");
@@ -139,7 +141,7 @@ public class SizePriceFormService {
 		
 		return result;
 	}
-	
+
 	private SizePriceForm constructForm(SizePriceForm result) {
 		Collection<SizePrice> sizePrices;
 		
@@ -147,19 +149,28 @@ public class SizePriceFormService {
 		
 		for(SizePrice sp : sizePrices) {
 			if(sp.getSize().equals("S")) {
-				result.setS(true);
 				result.setPriceS(sp.getPrice());
 			} else if(sp.getSize().equals("M")) {
-				result.setM(true);
 				result.setPriceM(sp.getPrice());
 			} else if(sp.getSize().equals("L")) {
-				result.setL(true);
 				result.setPriceL(sp.getPrice());
 			} else if(sp.getSize().equals("XL")) {
-				result.setXL(true);
 				result.setPriceXL(sp.getPrice());
 			}
 		}
+		
+		return result;
+	}
+	
+	private boolean checkSizePrices(SizePriceForm sizePriceForm) {
+		boolean result;
+		
+		result = true;
+		
+		if(sizePriceForm.getPriceS() == null && sizePriceForm.getPriceM() == null &&
+				sizePriceForm.getPriceL() == null && sizePriceForm.getPriceXL() == null) {
+			result = false;
+		} 
 		
 		return result;
 	}

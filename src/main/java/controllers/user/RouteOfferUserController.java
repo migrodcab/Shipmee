@@ -3,6 +3,9 @@ package controllers.user;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -33,6 +36,28 @@ public class RouteOfferUserController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required=false, defaultValue="-1") int routeId,
+			@RequestParam(required=false, defaultValue="-1") int userId,
+			@RequestParam(required=false, defaultValue="1") int page) {
+		ModelAndView result;
+		Page<RouteOffer> routeOffers;
+		Pageable pageable;
+		
+		pageable = new PageRequest(page - 1, 5);
+		
+		routeOffers = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, userId, pageable);
+		
+		result = new ModelAndView("routeOffer/list");
+		result.addObject("routeOffers", routeOffers.getContent());
+		result.addObject("p", page);
+		result.addObject("total_pages", routeOffers.getTotalPages());
+		result.addObject("routeId", routeId);
+		result.addObject("userId", userId);
+
+		return result;
+	}
+	
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

@@ -52,7 +52,7 @@ public class ShipmentFormService {
 		departureTime = null;
 		maximumArriveTime = null;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		try {
 			departureTime = formatter.parse(shipmentForm.getDepartureTime());
@@ -97,7 +97,7 @@ public class ShipmentFormService {
 		String maximumArriveTime, departureTime;
 		User user;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		result = this.create();
 		shipment = shipmentService.findOne(shipmentId);

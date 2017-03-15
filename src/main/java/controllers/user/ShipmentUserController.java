@@ -90,7 +90,7 @@ public class ShipmentUserController extends AbstractController {
 				shipment = shipmentFormService.reconstruct(shipmentForm);
 				shipment = shipmentService.save(shipment);
 
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:../../");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(shipmentForm, "shipment.commit.error");				
 			}
@@ -105,7 +105,7 @@ public class ShipmentUserController extends AbstractController {
 
 		try {
 			shipmentFormService.delete(shipmentForm);
-			result = new ModelAndView("redirect:list.do");						
+			result = new ModelAndView("redirect:../../");						
 		} catch (Throwable oops) {
 			System.out.println(oops);
 			result = createEditModelAndView(shipmentForm, "shipment.commit.error");

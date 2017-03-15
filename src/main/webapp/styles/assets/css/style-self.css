@@ -277,4 +277,12 @@ h3,
 	background-color: white;
 }
 
+.blue-barra{
+	background: #00b3fe;
+	margin-top: 0px;
+	/* margin-bottom: 60px; */
+	padding-top: 25px;
+	padding-bottom: 25px;
+	color: white;
+}
 

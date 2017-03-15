@@ -36,6 +36,20 @@
 			</security:authorize>
 			
             <security:authorize access="isAuthenticated()">
+            	<li class="dropdown">
+              		<a href="#" class="fNiv dropdown-toggle" data-toggle="dropdown"><spring:message code="master.page.shipment" /><b class="caret"></b></a>
+              			<ul class="dropdown-menu">
+                			<li><a href="shipment/user/create.do"><spring:message code="master.page.shipment.create" /></a></li>
+              			</ul>
+            	</li>
+            	
+            	<li class="dropdown">
+              		<a href="#" class="fNiv dropdown-toggle" data-toggle="dropdown"><spring:message code="master.page.route" /><b class="caret"></b></a>
+              			<ul class="dropdown-menu">
+                			<li><a href="route/user/create.do"><spring:message code="master.page.route.create" /></a></li>
+              			</ul>
+            	</li>
+            
 				<li class="dropdown">
               		<a href="#" class="fNiv dropdown-toggle" data-toggle="dropdown"><spring:message code="master.page.profile" /> (<security:authentication property="principal.username" />)<b class="caret"></b></a>
               			<ul class="dropdown-menu">
