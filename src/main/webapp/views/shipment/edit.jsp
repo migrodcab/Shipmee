@@ -52,10 +52,12 @@
 	</form:label>
 	<spring:message code="shipment.open" var="open"/>
 	<spring:message code="shipment.closed" var="closed"/>
+	<spring:message code="shipment.both" var="both" />
 	<form:select id="shipment" path="ItemEnvelope">
 		<form:option value="" label="----" />
 		<form:option value="${open }" label="${open }" />
 		<form:option value="${closed }" label="${closed }" />
+		<form:option value="${both }" label="${both }" />
 	</form:select>
 	<form:errors path="itemEnvelope" cssClass="error" />
 	

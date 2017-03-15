@@ -205,8 +205,9 @@ public class ShipmentService {
 		
 		res = false;
 
-		if(itemEnvelope.equals("open") || itemEnvelope.equals("closed") ||
-				itemEnvelope.equals("abierto") || itemEnvelope.equals("cerrado")) {
+		if(itemEnvelope.equals("Open") || itemEnvelope.equals("Closed") ||
+				itemEnvelope.equals("Both") || itemEnvelope.equals("Abierto") ||
+				itemEnvelope.equals("Cerrado") || itemEnvelope.equals("Ambos")) {
 			res = true;
 		}
 
