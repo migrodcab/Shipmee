@@ -188,18 +188,22 @@ public class ShipmentOfferService {
 
 		actUser = userService.findByPrincipal();
 
+		if (shipmentId > 0 && userId <= 0) {
+			Shipment actShipment;
+
+			actShipment = shipmentService.findOne(shipmentId);
+			if (!actShipment.getCreator().equals(actUser)) {
+				userId = actUser.getId();
+			}
+		}
+
 		result = shipmentOfferRepository.findAllByShipmentIdAndUserId(shipmentId, userId, page);
 
-		if (!result.hasContent()) {
-			if (shipmentId > 0 && userId <= 0) {
-				Assert.isTrue(result.iterator().next().getShipment().getCreator().equals(actUser),
-						"service.shipmentOffer.findAllByOrShipmentIdAndOrUserId.notCreator");
-			} else if (userId > 0 && shipmentId <= 0) {
-				Assert.isTrue(result.iterator().next().getUser().equals(actUser),
-						"service.shipmentOffer.findAllByOrShipmentIdAndOrUserId.notPermittedUser");
-			} else if (!checkPermission(result.iterator().next())) {
-				Assert.isTrue(false, "service.shipmentOffer.findAllByOrShipmentIdAndOrUserId.notPermitted");
-			}
+		if (userId > 0 && shipmentId <= 0) {
+			Assert.isTrue(result.iterator().next().getUser().equals(actUser),
+					"service.shipmentOffer.findAllByOrShipmentIdAndOrUserId.notPermittedUser");
+		} else if (!checkPermission(result.iterator().next())) {
+			Assert.isTrue(false, "service.shipmentOffer.findAllByOrShipmentIdAndOrUserId.notPermitted");
 		}
 
 		return result;
