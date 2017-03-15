@@ -244,13 +244,9 @@
 
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center">
-										
-											<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
+											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
-											value= "<spring:message code="shipment.carry" /> <jstl:set var="price" value="${fn:replace(price,
-                               				 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                				'.', ',')}" />${priceFormated}"/></input>
-											</form>
+											value= "<spring:message code="shipment.carry" />" onclick="location.href = 'shipment/user/carry.do?shipmentId=${shipment.id}';"></input>
 
 								</div>
 								<div class="text-center"><a href="shipmentOffer/user/list.do?shipmentId=${shipment.id}"><spring:message code="shipment.offers" /></a></div>

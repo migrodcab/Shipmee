@@ -165,37 +165,39 @@ public class ShipmentService {
 	 * 
 	 * @param shipmentId - Shipment's ID
 	 * 
-	 * This procedure does the selection of a shipment in the shipment's details view.
+	 * The carrier selects a shipment he/she wants to carry.
+	 * This takes place in the details view.
 	 * The carrier clicks in a button to select the shipment and the creator receives a notification
 	 */
-	public void selectShipment(int shipmentId){
+	public void carryShipment(int shipmentId){
 		
-		Assert.isTrue(shipmentId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user (carrier) can select a shipment");
-		/*
-		 * Here comes session restrictions and other stuff.
-		 * I don't know if there is something missing above
-		 */
-				
+		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment");
+		
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
-				
-		Assert.notNull(shipment); // shipment is not null.
-		Assert.isNull(shipment.getCarried()); // shipment has not a former selected carrier
-		Assert.isTrue(checkDates(shipment)); // All shipment dates are valid.
-		Assert.notNull(carrier);
+		
+		Assert.notNull(shipment, "The ID must match a Shipment");
+		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned");
+		Assert.isTrue(checkDates(shipment), "All dates must be valid");
+		Assert.notNull(carrier, "The carrier must not be empty");
+		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages");
+		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer");
+		
+		ShipmentOffer shipmentOffer;
+		
+		shipmentOffer = shipmentOfferService.create(shipmentId);
+		shipmentOffer.setAmount(shipment.getPrice());
+		shipmentOffer.setDescription("This carrier accepts the conditions of your Shipment");
+		
 		/*
-		 * Here comes the assert to:
-		 * 	check that a user can carry in our app.
-		 * 	the package size is good.
+		 * This may include more sets to the ShipmentOffer.
 		 */
 		
-		shipment.setCarried(carrier);
-		
-		save(shipment);
+		shipmentOfferService.save(shipmentOffer);
 		
 		/*
-		 * Here comes the notification to the creator (Still not developed).
+		 * Here comes the notification system (Sprint 2)
 		 */
 		
 	}
@@ -225,6 +227,25 @@ public class ShipmentService {
 		
 		if(shipment.getDepartureTime().compareTo(shipment.getMaximumArriveTime()) >= 0) {
 			res = false;
+		}
+		
+		return res;
+	}
+	
+	private boolean checkShipmentOfferAccepted(int shipmentId){
+		
+		boolean res;
+		Collection<ShipmentOffer> allShipmentOffersFromShipment;
+		
+		res = false;
+		
+		allShipmentOffersFromShipment = shipmentOfferService.findAllByShipmentId(shipmentId);
+		
+		for(ShipmentOffer shipmentOffer:allShipmentOffersFromShipment){
+			if(shipmentOffer.getAcceptedBySender()){
+				res = true;
+				break;
+			}
 		}
 		
 		return res;
