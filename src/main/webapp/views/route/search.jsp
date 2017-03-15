@@ -221,7 +221,7 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: ${route.date} / ${route.departureTime}
+												<spring:message code="route.departureTime" />: ${route.departureTime}
 												<br/>
 												
 												<i class="glyphicon glyphicon-plane"></i> 

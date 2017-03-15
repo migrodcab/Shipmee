@@ -235,7 +235,7 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: ${shipment.date} / ${shipment.departureTime}
+												<spring:message code="shipment.departureTime" />: ${shipment.departureTime}
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}
