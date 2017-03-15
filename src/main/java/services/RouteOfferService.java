@@ -187,13 +187,18 @@ public class RouteOfferService {
 
 		actUser = userService.findByPrincipal();
 
+		if (routeId > 0	&& userId <= 0) {
+			Route actRoute;
+
+			actRoute = routeService.findOne(routeId);
+			if (!actRoute.getCreator().equals(actUser))
+				userId = actUser.getId();
+		}
+
 		result = routeOfferRepository.findAllByRouteIdAndUserId(routeId, userId, page);
 
-		if (!result.hasContent()) {
-			if (routeId > 0 && userId <= 0) {
-				Assert.isTrue(result.iterator().next().getRoute().getCreator().equals(actUser),
-						"service.routeOffer.findAllByOrShipmentIdAndOrUserId.notCreator");
-			} else if (userId > 0 && routeId <= 0) {
+		if (result.hasContent()) {
+			if (userId > 0 && routeId <= 0) {
 				Assert.isTrue(result.iterator().next().getUser().equals(actUser),
 						"service.routeOffer.findAllByOrShipmentIdAndOrUserId.notPermittedUser");
 			} else if (!checkPermission(result.iterator().next())) {
