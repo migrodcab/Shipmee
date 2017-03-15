@@ -222,7 +222,7 @@
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price}&#8364;</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
 												
 						
 												

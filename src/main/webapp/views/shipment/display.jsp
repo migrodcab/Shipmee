@@ -223,7 +223,7 @@
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
-												<span class="titles-info-price">${shipment.price} euros</span>
+												<span class="titles-info-price">${shipment.price}&#8364;</span>
 
 												<security:authorize access="hasRole('USER')">
 													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"

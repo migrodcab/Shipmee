@@ -182,46 +182,86 @@
 											</div>
 										</div>
 										
+										
+										<div class="prueba"><div class="col-xs-12">
+												<img class="img-responsive center-block imagen-profile"
+													width="100" height="100" src="images/anonymous.png">
+													<spring:message code="route.profile" /> <a href="#">${route.creator.name}</a>
+											</div></div>
+									
 										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-6">
+											
+												<i class="glyphicon glyphicon-road">&nbsp;</i>Vehicle: 
+												<span class="titles-info">${route.vehicle.brand} - ${route.vehicle.model}</span>
+												<br/>
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="route.itemEnvelope" />: 
 												<span class="titles-info">${route.itemEnvelope}</span>
-											
-											<br/>
-											
-												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />: 
-												<span class="titles-info">XXX</span>
+												
+												<br/>
+												
+												<i class="demo-icon icon-package-1">&#xe802;&nbsp;</i><spring:message code="route.size" />:
+												<jstl:forEach var="value" items="${sizePrices}">
+													<span class="titles-info">${value.size}</span>
+												</jstl:forEach>
+												
 											</div>
 											
 										</div>
 										
 										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
-												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="route.itemEnvelope" />: 
-												<span class="titles-info-price">X euros</span>
-
-												<security:authorize access="hasRole('USER')">
-													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-													value= "<spring:message code="route.offer" />" onclick="location.href = 'routeOffer/user/create.do?routeId=${route.id}';"></input>
-												</security:authorize>
-												<br/>	
-				
+											<div class="col-sm-12">
+												
+											
+											</div>
+	
+											
 										</div>
 										
 
 									</div>
 		
-		
-		
-		
-		
-		
-									
-				
-									
-									
-									<div class="rfecha separador-final"></div>
+
+
+					
+					<table class="table table-valores table-bordered table-sm m-0">
+                	
+                    
+                        <tr class="table-cabecera">
+                            <th><spring:message code="route.table.choose" /></th>
+                            <th><spring:message code="route.table.size" /></th>
+                            <th><spring:message code="route.table.price" /></th>
+                        </tr>
+                   
+                    <tbody>
+                    <jstl:forEach var="value" items="${sizePrices}">
+                        <tr>
+                            <td>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" name="gender"  style="display:none" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td class="tabla-tam">${value.size}</td>
+                            <td class="tabla-precio">${value.price}&#8364;<security:authorize access="hasRole('USER')">
+                            <a href="shipmentOffer/user/create.do?shipmentId=${shipment.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span>
+                            
+                            </a></security:authorize></td>
+                            
+                            
+                        
+                         
+                        </tr>
+				</jstl:forEach>
+                       
+                    </tbody>
+                </table>
+					
+
+					
+					<div class="rfecha separador-final"></div>
 
 
 
@@ -235,7 +275,7 @@
 											</form>
 
 								</div>
-								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /></a></div>
+								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>
 								</div>
 
 							</div>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Route;
+import domain.SizePrice;
 import services.RouteService;
+import services.SizePriceService;
 
 @Controller
 @RequestMapping("/route")
@@ -23,7 +25,8 @@ public class RouteController extends AbstractController {
 	@Autowired
 	private RouteService routeService;
 	
-
+	@Autowired
+	private SizePriceService sizePriceService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -65,8 +68,10 @@ public class RouteController extends AbstractController {
 	private ModelAndView createListModelAndView(int routeId){
 		ModelAndView result;
 		Route route;
+		Collection<SizePrice> sizePrices;
 		
 		route = routeService.findOne(routeId);
+		sizePrices = sizePriceService.findAllByRouteId(routeId);
 		
 		String departureTime = new SimpleDateFormat("dd'/'MM'/'yyyy").format(route.getDepartureTime());
 		String departureTime_hour = new SimpleDateFormat("HH':'mm").format(route.getDepartureTime());
@@ -81,7 +86,7 @@ public class RouteController extends AbstractController {
 		result.addObject("departureTime_hour", departureTime_hour);
 		result.addObject("arriveTime", arriveTime);
 		result.addObject("arriveTime_hour", arriveTime_hour);
-		
+		result.addObject("sizePrices", sizePrices);
 		
 		return result;
 	}
