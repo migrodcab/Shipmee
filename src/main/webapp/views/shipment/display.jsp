@@ -160,39 +160,39 @@
 								
 								
 								
-								
+								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right">${shipment.date}</span>
+
 								<div class="row info-ruta">
-									<div class="rfecha col-xs-7 col-sm-9">
+									<div class="col-xs-7 col-sm-9">
+																			
 										
 										<h5 class="titulos"><spring:message code="shipment.places" /></h5>
 										
-										<div class="row titles-details"><i
-									class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
+										<div class="col-xs-7 col-sm-9 row titles-details">
+										<i class="glyphicon glyphicon-map-marker"></i>&nbsp;<spring:message code="shipment.origin" />:<span class="titles-info">${shipment.origin}</span>&nbsp;&nbsp;<i
 									class="glyphicon glyphicon-flag"></i>&nbsp;<spring:message code="shipment.destination" />:<span class="titles-info">${shipment.destination}</span></div>
 										
 										
-										
+									</div>
+			
 						
 										
 										
 
-										<div class="row">
+										<div class="row col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.moments" /></h5>
 											<div class="info-salida col-sm-12 ">
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.date}</span>
+												<spring:message code="shipment.departureTime" />: <span class="titles-info">${departureTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${departureTime_hour}</span>
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: <span class="titles-info">${shipment.departureTime}</span>
-												<br/>
-												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.maximumArriveTime" />: <span class="titles-info">${shipment.maximumArriveTime}</span>
+												<spring:message code="shipment.maximumArriveTime" />: <span class="titles-info">${maximumArriveTime}</span><i class="glyphicon glyphicon-time"></i><span class="titles-info">${maximumArriveTime_hour}</span>
 
 											</div>
 										</div>
 										
-										<div class="row info1">
+										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.characteristics" /></h5>
 											<div class="col-xs-6">
 												<i class="demo-icon icon-package-1">&#xe800;&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
@@ -206,58 +206,58 @@
 											
 										</div>
 										
-										<div class="row info1">
+										<div class="row info1 col-xs-7 col-sm-9">
+										<h5 class="titulos">Photos</h5>
+													
+											
+
+										</div>
+										<div class="row info1 col-xs-10 col-sm-12">
+										
+											<img class="imagen-envio"
+													 src="${shipment.itemPicture}">
+	
+										</div>
+										
+										<div class="row info1 col-xs-7 col-sm-9">
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
-											<div class="col-xs-6">
+											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
 												<span class="titles-info-price">${shipment.price} euros</span>
 
+												<security:authorize access="hasRole('USER')">
+													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
+													value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
+												</security:authorize>
+												<br/>
 
 											</div>
+	
 											
 										</div>
 										
 
-									</div>
-									<div class="imagen col-xs-5 col-sm-3 center">
-										<div class="row text-center">
-											<div class="col-xs-12">
-												<img class="imagen-envio"
-													 src="${shipment.itemPicture}">
-											</div>
-											
-										</div>
-
-									</div>
-				
-				<div class="imagen col-xs-5 col-sm-3 center">
-					<div class="row text-center">
-												
-						<!-- Hecho por Guillermo para poder meter el link
-						Si es necesario cambiarlo, no hay problemas -->	
-											
-						<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
-							<input type=submit class="btn-sm btn-llevar btn btn-success ok"
-								value= "<spring:message code="route.hire" /> <jstl:set var="price" value="${fn:replace(price,
-                                '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                '.', ',')}" />${priceFormated} euros"/></input>
-						</form>
-						
-						<security:authorize access="hasRole('USER')">
-							<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"
-								value= "<spring:message code="route.offer" />" onclick="location.href = 'shipmentOffer/user/create.do?shipmentId=${shipment.id}';"></input>
-						</security:authorize>
-												
-					</div>
-
-				</div>
-					
-									
-									
 									
 								</div>
+								<div class="rfecha separador-final"></div>
 
+
+
+								<div class="row info1 col-xs-12 col-sm-12 text-center">
+										
+											<form action="shipment/user/select.do?shipmentId=${shipment.id}" method="get">
+											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+											value= "<spring:message code="shipment.carry" /> <jstl:set var="price" value="${fn:replace(price,
+                               				 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
+                                				'.', ',')}" />${priceFormated}"/></input>
+											</form>
+
+								</div>
+								<div class="text-center"><a href="shipmentOffer/user/list.do?shipmentId=${shipment.id}"><spring:message code="shipment.offers" /></a></div>
 							</div>
+							
+							
+							
 						
 			</div>
 
