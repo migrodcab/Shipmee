@@ -67,7 +67,7 @@
 			</div>
 			       
             <div class="group">
-               <button onclick="return sendForm()" type="submit" class="btnSearch btn-lg btnSample btn-block btn-success"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
+               <button onclick="return sendForm()" type="submit" class="btnSearch btn-lg btnSample btn-block"><spring:message code="welcome.search" /> <span class="glyphicon glyphicon-search"></span></button>
        		</div> 
 					
 							

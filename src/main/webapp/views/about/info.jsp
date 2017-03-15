@@ -72,7 +72,6 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.manolo" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
 
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<div class="he-wrap tpl6">
@@ -93,7 +92,6 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.juanrra" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
 
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<div class="he-wrap tpl6">
@@ -114,7 +112,6 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.bart" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
 
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<div class="he-wrap tpl6">
@@ -135,7 +132,7 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.jose" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
+
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<div class="he-wrap tpl6">
 				<img src="https://avatars3.githubusercontent.com/u/11299118?v=3&s=460" alt="">
@@ -155,7 +152,7 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.migue" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
+
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<div class="he-wrap tpl6">
 				<img src="https://avatars1.githubusercontent.com/u/12424182?v=3&s=400" alt="">
@@ -175,9 +172,8 @@ margin-bottom: 10%;
 			<h5 class="ctitle"><spring:message code="perfil.guille" /></h5>
 			<div class="hline"></div>
 		</div>
-		<! --/col-lg-3 -->
+
 	</div>
-	<! --/row -->
 
 
 </div>
@@ -188,9 +184,9 @@ margin-bottom: 10%;
 	 		<div class="row">
 	 			<div class="col-lg-8 col-lg-offset-2">
 	 			<i class="fa fa-comment-o"></i>
-	 			<p>....</p>
-	 			<h4><br/>....</h4>
-	 			<p>...</p>
+	 			<p>Nowadays we spend almost more time from one place to another than in one place, we must take advantage of this time and that better than helping people.</p>
+	 			<h4><br/>Bartolomé Márquez</h4>
+	 			<p>CHIEF DESIGNER</p>
 	 			</div>
 	 		</div>
 	 	</div>

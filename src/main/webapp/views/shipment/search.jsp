@@ -110,6 +110,7 @@
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="selectpicker input-text fondoDesplegable" name="hour">
+								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
