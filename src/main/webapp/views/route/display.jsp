@@ -267,13 +267,9 @@
 
 
 								<div class="row info1 col-xs-12 col-sm-12 text-center">
-										
-											<form action="shipment/user/select.do?routeId=${route.id}" method="get">
+											
 											<input type=submit class="btn-sm btn-llevar btn btn-success ok"
-											value= "<spring:message code="route.contract" /> <jstl:set var="price" value="${fn:replace(price,
-                               				 '.0', '')}" /> <jstl:set var="priceFormated" value="${fn:replace(price, 
-                                				'.', ',')}" />${priceFormated}"/></input>
-											</form>
+											value= "<spring:message code="route.contract" />" onclick="location.href = 'route/user/contract.do?routeId=${route.id}&sizePriceId=${value.id}';"></input>
 
 								</div>
 								<div class="text-center"><a href="routeOffer/user/list.do?routeId=${route.id}"><spring:message code="route.offers" /><i class="glyphicon glyphicon-chevron-right"></i></a></div>

@@ -172,6 +172,41 @@ public class RouteService {
 		return result;
 	}
 	
+	public void contractRoute(int routeId, int sizePriceId){
+		
+		Assert.isTrue(routeId != 0, "The Route's ID must not be zero.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
+		
+		Route route = findOne(routeId);
+		User client = userService.findByPrincipal();
+		SizePrice sizePrice = sizePriceService.findOne(sizePriceId);
+		
+		Assert.notNull(route, "The ID must match a Route.");
+		Assert.isTrue(userService.findAllByRoutePurchased(routeId).isEmpty());
+		Assert.isTrue(checkDates(route));
+		Assert.notNull(client, "The client must not be empty.");
+		Assert.notNull(sizePrice, "The pair of a Size and its Price must not be null");
+		Assert.notNull(sizePrice.getSize(), "The Size must not be null");
+		Assert.isTrue(route.equals(sizePrice.getRoute()), "The Size and Price must refer to the same route");
+		
+		RouteOffer routeOffer;
+		
+		routeOffer = routeOfferService.create(routeId);
+		routeOffer.setAmount(sizePrice.getPrice());
+		routeOffer.setDescription("This client accepts the conditions of your Route");
+		
+		/*
+		 * This may include more sets to the RouteOffer.
+		 */
+		
+		routeOfferService.save(routeOffer);
+		
+		/*
+		 * Here comes the notification system (Sprint 2)
+		 */
+		
+	}
+	
 	public void flush() {
 		routeRepository.flush();
 	}

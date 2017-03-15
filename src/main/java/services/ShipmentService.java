@@ -171,16 +171,16 @@ public class ShipmentService {
 	 */
 	public void carryShipment(int shipmentId){
 		
-		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero");
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment");
+		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
 		
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
 		
-		Assert.notNull(shipment, "The ID must match a Shipment");
-		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned");
-		Assert.isTrue(checkDates(shipment), "All dates must be valid");
-		Assert.notNull(carrier, "The carrier must not be empty");
+		Assert.notNull(shipment, "The ID must match a Shipment.");
+		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned.");
+		Assert.isTrue(checkDates(shipment), "All dates must be valid.");
+		Assert.notNull(carrier, "The carrier must not be empty.");
 		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages");
 		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer");
 		

@@ -29,7 +29,6 @@ import domain.Route;
 import domain.Vehicle;
 import domain.form.RouteForm;
 import services.RouteService;
-import services.UserService;
 import services.VehicleService;
 import services.form.RouteFormService;
 
@@ -47,9 +46,6 @@ public class RouteUserController extends AbstractController {
 	
 	@Autowired
 	private VehicleService vehicleService;
-	
-	@Autowired
-	private UserService userService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -131,16 +127,19 @@ public class RouteUserController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/select", method = RequestMethod.POST)
-	public ModelAndView selectRoute(@RequestParam int routeId) {
+	@RequestMapping(value = "/contract", method = RequestMethod.GET)
+	public ModelAndView contractRoute(@RequestParam int routeId, @RequestParam int sizePriceId) {
 		ModelAndView result;
 		
 		Route route = routeService.findOne(routeId);
 		
 		try {
-			userService.selectRoute(routeId);
-			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
+			routeService.contractRoute(routeId, sizePriceId);
+			result = new ModelAndView("redirect:../../routeOffer/user/list.do?routeId=" + routeId);
 		} catch(Throwable oops){
+			/*
+			 * We have to be careful with the URL we use to send the user when things go wrong.
+			 */
 			result = createEditModelAndView(route, "route.commit.error");
 		}
 		

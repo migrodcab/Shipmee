@@ -124,6 +124,9 @@ public class ShipmentUserController extends AbstractController {
 			shipmentService.carryShipment(shipmentId);
 			result = new ModelAndView("redirect:../../shipmentOffer/user/list.do?shipmentId=" + shipmentId);
 		}catch(Throwable oops){
+			/*
+			 * We have to be careful with the URL we use to send the user when things go wrong.
+			 */
 			result = createEditModelAndView(shipment, "shipment.commit.error");
 		}
 		
