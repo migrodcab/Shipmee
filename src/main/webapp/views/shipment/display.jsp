@@ -93,6 +93,7 @@
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="selectpicker input-text fondoDesplegable" name="hour">
+								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
@@ -223,7 +224,7 @@
 										<h5 class="titulos"><spring:message code="shipment.price" /></h5>
 											<div class="col-sm-12">
 												<i class="glyphicon glyphicon-euro">&nbsp;</i><spring:message code="shipment.itemEnvelope" />: 
-												<span class="titles-info-price">${shipment.price} euros</span>
+												<span class="titles-info-price">${shipment.price}&#8364;</span>
 
 												<security:authorize access="hasRole('USER')">
 													<input type=submit class="btn-xs btn-llevar btn btn-danger contraoferta"

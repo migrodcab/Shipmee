@@ -110,6 +110,7 @@
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="selectpicker input-text fondoDesplegable" name="hour">
+								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
@@ -222,7 +223,7 @@
 										<div class="row">
 											<div class="info-salida col-sm-12 ">
 
-												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price} Euros</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
+												<div class="view" style="float: right;"><div class="price"><h4>${shipment.price}&#8364;</h4></div><h4><a href="shipment/display.do?shipmentId=${shipment.id}">
 												
 						
 												
@@ -234,7 +235,7 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: ${shipment.date} / ${shipment.departureTime}
+												<spring:message code="shipment.departureTime" />: ${shipment.departureTime}
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
 												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}

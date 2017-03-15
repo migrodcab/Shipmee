@@ -94,6 +94,7 @@
 							</a></li>
 							<li style="text-align: center" class="li-input">
 								<select class="selectpicker fondoDesplegable input-text" name="hour">
+								<option selected="selected" disabled value=''><spring:message code="shipment.select.hour" /></option>
 									<jstl:forEach begin="0" end="23" varStatus="i">
 										<jstl:choose>	
 											<jstl:when test="${i.index lt 10 }">
@@ -220,7 +221,7 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: ${route.date} / ${route.departureTime}
+												<spring:message code="route.departureTime" />: ${route.departureTime}
 												<br/>
 												
 												<i class="glyphicon glyphicon-plane"></i> 
