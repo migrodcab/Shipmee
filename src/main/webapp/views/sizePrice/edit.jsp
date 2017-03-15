@@ -146,7 +146,7 @@
 					<div class="inner-addon left-addon input-price">
 						<i class="glyphicon glyphicon-euro"></i>
 						<form:input path="priceL" class="form-control" id="priceL" min="0"
-							step="0.10" type="text" />
+							step="0.10" type="number" />
 					</div>
 					<form:errors class="error create-message-error" path="priceL" />
 				</div>

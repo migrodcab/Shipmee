@@ -93,7 +93,7 @@ public class RouteFormService {
 		String arriveTime, departureTime;
 		User user;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
 		result = this.create();
 		route = routeService.findOne(routeId);

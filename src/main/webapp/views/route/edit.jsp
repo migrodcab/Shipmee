@@ -68,7 +68,7 @@
 						<form:input path="departureTime" name="fecha"
 							style="backgroud-color: white ! important;width:99% ! important" type="text"
 							class="form-control" />
-						. <span class="input-group-addon"> <span
+						 <span class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
 					</div>
