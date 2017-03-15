@@ -71,6 +71,15 @@ public class UserService {
 		
 		return result;
 	}
+	
+	public User findOne(int userId){
+		User result;
+		
+		result = userRepository.findOne(userId);
+		Assert.notNull(result);
+		
+		return result;
+	}
 
 	public Collection<User> findAllByRoutePurchased(int routeId) {
 		Collection<User> result;

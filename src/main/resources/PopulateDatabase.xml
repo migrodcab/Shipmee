@@ -221,7 +221,7 @@
 		<property name="itemName" value="Equipo de música"/>
 		<property name="itemPicture" value="http://cde.3.elcomercio.pe/ima/0/1/0/2/1/1021917.jpg"/>
 		<property name="itemSize" value="L"/>
-		<property name="itemEnvelope" value="open"/>
+		<property name="itemEnvelope" value="Open"/>
 		<property name="creator" ref="user2"/>
 		<!-- <property name="carried" ref=""/> -->
 	</bean>

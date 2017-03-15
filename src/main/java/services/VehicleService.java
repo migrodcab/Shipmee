@@ -61,6 +61,17 @@ public class VehicleService {
 		return result;
 	}
 	
+	public Collection<Vehicle> findAllByUserId(int userId) {
+		Collection<Vehicle> result;
+		User user;
+		
+		user = userService.findOne(userId);
+
+		result = vehicleRepository.findAllByUserId(user.getId());
+
+		return result;
+	}
+	
 	public void flush() {
 		vehicleRepository.flush();
 	}

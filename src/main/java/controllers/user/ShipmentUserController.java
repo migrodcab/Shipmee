@@ -114,21 +114,20 @@ public class ShipmentUserController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public ModelAndView selectShipment(@RequestParam int shipmentId){
+	@RequestMapping(value = "/carry", method = RequestMethod.GET)
+	public ModelAndView carryShipment(@RequestParam int shipmentId){
 		ModelAndView result;
 		
 		Shipment shipment = shipmentService.findOne(shipmentId);
 		
 		try {			
-			shipmentService.selectShipment(shipmentId);
-			result = new ModelAndView("redirect:../search.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+			shipmentService.carryShipment(shipmentId);
+			result = new ModelAndView("redirect:../../shipmentOffer/user/list.do?shipmentId=" + shipmentId);
 		}catch(Throwable oops){
-			System.out.println(oops);
 			result = createEditModelAndView(shipment, "shipment.commit.error");
 		}
 		
-		return result;
+		return result;		
 	}
 	
 	// Ancillary methods ------------------------------------------------------

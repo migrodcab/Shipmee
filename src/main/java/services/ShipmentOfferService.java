@@ -33,6 +33,9 @@ public class ShipmentOfferService {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -158,20 +161,78 @@ public class ShipmentOfferService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param shipmentOfferId - The id of the ShipmentOffer
+	 * 
+	 * The client (the user that created the shipment) accept the counter offer proposed by the carrier. 
+	 */
 	public void accept(int shipmentOfferId){
 		
 		Assert.isTrue(shipmentOfferId != 0);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
 		
 		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
 		Shipment shipment = shipmentOffer.getShipment();
 		
-		Assert.notNull(shipment);
-		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()));
+		Assert.notNull(shipment, "The shipment related to the offer must exist.");
+		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
+		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
 		
-		shipment.setCarried(shipmentOffer.getUser());
-		shipment.setPrice(shipmentOffer.getAmount());
+		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
+		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
+		Assert.isTrue(vehicleService.findAllByUserId(shipmentOffer.getUser().getId()).size() > 0, "The carrier must have at least one vehicle.");
+		
+		/*
+		 * More possible constraints:
+		 * 1. We look if the vehicle has the package size required by the user.
+		 * - As a carrier could have more than one vehicle, we must know the vehicle he wants to use to perform this assert.
+		 */
+		
+		shipment.setCarried(shipmentOffer.getUser()); // Shipment is now linked to the carrier.
+		shipment.setPrice(shipmentOffer.getAmount()); // Shipment's price is updated.
 		shipmentService.save(shipment);
+		
+		shipmentOffer.setAcceptedBySender(true); // The offer is accepted
+		save(shipmentOffer);
+		
+		/*
+		 * Here comes the notification to the carrier (Still not developed) 
+		 */
+		
+	}
+	
+	/**
+	 * 
+	 * @param shipmentOfferId - The id of the ShipmentOffer
+	 * 
+	 * The client (the user that created the shipment) deny the counter offer proposed by the carrier. 
+	 */
+	public void deny(int shipmentOfferId){
+		
+		Assert.isTrue(shipmentOfferId != 0);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment.");
+		
+		ShipmentOffer shipmentOffer = findOne(shipmentOfferId);		
+		Shipment shipment = shipmentOffer.getShipment();
+		
+		Assert.notNull(shipment, "The shipment related to the offer must exist.");
+		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
+		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
+
+		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
+		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
+		Assert.isTrue(vehicleService.findAllByUserId(shipmentOffer.getUser().getId()).size() > 0, "The carrier must have at least one vehicle.");
+
+		/*
+		 * More possible constraints:
+		 * 1. We look if the vehicle has the package size required by the user.
+		 * - As a carrier could have more than one vehicle, we must know the vehicle he wants to use to perform this assert.
+		 */
+		
+		shipmentOffer.setAcceptedBySender(false);
+		shipmentOffer.setRejectedBySender(true); // The offer is rejected.
+		save(shipmentOffer);
 		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 

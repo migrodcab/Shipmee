@@ -45,7 +45,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 .demo-icon {
 	font-family: "icons";
 	font-style: normal;
@@ -54,7 +53,6 @@
 	text-transform: none;
 	font-size: 150%;
 }
-
 .size-icon {
 	font-family: "package-open";
 	font-style: normal;
