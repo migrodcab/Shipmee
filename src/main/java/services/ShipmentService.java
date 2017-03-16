@@ -173,10 +173,10 @@ public class ShipmentService {
 		
 		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero.");
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
-		
+				
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
-		
+				
 		Assert.notNull(shipment, "The ID must match a Shipment.");
 		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned.");
 		Assert.isTrue(checkDates(shipment), "All dates must be valid.");
@@ -240,8 +240,8 @@ public class ShipmentService {
 		
 		res = false;
 		
-		allShipmentOffersFromShipment = shipmentOfferService.findAllByShipmentId(shipmentId);
-		
+		allShipmentOffersFromShipment = shipmentOfferService.findAllByShipmentId2(shipmentId);
+				
 		for(ShipmentOffer shipmentOffer:allShipmentOffersFromShipment){
 			if(shipmentOffer.getAcceptedBySender()){
 				res = true;

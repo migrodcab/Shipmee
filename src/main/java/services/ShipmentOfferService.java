@@ -161,6 +161,14 @@ public class ShipmentOfferService {
 		return result;
 	}
 	
+	public Collection<ShipmentOffer> findAllByShipmentId2(int shipmentId){
+		Collection<ShipmentOffer> result;
+		
+		result = shipmentOfferRepository.findAllByShipmentId(shipmentId);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param shipmentOfferId - The id of the ShipmentOffer

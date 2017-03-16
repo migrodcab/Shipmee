@@ -165,7 +165,7 @@ public class ShipmentUserController extends AbstractController {
 		ModelAndView result;
 						
 		result = new ModelAndView("shipment/search");
-		result.addObject("shipmentForm", shipment);
+		result.addObject("shipment", shipment);
 		result.addObject("message", message);
 
 		return result;
