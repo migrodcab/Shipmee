@@ -171,18 +171,19 @@ public class ShipmentService {
 	 */
 	public void carryShipment(int shipmentId){
 		
-		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero");
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment");
-		
+		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero.");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
+				
 		Shipment shipment = findOne(shipmentId);
 		User carrier = userService.findByPrincipal();
-		
-		Assert.notNull(shipment, "The ID must match a Shipment");
-		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned");
-		Assert.isTrue(checkDates(shipment), "All dates must be valid");
-		Assert.notNull(carrier, "The carrier must not be empty");
-		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages");
-		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer");
+				
+		Assert.notNull(shipment, "The ID must match a Shipment.");
+		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned.");
+		Assert.isTrue(checkDates(shipment), "All dates must be valid.");
+		Assert.notNull(carrier, "The carrier must not be empty.");
+		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages.");
+		Assert.isTrue(!carrier.equals(shipment.getCreator()), "You cannot carry your own Shipment.");
+		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer.");
 		
 		ShipmentOffer shipmentOffer;
 		
@@ -232,15 +233,15 @@ public class ShipmentService {
 		return res;
 	}
 	
-	private boolean checkShipmentOfferAccepted(int shipmentId){
+	public boolean checkShipmentOfferAccepted(int shipmentId){
 		
 		boolean res;
 		Collection<ShipmentOffer> allShipmentOffersFromShipment;
 		
 		res = false;
 		
-		allShipmentOffersFromShipment = shipmentOfferService.findAllByShipmentId(shipmentId);
-		
+		allShipmentOffersFromShipment = shipmentOfferService.findAllByShipmentId2(shipmentId);
+				
 		for(ShipmentOffer shipmentOffer:allShipmentOffersFromShipment){
 			if(shipmentOffer.getAcceptedBySender()){
 				res = true;

@@ -258,7 +258,7 @@
 	<bean id="shipmentOffer4" class="domain.ShipmentOffer">
 		<property name="amount" value="1.50"/>
 		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
-		<property name="acceptedBySender" value="true"/>
+		<property name="acceptedBySender" value="false"/>
 		<property name="rejectedBySender" value="false"/>
 		<property name="user" ref="user1"/>
 		<property name="shipment" ref="shipment1"/>

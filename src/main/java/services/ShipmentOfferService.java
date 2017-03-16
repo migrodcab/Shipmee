@@ -34,9 +34,6 @@ public class ShipmentOfferService {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private VehicleService vehicleService;
-
 	// Constructors -----------------------------------------------------------
 
 	public ShipmentOfferService() {
@@ -161,6 +158,14 @@ public class ShipmentOfferService {
 		return result;
 	}
 	
+	public Collection<ShipmentOffer> findAllByShipmentId2(int shipmentId){
+		Collection<ShipmentOffer> result;
+		
+		result = shipmentOfferRepository.findAllByShipmentId(shipmentId);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param shipmentOfferId - The id of the ShipmentOffer
@@ -178,10 +183,10 @@ public class ShipmentOfferService {
 		Assert.notNull(shipment, "The shipment related to the offer must exist.");
 		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
-		
+		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "The creator of the Shipment must not accept any other offer.");
+
 		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
 		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
-		Assert.isTrue(vehicleService.findAllByUserId(shipmentOffer.getUser().getId()).size() > 0, "The carrier must have at least one vehicle.");
 		
 		/*
 		 * More possible constraints:
@@ -219,10 +224,10 @@ public class ShipmentOfferService {
 		Assert.notNull(shipment, "The shipment related to the offer must exist.");
 		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
+		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "The creator of the Shipment must not accept any other offer.");
 
 		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
 		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
-		Assert.isTrue(vehicleService.findAllByUserId(shipmentOffer.getUser().getId()).size() > 0, "The carrier must have at least one vehicle.");
 
 		/*
 		 * More possible constraints:
