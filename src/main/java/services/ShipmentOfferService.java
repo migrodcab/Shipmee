@@ -166,6 +166,15 @@ public class ShipmentOfferService {
 		return result;
 	}
 	
+	
+	public Collection<ShipmentOffer> findAllPendingByShipmentId(int shipmentId){
+		Collection<ShipmentOffer> result;
+		
+		result = shipmentOfferRepository.findAllPendingByShipmentId(shipmentId);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param shipmentOfferId - The id of the ShipmentOffer
@@ -201,6 +210,16 @@ public class ShipmentOfferService {
 		shipmentOffer.setAcceptedBySender(true); // The offer is accepted
 		save(shipmentOffer);
 		
+		// Now, we reject every other offer.
+		
+		Collection<ShipmentOffer> remaining = findAllPendingByShipmentId(shipment.getId());
+		
+		for(ShipmentOffer so:remaining){
+			if(!so.getAcceptedBySender()){
+				deny(so.getId());
+			}
+		}
+		
 		/*
 		 * Here comes the notification to the carrier (Still not developed) 
 		 */
@@ -224,7 +243,6 @@ public class ShipmentOfferService {
 		Assert.notNull(shipment, "The shipment related to the offer must exist.");
 		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
-		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "The creator of the Shipment must not accept any other offer.");
 
 		Assert.isTrue(!shipmentOffer.getAcceptedBySender() && !shipmentOffer.getRejectedBySender(), "The offer must not be accepted or rejected.");
 		Assert.isTrue(shipmentOffer.getUser().getIsVerified(), "The carrier must be verified");
