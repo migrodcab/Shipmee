@@ -179,7 +179,8 @@
 													<a href="user/profile.do?userId=${route.creator.id}"><img src="images/anonymous.png" class="media-photo-route"></a>
 												</div>
 												<div class="media-body">
-													<span class="media-meta pull-right">${route.date}</span>
+													<span class="media-meta pull-right"><fmt:formatDate value="${route.date}" pattern="dd/MM/yyyy HH:mm" /></span>
+													
 													<h4 class="title">
 														<a href="user/profile.do?userId=${route.creator.id}">${route.creator.name}</a>
 														<span class="pull-right cantidad"></span>
@@ -221,11 +222,13 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.departureTime" />: ${route.departureTime}
+												<spring:message code="route.departureTime" />: 
+												<fmt:formatDate value="${route.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												<br/>
 												
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="route.arriveTime" />: ${route.arriveTime}
+												<spring:message code="route.arriveTime" />: 
+												<fmt:formatDate value="${route.arriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 														
 												
 													
