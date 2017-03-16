@@ -159,10 +159,8 @@
 									</div>
 								</div>
 								
+								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right"><fmt:formatDate value="${shipment.date}" pattern="dd/MM/yyyy HH:mm" /></span>
 								
-								
-								<div class="rfecha separador"></div><span class="cretaion-date media-meta pull-right">${shipment.date}</span>
-
 								<div class="row info-ruta">
 									<div class="col-xs-7 col-sm-9">
 																			

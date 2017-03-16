@@ -193,7 +193,8 @@
 													<img src="${shipment.itemPicture}" class="media-photo-shipment">
 												</div>
 												<div class="media-body">
-													<span class="media-meta pull-right">${shipment.date}</span>
+													<span class="media-meta pull-right"><fmt:formatDate value="${shipment.date}" pattern="dd/MM/yyyy HH:mm" /></span>
+													
 													<h4 class="title">
 														<a>${shipment.itemName}</a>
 														<span class="pull-right cantidad"></span>
@@ -235,10 +236,14 @@
 												</div>
 
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.departureTime" />: ${shipment.departureTime}
+												<spring:message code="shipment.departureTime" />: 
+												<fmt:formatDate value="${shipment.departureTime}" pattern="dd/MM/yyyy '-' HH:mm" />
+												
+												
 												<br/>
 												<i class="glyphicon glyphicon-plane"></i> 
-												<spring:message code="shipment.maximumArriveTime" />: ${shipment.maximumArriveTime}
+												<spring:message code="shipment.maximumArriveTime" />: 
+												<fmt:formatDate value="${shipment.maximumArriveTime}" pattern="dd/MM/yyyy '-' HH:mm" />
 												
 													
 											</div>
