@@ -181,8 +181,9 @@ public class ShipmentService {
 		Assert.isNull(shipment.getCarried(), "The shipment must not have a carrier asigned.");
 		Assert.isTrue(checkDates(shipment), "All dates must be valid.");
 		Assert.notNull(carrier, "The carrier must not be empty.");
-		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages");
-		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer");
+		Assert.isTrue(carrier.getIsVerified(), "Only a verified user can carry packages.");
+		Assert.isTrue(!carrier.equals(shipment.getCreator()), "You cannot carry your own Shipment.");
+		Assert.isTrue(!checkShipmentOfferAccepted(shipmentId), "The creator of the Shipment must not accept any other offer.");
 		
 		ShipmentOffer shipmentOffer;
 		
