@@ -125,7 +125,7 @@ public class ShipmentOfferUserController extends AbstractController {
 		try{
 			shipmentOfferService.accept(shipmentOfferId);
 			// This reditect may be change to other url.
-			result = new ModelAndView("redirect:../user/list.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
 			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
 		}
@@ -143,7 +143,7 @@ public class ShipmentOfferUserController extends AbstractController {
 		try{
 			shipmentOfferService.deny(shipmentOfferId);
 			// This reditect may be change to other url.
-			result = new ModelAndView("redirect:../user/list.do?origin=" + shipment.getOrigin() + "&destination=" + shipment.getDestination());
+			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
 			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
 		}
