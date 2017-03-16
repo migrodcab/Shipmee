@@ -127,7 +127,7 @@ public class ShipmentOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+			result = createEditModelAndView2(shipmentOffer, "shipmentOffer.commit.error");
 		}
 		
 		return result;
@@ -145,7 +145,7 @@ public class ShipmentOfferUserController extends AbstractController {
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../user/list.do?shipmentId="+shipment.getId());
 		}catch(Throwable oops){
-			result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
+			result = createEditModelAndView2(shipmentOffer, "shipmentOffer.commit.error");
 		}
 		
 		return result;
@@ -165,6 +165,24 @@ public class ShipmentOfferUserController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("shipmentOffer/edit");
+		result.addObject("shipmentOffer", input);
+		result.addObject("message", message);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView2(ShipmentOffer input) {
+		ModelAndView result;
+
+		result = createEditModelAndView(input, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView2(ShipmentOffer input, String message) {
+		ModelAndView result;
+		
+		result = new ModelAndView("shipmentOffer/list");
 		result.addObject("shipmentOffer", input);
 		result.addObject("message", message);
 
