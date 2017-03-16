@@ -233,7 +233,7 @@ public class ShipmentService {
 		return res;
 	}
 	
-	private boolean checkShipmentOfferAccepted(int shipmentId){
+	public boolean checkShipmentOfferAccepted(int shipmentId){
 		
 		boolean res;
 		Collection<ShipmentOffer> allShipmentOffersFromShipment;

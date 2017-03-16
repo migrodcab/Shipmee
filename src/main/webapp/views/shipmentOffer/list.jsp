@@ -34,6 +34,13 @@
 			<jstl:if test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender}">
 					<p> <b><spring:message code="shipmentOffer.pending" /></b></p>
 			</jstl:if>
+			<jstl:if test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender}">		
+					<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+					value= "<spring:message code="shipmentOffer.accept" />" onclick="location.href = 'shipmentOffer/user/accept.do?shipmentOfferId=${shipmentOfferRow.id}';"></input>
+
+					<input type=submit class="btn-sm btn-llevar btn btn-success ok"
+					value= "<spring:message code="shipmentOffer.deny" />" onclick="location.href = 'shipmentOffer/user/deny.do?shipmentOfferId=${shipmentOfferRow.id}';"></input>
+			</jstl:if>
 			
 			<p> <b><spring:message code="shipmentOffer.amount" />:</b> <jstl:out value="${shipmentOfferRow.amount}" /> </p>
 			
