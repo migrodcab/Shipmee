@@ -16,6 +16,9 @@ public interface ShipmentOfferRepository extends JpaRepository<ShipmentOffer, In
 	@Query("select so from ShipmentOffer so where so.shipment.id = ?1")
 	Collection<ShipmentOffer> findAllByShipmentId(int shipmentId);
 	
+	@Query("select so from ShipmentOffer so where so.shipment.id = ?1 AND so.acceptedBySender = false AND so.rejectedBySender = false")
+	Collection<ShipmentOffer> findAllPendingByShipmentId(int shipmentId);
+	
 	@Query("select so from ShipmentOffer so where (?1 <= 0 OR so.shipment.id = ?1)"
 			+ " AND (?2 <= 0 OR so.user.id = ?2)"
 			+ " ORDER BY so.rejectedBySender ASC")
