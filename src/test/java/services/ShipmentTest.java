@@ -17,7 +17,7 @@ import utilities.AbstractTest;
 import utilities.UtilTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/datasource.xml", "classpath:spring/config/packages.xml" })
+@ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class ShipmentTest extends AbstractTest {
