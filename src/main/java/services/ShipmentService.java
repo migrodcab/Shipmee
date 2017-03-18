@@ -169,7 +169,7 @@ public class ShipmentService {
 	 * This takes place in the details view.
 	 * The carrier clicks in a button to select the shipment and the creator receives a notification
 	 */
-	public void carryShipment(int shipmentId){
+	public ShipmentOffer carryShipment(int shipmentId){
 		
 		Assert.isTrue(shipmentId != 0, "The Shipment's ID must not be zero.");
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can carry a shipment.");
@@ -195,12 +195,13 @@ public class ShipmentService {
 		 * This may include more sets to the ShipmentOffer.
 		 */
 		
-		shipmentOfferService.save(shipmentOffer);
+		shipmentOffer = shipmentOfferService.save(shipmentOffer);
 		
 		/*
 		 * Here comes the notification system (Sprint 2)
 		 */
 		
+		return shipmentOffer;
 	}
 	
 	private boolean checkItemEnvelope(String itemEnvelope) {
