@@ -98,6 +98,8 @@ public class ShipmentOfferTest extends AbstractTest {
 		
 		shipmentOfferService.accept(ro.getId());
 		
+		authenticate("user2");
+
 		ro = shipmentOfferService.findOne(ro.getId());
 		
 		Assert.isTrue(ro.getAcceptedBySender() && !ro.getRejectedBySender());
@@ -135,6 +137,103 @@ public class ShipmentOfferTest extends AbstractTest {
 		ro = shipmentOfferService.findOne(ro.getId());
 		
 		Assert.isTrue(ro.getAcceptedBySender() && !ro.getRejectedBySender());
+	}
+	
+	
+	/**
+	 * @Test Deny a Shipment Offer
+	 * @result The user denies a shipment offer
+	 */
+	@Test
+	public void shipmentOfferDenyPositive1() {
+		authenticate("user2");
+		
+		ShipmentOffer ro;
+
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer3"));
+		
+		shipmentOfferService.deny(ro.getId());
+		
+		ro = shipmentOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(!ro.getAcceptedBySender() && ro.getRejectedBySender());
+	}
+	
+	
+	/**
+	 * @Test Deny a Shipment Offer
+	 * @result The user tries to deny their own shipment offer
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void shipmentOfferDenyNegative1() {
+		authenticate("user1");
+		
+		ShipmentOffer ro;
+
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer3"));
+				
+		shipmentOfferService.deny(ro.getId());
+		
+		ro = shipmentOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(!ro.getAcceptedBySender() && ro.getRejectedBySender());
+	}
+	
+	/**
+	 * @Test Deny a Shipment Offer
+	 * @result The user tries to deny an offer without being logged in
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void shipmentOfferDenyNegative2() {
+		authenticate("user2");
+		
+		ShipmentOffer ro;
+
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer3"));
+		
+		unauthenticate();
+		
+		shipmentOfferService.deny(ro.getId());
+		
+		authenticate("user2");
+		
+		ro = shipmentOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(!ro.getAcceptedBySender() && ro.getRejectedBySender());
+	}
+	
+	/**
+	 * @Test Deny a Shipment Offer
+	 * @result The user tries to deny an offer that is rejected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void shipmentOfferDenyNegative3() {
+		authenticate("user2");
+		
+		ShipmentOffer ro;
+		
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer2"));				
+		shipmentOfferService.deny(ro.getId());
+		ro = shipmentOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(!ro.getAcceptedBySender() && ro.getRejectedBySender());
+	}
+	
+	/**
+	 * @Test Deny a Shipment Offer
+	 * @result The user tries to deny an offer that is accepted
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void shipmentOfferDenyNegative4() {
+		authenticate("user3");
+		
+		ShipmentOffer ro;
+		
+		ro = shipmentOfferService.findOne(UtilTest.getIdFromBeanName("shipmentOffer5"));				
+		shipmentOfferService.deny(ro.getId());
+		ro = shipmentOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(!ro.getAcceptedBySender() && ro.getRejectedBySender());
 	}
 	
 
