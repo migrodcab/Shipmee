@@ -289,6 +289,21 @@
 		<!-- <property name="carried" ref=""/> -->
 	</bean>
 	
+	<bean id="shipment2" class="domain.Shipment">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/03/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/03/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Linterna"/>
+		<property name="itemPicture" value="https://www.publicdomainpictures.net/pictures/30000/velka/flashlight-1346103141HB3.jpg"/>
+		<property name="itemSize" value="M"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user3"/>
+		<property name="carried" ref="user1"/>
+	</bean>
+	
 	<!-- ShipmentOffer -->
 	
 	<bean id="shipmentOffer1" class="domain.ShipmentOffer">
@@ -325,6 +340,24 @@
 		<property name="rejectedBySender" value="false"/>
 		<property name="user" ref="user1"/>
 		<property name="shipment" ref="shipment1"/>
+	</bean>
+	
+	<bean id="shipmentOffer5" class="domain.ShipmentOffer">
+		<property name="amount" value="1.50"/>
+		<property name="description" value="Te llevo ese artículo por 1.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="true"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user1"/>
+		<property name="shipment" ref="shipment2"/>
+	</bean>
+	
+	<bean id="shipmentOffer6" class="domain.ShipmentOffer">
+		<property name="amount" value="1.20"/>
+		<property name="description" value="Te llevo ese artículo por 2.50€ debido a su tamaño."/>
+		<property name="acceptedBySender" value="false"/>
+		<property name="rejectedBySender" value="false"/>
+		<property name="user" ref="user2"/>
+		<property name="shipment" ref="shipment2"/>
 	</bean>
 	
 	<!-- Notification -->
