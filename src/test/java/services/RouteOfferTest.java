@@ -225,5 +225,122 @@ public class RouteOfferTest extends AbstractTest {
 		
 		unauthenticate();
 	}
+	
+	/**
+	 * @Test Accept a Route Offer
+	 * @result The user accepts a route offer
+	 */
+	@Test
+	public void positiveAcceptRouteOffer1() {
+		authenticate("user1");
+		
+		Route route;
+		RouteOffer ro;
+		Collection<RouteOffer> routeOffers;
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		routeOffers = routeOfferService.findAllByRouteId(route.getId());
+		ro = routeOffers.iterator().next();
+		
+		routeOfferService.accept(ro.getId());
+		
+		ro = routeOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Accept a Route Offer
+	 * @result The user tries to accept their own route offer
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeAcceptRouteOffer1() {
+		authenticate("user1");
+		
+		Route route;
+		RouteOffer ro;
+		Collection<RouteOffer> routeOffers;
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		routeOffers = routeOfferService.findAllByRouteId(route.getId());
+		ro = routeOffers.iterator().next();
+		
+		unauthenticate();
+		authenticate("user2");
+		
+		routeOfferService.accept(ro.getId());
+		
+		ro = routeOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Accept a Route Offer
+	 * @result The user tries to accept an offer without being logged in
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeAcceptRouteOffer2() {
+		authenticate("user1");
+		
+		Route route;
+		RouteOffer ro;
+		Collection<RouteOffer> routeOffers;
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		routeOffers = routeOfferService.findAllByRouteId(route.getId());
+		ro = routeOffers.iterator().next();
+		
+		unauthenticate();
+		
+		routeOfferService.accept(ro.getId());
+		
+		ro = routeOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
+		
+	}
+	
+	/**
+	 * @Test Accept a Route Offer
+	 * @result The user tries to accept an offer that is rejected
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeAcceptRouteOffer3() {
+		authenticate("user1");
+		
+		RouteOffer ro;
+		
+		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer3"));				
+		routeOfferService.accept(ro.getId());
+		ro = routeOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
+		
+		unauthenticate();
+	}
+	
+	/**
+	 * @Test Accept a Route Offer
+	 * @result The user tries to accept an offer that is accepted
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeAcceptRouteOffer4() {
+		authenticate("user1");
+		
+		RouteOffer ro;
+		
+		ro = routeOfferService.findOne(UtilTest.getIdFromBeanName("routeOffer4"));				
+		routeOfferService.accept(ro.getId());
+		ro = routeOfferService.findOne(ro.getId());
+		
+		Assert.isTrue(ro.getAcceptedByCarrier() == true && ro.getRejectedByCarrier() == false);
+		
+		unauthenticate();
+	}
 
 }
