@@ -55,6 +55,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Administrator -->	
 	
@@ -82,6 +94,13 @@
 		<property name="description" value="description2"/>
 		<property name="icon" value="http://www.icon2.com"/>
 		<property name="since" value="2"/>
+	</bean>
+	
+	<bean id="rank3" class="domain.Rank">
+		<property name="title" value="title3"/>
+		<property name="description" value="description3"/>
+		<property name="icon" value="http://www.icon3.com"/>
+		<property name="since" value="3"/>
 	</bean>
 	
 	<!-- User -->
@@ -114,6 +133,23 @@
 		<property name="isVerified" value="false"/>
 		<property name="isActive" value="true"/>
 		<property name="rank" ref="rank2"/>
+		<property name="routes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user3" class="domain.User">
+		<property name="name" value="Carlos"/>
+		<property name="surname" value="García"/>
+		<property name="email" value="carlos@gmail.com"/>
+		<property name="birthDate" value="1983/02/09 00:00"/>
+		<property name="phone" value="676554311"/>
+		<property name="dni" value="34567895C"/>
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="isVerified" value="false"/>
+		<property name="isActive" value="true"/>
+		<property name="rank" ref="rank3"/>
 		<property name="routes">
 			<list>
 			</list>
