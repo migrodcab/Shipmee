@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -458,6 +461,103 @@ public class RouteOfferTest extends AbstractTest {
 		Assert.isTrue(ro.getAcceptedByCarrier() == false && ro.getRejectedByCarrier() == true);
 		
 		unauthenticate();
+	}
+	
+	
+	/**
+	 * @Test List all Routes Offers
+	 * @result The routes are list
+	 */
+	@Test
+	public void positiveListRouteOffer1() {
+		authenticate("user1");
+	
+		Route route;
+		Page<RouteOffer> routeOffersPage;
+		Collection<RouteOffer> routeOffers;
+		
+		Integer routeId;
+		Integer userId;
+		Pageable pageable = new PageRequest(1 - 1, 10);
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		
+		routeId = route.getId();
+		userId = 0;
+		
+		routeOffersPage = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, userId, pageable);
+		routeOffers = routeOfferService.findAllByRouteId(routeId);
+		
+		Assert.isTrue(routeOffersPage.getNumberOfElements() == 	routeOffers.size());
+		unauthenticate();
+	}
+	
+	
+	/**
+	 * @Test List Routes Offers of a user
+	 * @result The routes of user are list
+	 */
+	@Test
+	public void positiveListRouteOffer2() {
+		authenticate("user2");
+	
+		Route route;
+		Page<RouteOffer> routeOffers;
+		Page<RouteOffer> routeOffersByUser;
+		Integer routeId;
+		Pageable pageable = new PageRequest(1 - 1, 5);
+
+		User user2;
+		Integer user2Id;
+
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		user2 = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		
+		routeId = route.getId();
+		user2Id = user2.getId();
+
+		routeOffers = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, user2Id, pageable);
+		routeOffersByUser = routeOfferService.findAllByOrRouteIdAndOrUserId(0, user2Id, pageable);
+		
+		Assert.isTrue(routeOffers.getNumberOfElements() == routeOffersByUser.getNumberOfElements());
+
+		unauthenticate();
+		
+	}
+	
+	
+	/**
+	 * @Test List Routes Offers of a user
+	 * @result The routes are not list because the user do not is logged.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void negativeListRouteOffer1() {
+		authenticate("user1");
+	
+		Route route;
+		Page<RouteOffer> routeOffers;
+		Page<RouteOffer> routeOffersByUser;
+		Integer routeId;
+		Pageable pageable = new PageRequest(1 - 1, 5);
+
+		User user2;
+		Integer user2Id;
+
+		
+		route = routeService.findOne(UtilTest.getIdFromBeanName("route1"));
+		user2 = userService.findOne(UtilTest.getIdFromBeanName("user2"));
+		
+		routeId = route.getId();
+		user2Id = user2.getId();
+
+		routeOffers = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, user2Id, pageable);
+		routeOffersByUser = routeOfferService.findAllByOrRouteIdAndOrUserId(0, user2Id, pageable);
+		
+		Assert.isTrue(routeOffers.getNumberOfElements() == routeOffersByUser.getNumberOfElements());
+
+		unauthenticate();
+		
 	}
 	
 
