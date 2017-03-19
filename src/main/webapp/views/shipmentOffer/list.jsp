@@ -62,8 +62,8 @@ hr {
 			<h3>
 			<spring:message code="shipmentOffer.list.for" />
 			<a
-				href="shipment/display.do?shipmentId=${shipmentOfferRow.shipment.id}">
-				<jstl:out value="${shipmentOfferRow.shipment.itemName}" />
+				href="shipment/display.do?shipmentId=${shipmentId}">
+				<jstl:out value="${shipment.itemName}" />
 			</a>
 			</h3>
 		</div>
