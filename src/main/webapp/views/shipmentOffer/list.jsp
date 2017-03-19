@@ -126,20 +126,22 @@ hr {
 					<div class="botones col-xs-10 col-sm-2 col-lg-3">
 						<div class="col-xs-12"
 							style="text-align: center; padding-top: 2%;">
-							<div class="col-xs-6 col-sm-12">
-								<button type="button"
-									class="btn btn-danger btn-shipmentOffer-actions"
-									onclick="location.href = 'shipmentOffer/user/accept.do?shipmentOfferId=${shipmentOfferRow.id}';">
-									<spring:message code="shipmentOffer.deny" />
-								</button>
-							</div>
-							<div class="col-xs-6 col-sm-12" style="text-align: center;">
-								<button type="button"
-									class="btn btn-primary btn-shipmentOffer-actions"
-									onclick="location.href = 'shipmentOffer/user/deny.do?shipmentOfferId=${shipmentOfferRow.id}';">
-									<spring:message code="shipmentOffer.accept" />
-								</button>
-							</div>
+							<jstl:if test="${!shipmentOfferRow.rejectedBySender && !shipmentOfferRow.acceptedBySender && currentUser.id != shipmentOfferRow.user.id}">
+								<div class="col-xs-6 col-sm-12">
+									<button type="button"
+										class="btn btn-primary btn-shipmentOffer-actions"
+										onclick="location.href = 'shipmentOffer/user/accept.do?shipmentOfferId=${shipmentOfferRow.id}';">
+										<spring:message code="shipmentOffer.accept" />
+									</button>
+								</div>
+								<div class="col-xs-6 col-sm-12" style="text-align: center;">
+									<button type="button"
+										class="btn btn-danger btn-shipmentOffer-actions"
+										onclick="location.href = 'shipmentOffer/user/deny.do?shipmentOfferId=${shipmentOfferRow.id}';">
+										<spring:message code="shipmentOffer.deny" />
+									</button>
+								</div>
+							</jstl:if>
 
 						</div>
 					</div>
