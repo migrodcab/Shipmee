@@ -246,14 +246,11 @@
                             <td class="tabla-tam">${value.size}</td>
                             <td class="tabla-precio">${value.price}&#8364;<security:authorize access="hasRole('USER')">
                             <a href="shipmentOffer/user/create.do?shipmentId=${shipment.id}"><span title="<spring:message code="route.offer" />"><i class="glyphicon glyphicon-resize-small contraoferta-icon"></i></span>
-                            
+							
                             </a></security:authorize></td>
-                            
-                            
-                        
                          
                         </tr>
-				</jstl:forEach>
+					</jstl:forEach>
                        
                     </tbody>
                 </table>

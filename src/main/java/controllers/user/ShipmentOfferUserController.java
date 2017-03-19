@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Shipment;
 import domain.ShipmentOffer;
+import domain.User;
 import services.ShipmentOfferService;
+import services.ShipmentService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/shipmentOffer/user")
@@ -27,6 +30,12 @@ public class ShipmentOfferUserController extends AbstractController {
 
 	@Autowired
 	private ShipmentOfferService shipmentOfferService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ShipmentService shipmentService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,10 +52,14 @@ public class ShipmentOfferUserController extends AbstractController {
 		ModelAndView result;
 		Page<ShipmentOffer> shipmentOffers;
 		Pageable pageable;
+		User currentUser;
+		Shipment shipment;
 		
 		pageable = new PageRequest(page - 1, 5);
 		
 		shipmentOffers = shipmentOfferService.findAllByOrShipmentIdAndOrUserId(shipmentId, userId, pageable);
+		currentUser = userService.findByPrincipal();
+		shipment = shipmentService.findOne(shipmentId);
 		
 		result = new ModelAndView("shipmentOffer/list");
 		result.addObject("shipmentOffers", shipmentOffers.getContent());
@@ -54,6 +67,8 @@ public class ShipmentOfferUserController extends AbstractController {
 		result.addObject("total_pages", shipmentOffers.getTotalPages());
 		result.addObject("shipmentId", shipmentId);
 		result.addObject("userId", userId);
+		result.addObject("currentUser", currentUser);
+		result.addObject("shipment", shipment);
 
 		return result;
 	}
