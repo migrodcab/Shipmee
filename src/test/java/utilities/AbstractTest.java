@@ -43,12 +43,11 @@ public abstract class AbstractTest {
 			}
 		}
 
-		unauthenticate();
 	}
 
 	@After
 	public void tearDown() {
-		;
+		unauthenticate();
 	}
 
 	// Supporting methods ---------------------------------
