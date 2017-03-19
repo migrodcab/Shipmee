@@ -126,11 +126,11 @@
 		<property name="name" value="Guillermo"/>
 		<property name="surname" value="Gamero"/>
 		<property name="email" value="Guillermo@gmail.com"/>
-		<property name="birthDate" value="1990/02/09 00:00"/>
+		<property name="birthDate" value="1995/10/01 00:00"/>
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
 		<property name="userAccount" ref="userAccount3"/>
-		<property name="isVerified" value="false"/>
+		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
 		<property name="rank" ref="rank2"/>
 		<property name="routes">
@@ -177,6 +177,13 @@
 		<property name="user" ref="user1"/>
 	</bean>
 	
+	<bean id="vehicle2" class="domain.Vehicle">
+		<property name="brand" value="Fiat"/>
+		<property name="model" value="Panda"/>
+		<property name="picture" value=""/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
 	<!-- Rating -->
 	
 	<bean id="rating1" class="domain.Rating">
@@ -208,6 +215,17 @@
 		<property name="vehicle" ref="vehicle1"/>
 	</bean>
 	
+	<bean id="route2" class="domain.Route">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="arriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="itemEnvelope" value="Both"/>
+		<property name="creator" ref="user2"/>
+		<property name="vehicle" ref="vehicle2"/>
+	</bean>
+	
 	<!-- SizePrice -->
 	
 	<bean id="sizePrice1" class="domain.SizePrice">
@@ -232,6 +250,30 @@
 		<property name="size" value="XL"/>
 		<property name="price" value="3.50"/>
 		<property name="route" ref="route1"/>
+	</bean>
+	
+	<bean id="sizePrice5" class="domain.SizePrice">
+		<property name="size" value="S"/>
+		<property name="price" value="1.50"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice6" class="domain.SizePrice">
+		<property name="size" value="M"/>
+		<property name="price" value="2.00"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice7" class="domain.SizePrice">
+		<property name="size" value="L"/>
+		<property name="price" value="2.50"/>
+		<property name="route" ref="route2"/>
+	</bean>
+	
+	<bean id="sizePrice8" class="domain.SizePrice">
+		<property name="size" value="XL"/>
+		<property name="price" value="3.50"/>
+		<property name="route" ref="route2"/>
 	</bean>
 	
 	<!-- RouteOffer -->
@@ -302,6 +344,21 @@
 		<property name="itemEnvelope" value="Open"/>
 		<property name="creator" ref="user3"/>
 		<property name="carried" ref="user1"/>
+	</bean>
+	
+	<bean id="shipment3" class="domain.Shipment">
+		<property name="date" value="2017/03/12 00:00"/>
+		<property name="departureTime" value="2017/07/12 16:00"/>
+		<property name="maximumArriveTime" value="2017/07/12 19:00"/>
+		<property name="origin" value="Almeria"/>
+		<property name="destination" value="Sevilla"/>
+		<property name="price" value="2.00"/>
+		<property name="itemName" value="Libro"/>
+		<property name="itemPicture" value="http://i.imgur.com/JX1E7.jpg"/>
+		<property name="itemSize" value="M"/>
+		<property name="itemEnvelope" value="Open"/>
+		<property name="creator" ref="user2"/>
+<!-- 		<property name="carried" ref="user1"/> -->
 	</bean>
 	
 	<!-- ShipmentOffer -->

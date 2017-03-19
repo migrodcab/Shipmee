@@ -121,7 +121,7 @@ public class ShipmentOfferUserController extends AbstractController {
 			try {
 				shipmentOffer = shipmentOfferService.save(shipmentOffer);
 
-				result = new ModelAndView("redirect:details.do?shipmentId=" + shipmentOffer.getShipment().getId());
+				result = new ModelAndView("redirect:list.do?shipmentId=" + shipmentOffer.getShipment().getId());
 			} catch (Throwable oops) {
 				result = createEditModelAndView(shipmentOffer, "shipmentOffer.commit.error");
 			}

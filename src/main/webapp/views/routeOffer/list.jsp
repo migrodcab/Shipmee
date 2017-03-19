@@ -41,6 +41,28 @@
 			
 			<p> <b><spring:message code="routeOffer.description" />:</b> <jstl:out value="${routeOfferRow.description}" /> </p>
 
+			<div class="botones col-xs-10 col-sm-2 col-lg-3">
+				<div class="col-xs-12"
+					style="text-align: center; padding-top: 2%;">
+					<jstl:if test="${!routeOfferRow.rejectedByCarrier && !routeOfferRow.acceptedByCarrier && currentUser.id != routeOfferRow.user.id}">
+						<div class="col-xs-6 col-sm-12">
+							<button type="button"
+								class="btn btn-primary btn-shipmentOffer-actions"
+								onclick="location.href = 'routeOffer/user/accept.do?routeOfferId=${routeOfferRow.id}';">
+								<spring:message code="routeOffer.accept" />
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-12" style="text-align: center;">
+							<button type="button"
+								class="btn btn-danger btn-shipmentOffer-actions"
+								onclick="location.href = 'routeOffer/user/deny.do?routeOfferId=${routeOfferRow.id}';">
+								<spring:message code="routeOffer.deny" />
+							</button>
+						</div>
+					</jstl:if>
+
+				</div>
+			</div>
 <hr>
 
 </jstl:forEach>

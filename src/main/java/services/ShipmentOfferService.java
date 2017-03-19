@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -191,6 +192,8 @@ public class ShipmentOfferService {
 		
 		Assert.notNull(shipment, "The shipment related to the offer must exist.");
 		Assert.isTrue(shipmentService.checkDates(shipment), "All shipment dates must be valid.");
+		Assert.isTrue(shipment.getDepartureTime().after(new Date()),"The Departure Time must be future");
+		Assert.isTrue(shipment.getMaximumArriveTime().after(new Date()),"The Maximum Arrival Time must be future");
 		Assert.isTrue(shipment.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the shipment can accept a counter offer.");
 		Assert.isTrue(!shipmentService.checkShipmentOfferAccepted(shipment.getId()), "The creator of the Shipment must not accept any other offer.");
 
@@ -208,6 +211,7 @@ public class ShipmentOfferService {
 		shipmentService.save(shipment);
 		
 		shipmentOffer.setAcceptedBySender(true); // The offer is accepted
+		shipmentOffer.setRejectedBySender(false); // The offer is not rejected.
 		save(shipmentOffer);
 		
 		// Now, we reject every other offer.

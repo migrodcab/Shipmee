@@ -16,6 +16,9 @@ public interface RouteOfferRepository extends JpaRepository<RouteOffer, Integer>
 	@Query("select ro from RouteOffer ro where ro.route.id = ?1")
 	Collection<RouteOffer> findAllByRouteId(int routeId);
 	
+	@Query("select ro from RouteOffer ro where ro.route.id = ?1 AND ro.acceptedByCarrier = false AND ro.rejectedByCarrier = false")
+	Collection<RouteOffer> findAllPendingByRouteId(int routeId);
+	
 	@Query("select ro from RouteOffer ro where (?1 <= 0 OR ro.route.id = ?1)"
 			+ " AND (?2 <= 0 OR ro.user.id = ?2)"
 			+ " ORDER BY ro.rejectedByCarrier ASC")

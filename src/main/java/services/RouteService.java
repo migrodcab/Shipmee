@@ -184,6 +184,8 @@ public class RouteService {
 		Assert.notNull(route, "The ID must match a Route.");
 		Assert.isTrue(userService.findAllByRoutePurchased(routeId).isEmpty());
 		Assert.isTrue(checkDates(route));
+		Assert.isTrue(route.getDepartureTime().after(new Date()), "The Departure Time must be future");
+		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
 		Assert.notNull(client, "The client must not be empty.");
 		Assert.isTrue(!client.equals(route.getCreator()), "You cannot contract your own route.");
 		Assert.notNull(sizePrice, "The pair of a Size and its Price must not be null");
