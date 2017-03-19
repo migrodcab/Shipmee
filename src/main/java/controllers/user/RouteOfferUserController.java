@@ -17,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Route;
 import domain.RouteOffer;
+import domain.User;
 import services.RouteOfferService;
+import services.RouteService;
+import services.UserService;
 
 @Controller
 @RequestMapping("/routeOffer/user")
@@ -27,6 +30,12 @@ public class RouteOfferUserController extends AbstractController {
 
 	@Autowired
 	private RouteOfferService routeOfferService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private RouteService routeService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,10 +52,14 @@ public class RouteOfferUserController extends AbstractController {
 		ModelAndView result;
 		Page<RouteOffer> routeOffers;
 		Pageable pageable;
+		User currentUser;
+		Route route;
 		
 		pageable = new PageRequest(page - 1, 5);
 		
 		routeOffers = routeOfferService.findAllByOrRouteIdAndOrUserId(routeId, userId, pageable);
+		currentUser = userService.findByPrincipal();
+		route = routeService.findOne(routeId);
 		
 		result = new ModelAndView("routeOffer/list");
 		result.addObject("routeOffers", routeOffers.getContent());
@@ -54,6 +67,8 @@ public class RouteOfferUserController extends AbstractController {
 		result.addObject("total_pages", routeOffers.getTotalPages());
 		result.addObject("routeId", routeId);
 		result.addObject("userId", userId);
+		result.addObject("currentUser", currentUser);
+		result.addObject("route", route);
 
 		return result;
 	}
@@ -116,14 +131,14 @@ public class RouteOfferUserController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
-	public ModelAndView accept(@RequestParam int routeOfferId){
+	public ModelAndView accept(@RequestParam int routeOfferId, @RequestParam int sizePriceId){
 		ModelAndView result;
 		
 		RouteOffer routeOffer = routeOfferService.findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
 		
 		try{
-			routeOfferService.accept(routeOfferId);
+			routeOfferService.accept(routeOfferId, sizePriceId);
 			// This reditect may be change to other url.
 			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
 		}catch(Throwable oops){

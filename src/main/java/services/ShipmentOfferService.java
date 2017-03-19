@@ -208,6 +208,7 @@ public class ShipmentOfferService {
 		shipmentService.save(shipment);
 		
 		shipmentOffer.setAcceptedBySender(true); // The offer is accepted
+		shipmentOffer.setRejectedBySender(false); // The offer is not rejected.
 		save(shipmentOffer);
 		
 		// Now, we reject every other offer.

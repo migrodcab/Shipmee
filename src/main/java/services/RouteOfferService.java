@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import domain.Route;
 import domain.RouteOffer;
+import domain.SizePrice;
 import domain.User;
 import repositories.RouteOfferRepository;
 
@@ -33,9 +34,9 @@ public class RouteOfferService {
 
 	@Autowired
 	private RouteService routeService;
-	
+		
 	@Autowired
-	private VehicleService vehicleService;
+	private SizePriceService sizePriceService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -160,45 +161,58 @@ public class RouteOfferService {
 		return result;
 	}
 	
+	public Collection<RouteOffer> findAllPendingByRouteId(int routeId){
+		Collection<RouteOffer> result;
+		
+		result = routeOfferRepository.findAllPendingByRouteId(routeId);
+		
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param routeOfferId - The if of the RouteOffer
 	 * 
 	 * The carrier (the user that created the route) accept the counter offer proposed by the client.
 	 */
-	public void accept(int routeOfferId){
+	public void accept(int routeOfferId, int sizePriceId){
 		
 		Assert.isTrue(routeOfferId != 0);
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can select a shipment");
 		
 		RouteOffer routeOffer = findOne(routeOfferId);
 		Route route = routeOffer.getRoute();
+		SizePrice sizePrice = sizePriceService.findOne(sizePriceId);
 		
 		Assert.notNull(route, "The route related to the offer must exist.");
 		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
+		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
 		
 		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");
 		
-		/*
-		 * More possible constraints:
-		 * 1. The creator of the route (the carrier) is verified.
-		 * 2. The carrier has at least one vehicle.
-		 * 3. We look if the vehicle has the package size required by the user.
-		 * - As a carrier could have more than one vehicle, we must know the vehicle he wants to use to perform this assert.
-		 */
+		Assert.isTrue(sizePrice.getRoute().equals(route), "The Size and Price must match the route.");
 		
-		/*
-		 * Here comes:
-		 * - Update price of the route.
-		 * - Update user with his role.
-		 * - Save changes.
-		 * - Notification to the client.
-		 */
+		sizePrice.setPrice(routeOffer.getAmount()); // Update price of the route
+		sizePriceService.save(sizePrice);
 		
-		routeOffer.setAcceptedByCarrier(false);
-		routeOffer.setRejectedByCarrier(true);
+		routeOffer.setAcceptedByCarrier(true); // The offer is accepted.
+		routeOffer.setRejectedByCarrier(false); // The offer is not rejected.
 		save(routeOffer);
+		
+		// Now, we reject every other offer.
+
+		Collection<RouteOffer> remaining = findAllPendingByRouteId(route.getId());
+		
+		for(RouteOffer ro:remaining){
+			if(!ro.getAcceptedByCarrier()){
+				deny(ro.getId());
+			}
+		}
+		
+		/*
+		 * Here comes the notification to the carrier (Still not developed) 
+		 */
 		
 	}
 	
@@ -219,8 +233,18 @@ public class RouteOfferService {
 		Assert.notNull(route, "The route related to the offer must exist.");
 		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
+		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
 
+		Assert.isTrue(!routeOffer.getAcceptedByCarrier() && !routeOffer.getRejectedByCarrier(), "The offer must not be accepted or rejected.");
 		
+		routeOffer.setAcceptedByCarrier(false); // The offer is not accepted.
+		routeOffer.setRejectedByCarrier(true); // The offer is rejected.
+		save(routeOffer);
+		
+		/*
+		 * Here comes the notification to the carrier (Still not developed) 
+		 */
+	
 	}
 	
 	// IDs could be <= 0 to ignore in the find
