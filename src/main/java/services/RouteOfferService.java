@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -186,6 +187,8 @@ public class RouteOfferService {
 		
 		Assert.notNull(route, "The route related to the offer must exist.");
 		Assert.isTrue(routeService.checkDates(route), "All routes dates must be valid.");
+		Assert.isTrue(route.getDepartureTime().after(new Date()), "The Departure Time must be future");
+		Assert.isTrue(route.getArriveTime().after(new Date()), "The Arrival Time must be future");
 		Assert.isTrue(route.getCreator().equals(actorService.findByPrincipal()), "Only the creator of the route can accept or deny a counter offer");
 		Assert.isTrue(route.getCreator().getIsVerified(), "The creator of the route must be verified.");
 		

@@ -140,7 +140,7 @@ public class RouteOfferUserController extends AbstractController {
 		try{
 			routeOfferService.accept(routeOfferId, sizePriceId);
 			// This reditect may be change to other url.
-			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
+			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
 			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
 		}
@@ -158,7 +158,7 @@ public class RouteOfferUserController extends AbstractController {
 		try{
 			routeOfferService.deny(routeOfferId);
 			// This reditect may be change to other url.
-			result = new ModelAndView("redirect:../search.do?origin=" + route.getOrigin() + "&destination=" + route.getDestination());
+			result = new ModelAndView("redirect:../user/list.do?routeId="+route.getId());
 		}catch(Throwable oops){
 			result = createEditModelAndView(routeOffer, "routeOffer.commit.error");
 		}
