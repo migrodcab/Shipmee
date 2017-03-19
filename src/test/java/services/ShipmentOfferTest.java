@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
 import domain.Shipment;
 import domain.ShipmentOffer;
 import domain.User;
+import repositories.ShipmentOfferRepository;
 import utilities.AbstractTest;
 import utilities.UtilTest;
 
@@ -39,6 +40,9 @@ public class ShipmentOfferTest extends AbstractTest {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ShipmentOfferRepository shipmentOfferRepository;
 
 
 	// Test cases -------------------------------------------------------------
@@ -78,12 +82,11 @@ public class ShipmentOfferTest extends AbstractTest {
 	 * @result The shipments of user are list
 	 */
 	@Test
-	public void positiveListRouteOffer2() {
+	public void positiveListShipmentOffer2() {
 		authenticate("user1");
 	
 		Shipment shipment;
 		Page<ShipmentOffer> shipmentOffers;
-		Page<ShipmentOffer> shipmentOffersByUser;
 		Integer shipmentId;
 		Pageable pageable = new PageRequest(1 - 1, 5);
 	
@@ -98,12 +101,51 @@ public class ShipmentOfferTest extends AbstractTest {
 		user1Id = user1.getId();
 	
 		shipmentOffers = shipmentOfferService.findAllByOrShipmentIdAndOrUserId(shipmentId, user1Id, pageable);
-		shipmentOffersByUser = shipmentOfferService.findAllByOrShipmentIdAndOrUserId(0, user1Id, pageable);
+		int counter = 0;
+		for(ShipmentOffer a:shipmentOfferRepository.findAll()){
+			if(a.getUser().getId() == user1Id && a.getShipment().getId() == shipmentId){
+				Assert.isTrue(shipmentOffers.getContent().contains(a));
+				counter++;
+			}
+		}
 		
-		Assert.isTrue(shipmentOffers.getNumberOfElements() == shipmentOffersByUser.getNumberOfElements());
+		Assert.isTrue(shipmentOffers.getNumberOfElements() == counter);
 	
 		unauthenticate();
 		
+	}
+	
+
+	/**
+	 * @Test List shipments Offers of a user
+	 * @result The shipments of user are list
+	 */
+	@Test
+	public void positiveListShipmentOffer3() {
+		authenticate("user1");
+	
+		Page<ShipmentOffer> shipmentOffers;
+		Pageable pageable = new PageRequest(1 - 1, 100);
+	
+		User user1;
+		Integer user1Id;
+	
+		
+		user1 = userService.findOne(UtilTest.getIdFromBeanName("user1"));
+		
+		user1Id = user1.getId();
+	
+		shipmentOffers = shipmentOfferService.findAllByOrShipmentIdAndOrUserId(0, user1Id, pageable);
+		int counter = 0;
+		for(ShipmentOffer a:shipmentOfferRepository.findAll()){
+			if(a.getUser().getId() == user1Id){
+				Assert.isTrue(shipmentOffers.getContent().contains(a));
+				counter++;
+			}
+		}
+		
+		Assert.isTrue(shipmentOffers.getNumberOfElements() == counter);
+	
 	}
 
 	/**
