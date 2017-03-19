@@ -130,7 +130,7 @@
 		<property name="phone" value="676554345"/>
 		<property name="dni" value="34567890C"/>
 		<property name="userAccount" ref="userAccount3"/>
-		<property name="isVerified" value="false"/>
+		<property name="isVerified" value="true"/>
 		<property name="isActive" value="true"/>
 		<property name="rank" ref="rank2"/>
 		<property name="routes">
@@ -177,6 +177,13 @@
 		<property name="user" ref="user1"/>
 	</bean>
 	
+	<bean id="vehicle2" class="domain.Vehicle">
+		<property name="brand" value="Fiat"/>
+		<property name="model" value="Panda"/>
+		<property name="picture" value=""/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
 	<!-- Rating -->
 	
 	<bean id="rating1" class="domain.Rating">
@@ -216,7 +223,7 @@
 		<property name="destination" value="Sevilla"/>
 		<property name="itemEnvelope" value="Both"/>
 		<property name="creator" ref="user2"/>
-		<property name="vehicle" ref="vehicle1"/>
+		<property name="vehicle" ref="vehicle2"/>
 	</bean>
 	
 	<!-- SizePrice -->
